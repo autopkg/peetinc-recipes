@@ -23,7 +23,7 @@
 		<key>DEPLOY_CODE</key>
 		<string>-REPLACE-ME-</string>
 		<key>PLIST_PERM</key>
-		<string>644</string>
+		<string>664</string>
 		<key>HIDE_FOLDER</key>
 		<string>hidden</string>				
 		<key>pkginfo</key>
