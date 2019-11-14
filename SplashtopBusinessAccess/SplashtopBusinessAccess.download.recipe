@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of Splashtop Business Access.</string>
+	<key>Identifier</key>
+	<string>com.github.peetinc.download.SplashtopBusinessAccess</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>SplashtopBusinessAccess</string>
+		<key>SPARKLE_FEED_URL</key>
+		<string>https://sn.splashtop.com/file_system/apt_repository/dists/STB01/released/binary-i386/en.appcast.xml</string>
+	</dict>
+	<key>MiniumumVersion</key>
+	<string>1.0</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>appcast_url</key>
+				<string>%SPARKLE_FEED_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>SparkleUpdateInfoProvider</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+	</array>
+</dict>
+</plist>
