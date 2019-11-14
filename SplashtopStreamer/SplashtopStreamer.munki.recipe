@@ -5,13 +5,13 @@
 	<key>Description</key>
 	<string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.munki.SplasthtopStreamer</string>
+	<string>com.github.peetinc.munki.SplashtopStreamer</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>SplasthtopStreamer</string>
+		<string>SplashtopStreamer</string>
 		<key>DISPLAY_NAME</key>
-		<string>Splasthtop Streamer</string>
+		<string>Splashtop Streamer</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/Splashtop</string>
 		<key>MUNKI_CATEGORY</key>
@@ -221,7 +221,7 @@ exit 0
         <key>Arguments</key>
 	        <dict>
                 <key>force_munkiimport</key>
-                <false/>
+                <true/>
                 <key>pkg_path</key>
                 <string>%pathname%</string>
                 <key>repo_subdirectory</key>
