@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the current version of Splashtop streamer</string>
+	<string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.SplasthtopStreamer</string>
 	<key>Input</key>
@@ -22,6 +22,10 @@
 		<string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
 		<key>DEPLOY_CODE</key>
 		<string>-REPLACE-ME-</string>
+		<key>PLIST_PERM</key>
+		<string>644</string>
+		<key>HIDE_FOLDER</key>
+		<string>hidden</string>				
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -47,6 +51,11 @@
 
 #Script to create /Users/Shared/SplashtopStreamer/.PreInstall with appropriate variables.
 #If /Users/Shared/SplashtopStreamer/.PreInstall is in place when splashtop package is installed then it will be correctly deployed
+
+if [ -f "/Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist" ]; then
+  echo "Splashtop Streamer settings exist. Skipping deployment"
+  exit0
+fi
 
 if [ ! -d /Users/Shared/SplashtopStreamer ]; then
   mkdir -p /Users/Shared/SplashtopStreamer;
@@ -129,6 +138,23 @@ fi
 
 /usr/libexec/PlistBuddy -c "Add STP:FirstTimeClose bool $FirstTimeClose" /Users/Shared/SplashtopStreamer/.PreInstall
 /usr/libexec/PlistBuddy -c "Add STP:FirstTimeLogin bool $FirstTimeLogin" /Users/Shared/SplashtopStreamer/.PreInstall
+
+exit 0
+		</string>
+		<key>postinstall_script</key>
+			<string>#!/bin/bash
+
+#Splashtop runs as user, so the settings plist permissions are 666. Any user could delete the plist or change settings,
+#even if changing settings is denied by your Splashtop deployment policy. So chown root:admin, chmod 644, chmod +a "everyone deny delete"
+
+if [ -f "/Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist" ]; then
+  echo "Securing /Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist"
+  chown root:admin /Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist
+  chmod %PLIST_PERM% /Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist
+  chmod +a "everyone deny delete" /Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist
+fi
+
+chflags %HIDE_FOLDER% /Users/Shared/SplashtopStreamer
 
 exit 0
 		</string>
