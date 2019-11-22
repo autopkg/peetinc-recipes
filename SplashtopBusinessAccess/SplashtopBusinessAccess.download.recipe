@@ -40,9 +40,9 @@
             <dict>
                 <key>input_path</key>
                 <string>%pathname%/Splashtop Business.pkg</string>
+            </dict>
             <key>Processor</key>
-            <string>CodeSignatureVerifier</string>
-        	</dict>
+            <string>CodeSignatureVerifier</string>      	
     	</dict>
 	</array>
 </dict>

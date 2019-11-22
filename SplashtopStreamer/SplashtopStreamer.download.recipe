@@ -36,13 +36,17 @@
 			<string>URLDownloader</string>
 		</dict>
 		<dict>
-        <key>Arguments</key>
-        <dict>
-            <key>input_path</key>
-            <string>%pathname%/Splashtop Streamer.pkg</string>
-        <key>Processor</key>
-        <string>CodeSignatureVerifier</string>
-     	</dict>
+            <key>Processor</key>
+            <string>EndOfCheckPhase</string>
+        </dict>
+		<dict>
+        	<key>Arguments</key>
+        	<dict>
+            	<key>input_path</key>
+            	<string>%pathname%/Splashtop Streamer.pkg</string>
+            </dict>
+        	<key>Processor</key>
+        	<string>CodeSignatureVerifier</string>
     	</dict>
 	</array>
 </dict>
