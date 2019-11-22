@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads Kerio Connect Client</string>   
+    <key>Identifier</key>
+    <string>com.github.peetinc.download.KerioConnectClient</string> 
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>KerioConnectClient</string>
+        
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.4.0</string>
+    <key>Process</key>
+    <array>
+    	<dict>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>https://app-update.kerio.com/connect/client/download?target=darwin-x64</string>
+				<key>curl_opts</key>
+				<array>
+					<string>--location</string>
+				</array>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+        	</dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>EndOfCheckPhase</string>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>CodeSignatureVerifier</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_path</key>
+                <string>%pathname%/Kerio Connect.app</string>
+        	</dict>
+    	</dict>
+    </array>
+</dict>
+</plist>

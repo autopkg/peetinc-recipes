@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads Kerio Connect Client Client</string>
+    
+    <key>Identifier</key>
+    <string>com.github.peetinc.munki.KerioConnectClient</string>
+    
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>KerioConnectClient</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/kerio</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>Kerio Connect Client is used to connect to any Kerio Connect mail server.</string>
+            <key>display_name</key>
+            <string>Kerio Connect Client</string>
+            <key>name</key>
+            <string>%NAME%</string>
+            <key>unattended_install</key>
+            <false/>
+            <key>category</key>
+			<string>Internet</string>
+			<key>developer</key>
+			<string>Kerio (GFI)</string>
+        </dict>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.4.0</string>
+    <key>ParentRecipe</key>
+    <string>com.github.peetinc.download.KerioConnectClient</string>
+    <key>Process</key>
+        <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+        </dict>
+    </array>
+</dict>
+</plist>
