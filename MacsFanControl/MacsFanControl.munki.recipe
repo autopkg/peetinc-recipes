@@ -3,17 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v1.0.2 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Unlox and imports it into Munki.</string>
+	<string>Downloads the latest version of MacsFanControl and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.munki.Unlox</string>
+	<string>com.github.peetinc.munki.macsfancontrol</string>
 	<key>Input</key>
 	<dict>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>Unlox</string>
+		<string>MacsFanControl</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/%DEVELOPER%</string>
+		<key>DISPLAY_NAME</key>
+		<string>Macs Fan Control</string>
+		<key>MIN_OS</key>
+		<string>10.7</string>
+		<key>DEVELOPER</key>
+		<string>Ilya Parniuk</string>
+		<key>CATEGORY</key>
+		<string>Utilities</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -21,21 +29,25 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Unlox is a beautiful redesign of MacID - the original and best app for unlocking your Mac with your fingerprint, wrist, and now your face.</string>
+			<string>Monitor and control your computer's fans.</string>
 			<key>developer</key>
-			<string>Kane Cheshire</string>
+			<string>%DEVELOPER%</string>
+			<key>category</key>
+            <string>%CATEGORY%</string>
 			<key>display_name</key>
-			<string>Unlox</string>
+			<string>%DISPLAY_NAME%</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>minimum_os_version</key>
+            <string>%MIN_OS%</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
-	<string>1.0.0</string>
+	<string>1.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.Unlox</string>
+	<string>com.github.peetinc.download.macsfancontrol</string>
 	<key>Process</key>
 	<array>
 		<dict>
