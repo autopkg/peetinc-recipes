@@ -11,9 +11,13 @@
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/%NAME%</string>
+		<string>apps/Kane_Cheshire</string>
 		<key>NAME</key>
 		<string>Unlox</string>
+		<key>CATAGORY</key>
+		<string>Security</string>
+		<key>DEVELOPER</key>
+		<string>Kane Cheshire</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -23,7 +27,9 @@
 			<key>description</key>
 			<string>Unlox is a beautiful redesign of MacID - the original and best app for unlocking your Mac with your fingerprint, wrist, and now your face.</string>
 			<key>developer</key>
-			<string>Kane Cheshire</string>
+			<string>%DEVELOPER%</string>
+			<key>catagory</key>
+			<string>%CATAGORY%</string>
 			<key>display_name</key>
 			<string>Unlox</string>
 			<key>name</key>

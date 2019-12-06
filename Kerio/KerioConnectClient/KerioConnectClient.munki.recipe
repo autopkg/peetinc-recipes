@@ -14,7 +14,11 @@
         <string>KerioConnectClient</string>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>apps/kerio</string>
-        <key>pkginfo</key>
+   		<key>CATAGORY</key>
+        <string>Internet</string>
+        <key>DEVELOPER</key>
+        <string>Kerio (GFI)</string>>
+    	<key>pkginfo</key>
         <dict>
             <key>catalogs</key>
             <array>
@@ -27,11 +31,11 @@
             <key>name</key>
             <string>%NAME%</string>
             <key>unattended_install</key>
-            <false/>
+            <true/>
             <key>category</key>
-			<string>Internet</string>
+			<string>%CATAGORY%</string>
 			<key>developer</key>
-			<string>Kerio (GFI)</string>
+			<string>%DEVELOPER%</string>
         </dict>
     </dict>
     <key>MinimumVersion</key>
