@@ -17,7 +17,7 @@
    		<key>CATAGORY</key>
         <string>Internet</string>
         <key>DEVELOPER</key>
-        <string>Kerio (GFI)</string>>
+        <string>Kerio (GFI)</string>
     	<key>pkginfo</key>
         <dict>
             <key>catalogs</key>
