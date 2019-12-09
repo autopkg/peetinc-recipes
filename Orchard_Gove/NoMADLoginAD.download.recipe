@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Description</key>
+        <string>Downloads the latest version of NoMAD Login AD.
+This recipe differs from the ones in bochoven-recipes in the following ways:
+- This one performs code signature verification.
+- This one acquires just the latest version NoMAD Login AD pkg.
+- This one acquires adds check phase
+        </string>     
+        <key>Identifier</key>
+        <string>com.github.peetinc.download.NoMADLoginAD</string>
+        <key>Input</key>
+        <dict>
+            <key>NAME</key>
+            <string>NoMADLoginAD</string>
+            <key>URL</key>
+            <string>https://files.nomad.menu/NoMAD-Login-AD.pkg</string>
+        </dict>
+        <key>MinimumVersion</key>
+        <string>1.0</string>
+        <key>Process</key>
+        <array>
+            <dict>
+                <key>Processor</key>
+                <string>URLDownloader</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>url</key>
+                    <string>%URL%</string>
+                    <key>filename</key>
+					<string>%NAME%.pkg</string>
+                </dict>
+            </dict>
+            <dict>
+			<key>Processor</key>
+				<string>EndOfCheckPhase</string>
+			</dict>
+			<dict>   
+    		<key>Processor</key>   
+    		<string>CodeSignatureVerifier</string>   
+    		<key>Arguments</key>   
+   			<dict>   
+        		<key>input_path</key>   
+        		<string>%pathname%</string>
+        		<key>expected_authority_names</key>
+        		<array>
+            		<string>Developer ID Installer: Orchard &#038; Grove Inc. (VRPY9KHGX6)</string>
+            		<string>Developer ID Certification Authority</string>
+            		<string>Apple Root CA</string>
+        		</array>
+   			 </dict>
+   			 </dict>
+        </array>
+    </dict>
+</plist>
