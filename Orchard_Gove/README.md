@@ -8,3 +8,6 @@ This download recipe differs from the ones in bochoven-recipes in the following 
 - This one performs code signature verification.
 - This one acquires just the latest version NoMAD Login AD pkg.
 - This one adds check phase
+
+This munki recipe differs from the ones in bochoven-recipes in the following ways:
+- This one adds pre/post install script variables
