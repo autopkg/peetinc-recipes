@@ -54,7 +54,7 @@
 
 if [ -f "/Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist" ]; then
   echo "Splashtop Streamer settings exist. Skipping deployment"
-  exit0
+  exit 0
 fi
 
 if [ ! -d /Users/Shared/SplashtopStreamer ]; then
