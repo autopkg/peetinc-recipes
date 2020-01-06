@@ -32,6 +32,12 @@
 			<string>VipRiser</string>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>postinstall_script</key>
+			<string>#!/bin/bash
+installer -pkg /Applications/VipRiser.app/Contents/Resources/VipRiserCUPSDevice.pkg -target /
+exit 0</string>
+			<key>blocking_applications</key>
+			<array/>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
