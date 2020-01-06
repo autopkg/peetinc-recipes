@@ -19,6 +19,8 @@ This recipe differs from the ones in bochoven-recipes in the following ways:
         <string>NoMAD Login AD</string>
         <key>MUNKI_CATEGORY</key>
         <string>Security</string>
+        <key>MINIMUM_OS</key>
+        <string>10.12</string>
         <key>PREINSTALL</key>
         <string>#!/bin/bash
 exit 0</string>
@@ -49,6 +51,8 @@ exit 0</string>
             <string>#!/bin/bash
 /usr/local/bin/authchanger -reset
             </string>
+            <key>minimum_os_version</key>
+			<string>%MINIMUM_OS%</string>
             <key>unattended_install</key>
             <true/>
             <key>unattended_uninstall</key>
