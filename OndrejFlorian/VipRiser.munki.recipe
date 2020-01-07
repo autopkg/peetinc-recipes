@@ -35,6 +35,9 @@
 			<key>postinstall_script</key>
 			<string>#!/bin/bash
 installer -pkg /Applications/VipRiser.app/Contents/Resources/VipRiserCUPSDevice.pkg -target /
+lpadmin -D "Print to VipRiser" -p "Print_to_VipRiser" -v "vipriser:/" -P /Library/Printers/PPDs/Contents/Resources/vipriser.ppd -o printer-is-shared=false
+cupsenable "Print_to_VipRiser"
+cupsaccept "Print_to_VipRiser"
 exit 0</string>
 			<key>blocking_applications</key>
 			<array/>
