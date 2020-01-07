@@ -39,8 +39,6 @@ lpadmin -D "Print to VipRiser" -p "Print_to_VipRiser" -v "vipriser:/" -P /Librar
 cupsenable "Print_to_VipRiser"
 cupsaccept "Print_to_VipRiser"
 exit 0</string>
-			<key>blocking_applications</key>
-			<array/>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
