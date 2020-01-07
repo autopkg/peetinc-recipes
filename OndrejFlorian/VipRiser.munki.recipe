@@ -39,6 +39,31 @@ lpadmin -D "Print to VipRiser" -p "Print_to_VipRiser" -v "vipriser:/" -P /Librar
 cupsenable "Print_to_VipRiser"
 cupsaccept "Print_to_VipRiser"
 exit 0</string>
+			<key>postuninstall_script</key>
+			<string>#!/bin/bash
+
+printers=`lpstat -p | awk '{print $2}'`
+consoleuser=`/usr/bin/stat -f "%Su" /dev/console | /usr/bin/xargs /usr/bin/id -u`
+ 
+/bin/launchctl bootout gui/$consoleuser /Library/LaunchAgents/com.onflapp.VipRiserAgent.plist
+
+rm /Library/LaunchAgents/com.onflapp.VipRiserAgent.plist
+rm /Library/Printers/Icons/vipriser.icns
+rm /Library/Printers/PPDs/Contents/Resources/vipriser-cp.ppd
+rm /Library/Printers/PPDs/Contents/Resources/vipriser-ps.ppd
+rm /Library/Printers/PPDs/Contents/Resources/vipriser.ppd
+rm -rf /Users/Shared/Library/VipRiser
+rm /usr/libexec/cups/backend/vipriser
+rm /usr/libexec/cups/backend/vipriser-cp
+rm /usr/libexec/cups/backend/vipriser-ps
+
+if [[ $printers == *"Print_to_VipRiser"* ]]; then
+  lpadmin -x Print_to_VipRiser
+fi
+
+pkgutil --forget com.onflapp.vipriser.driver
+
+exit 0</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
