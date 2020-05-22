@@ -11,9 +11,11 @@
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/%NAME%</string>
+		<string>apps/CoreCode_Limited</string>
 		<key>NAME</key>
 		<string>MacUpdater</string>
+		<key>CATEGORY</key>
+		<string>Utilities</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -24,6 +26,8 @@
 			<string>MacUpdater is an application that can scan your Mac and display which of the apps that you have installed are not up-to-date. MacUpdater can also update those outdated apps to their newest versions with a simple click.</string>
 			<key>developer</key>
 			<string>CoreCode Limited</string>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>display_name</key>
 			<string>MacUpdater</string>
 			<key>name</key>
