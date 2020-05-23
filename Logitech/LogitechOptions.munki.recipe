@@ -11,7 +11,7 @@
 	<key>Input</key>
 	<dict>
 		<key>DEVELOPER</key>
-		<string>Logitech</string>
+		<string>Logitech, Inc.</string>
 		<key>NAME</key>
 		<string>LogitechOptions</string>
 		<key>DISPLAY_NAME</key>
@@ -31,7 +31,7 @@
 			<key>description</key>
 			<string>Logitech Options is a powerful and easy-to-use application that enhances your Logitech mice, keyboards, and touchpads. Customize your device with Options and do more than you thought possible.</string>
 			<key>developer</key>
-			<string>Logitech Inc.</string>
+			<string>%DEVELOPER%</string>
 			<key>display_name</key>
 			<string>%DISPLAY_NAME%</string>
 			<key>name</key>
