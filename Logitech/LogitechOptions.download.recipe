@@ -26,20 +26,11 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>%SCRAPE_URL%</string>
-				<key>result_output_var_name</key>
-				<string>DOWNLOAD_URL</string>
-				<key>re_pattern</key>
-				<string>%REG_EX%</string>
-				<key>request_headers</key>
-                <dict>
-                        <key>user-agent</key>
-                        <string>%USER_AGENT%</string>
-                </dict>
+				<key>cask_name</key>
+				<string>logitech-options</string>
 			</dict>
 			<key>Processor</key>
-			<string>CURLTextSearcher</string>
+			<string>BrewCaskInfoProvider</string>
 		</dict>
 		<dict>
 			<key>Arguments</key>
