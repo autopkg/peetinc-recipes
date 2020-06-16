@@ -13,9 +13,9 @@
 		<key>NAME</key>
 		<string>LogitechOptions</string>
 		<key>SCRAPE_URL</key>
-		<string>https://support.logi.com/hc/en-us/articles/360025297893</string>
+		<string>https://raw.githubusercontent.com/caskroom/homebrew-drivers/master/Casks/logitech-options.rb</string>
 		<key>REG_EX</key>
-		<string>version +'(.+)'</string>
+		<string>else\s+version\s+'([\d\.]*?)'</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
