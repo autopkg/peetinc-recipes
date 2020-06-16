@@ -3,7 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the current release version of RingCentral Meetings and builds a package.</string>
+	<string>Downloads the current release version of RingCentral Meetings and builds a package.
+	This recipe differs from the ones in homebysix-recipes in the following ways:
+	- This one does not repackage the downloaded pkg
+	</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.pkg.RingCentralMeetings</string>
 	<key>Input</key>
@@ -16,7 +19,7 @@
 	<key>MinimumVersion</key>
 	<string>1.1</string>
 	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.RingCentralMeetings</string>
+	<string>com.github.homebysix.download.RingCentralMeetings</string>
 	<key>Process</key>
 	<array>
 		<dict>
