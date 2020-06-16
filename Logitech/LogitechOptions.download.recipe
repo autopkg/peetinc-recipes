@@ -15,9 +15,7 @@
 		<key>SCRAPE_URL</key>
 		<string>https://support.logi.com/hc/en-us/articles/360025297893</string>
 		<key>REG_EX</key>
-		<string>https?://.*?/*\.zip</string>
-		<key>USER_AGENT</key>
-        <string>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15</string>
+		<string>version +'(.+)'</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -26,11 +24,15 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>cask_name</key>
-				<string>logitech-options</string>
+				<key>url</key>
+				<string>%SCRAPE_URL%</string>
+				<key>result_output_var_name</key>
+				<string>VERSION</string>
+				<key>re_pattern</key>
+				<string>%REG_EX%</string>
 			</dict>
 			<key>Processor</key>
-			<string>BrewCaskInfoProvider</string>
+			<string>CURLTextSearcher</string>
 		</dict>
 		<dict>
 			<key>Arguments</key>
@@ -38,7 +40,7 @@
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 				<key>url</key>
-				<string>%DOWNLOAD_URL%</string>
+				<string>https://www.logitech.com/pub/techsupport/options/Options_%VERSION%.zip</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
