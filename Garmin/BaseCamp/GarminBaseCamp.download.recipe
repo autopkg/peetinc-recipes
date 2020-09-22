@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of Garmin BaseCamp.</string>
+	<key>Identifier</key>
+	<string>com.github.peetinc.download.GarminBaseCamp</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>GarminBaseCamp</string>
+		<key>SCRAPE_URL</key>
+		<string>https://www8.garmin.com/support/download_details.jsp?id=4449</string>
+		<key>REG_EX</key>
+		<string>(https\S*BaseCampforMac_\S*\.dmg)</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>%SCRAPE_URL%</string>
+				<key>result_output_var_name</key>
+				<string>URL</string>
+				<key>re_pattern</key>
+				<string>%REG_EX%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>filename</key>
+				<string>%NAME%.dmg</string>
+				<key>url</key>
+				<string>%URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_path</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/%NAME%.dmg/Install BaseCamp.pkg</string>
+				<key>expected_authority_names</key>
+				<array>
+					<string>Developer ID Installer: Garmin International (72ES32VZUA)</string>
+					<string>Developer ID Certification Authority</string>
+            		<string>Apple Root CA</string>
+				</array>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+				<key>pkgdirs</key>
+				<dict/>
+			</dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+		</dict>
+
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>
