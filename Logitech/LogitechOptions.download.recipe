@@ -13,7 +13,7 @@
 		<key>NAME</key>
 		<string>LogitechOptions</string>
 		<key>SCRAPE_URL</key>
-		<string>https://raw.githubusercontent.com/caskroom/homebrew-drivers/master/Casks/logitech-options.rb</string>
+		<string>https://raw.githubusercontent.com/Homebrew/homebrew-cask-drivers/master/Casks/logitech-options.rb</string>
 		<key>REG_EX</key>
 		<string>else\s+version\s+'([\d\.]*?)'</string>
 	</dict>
