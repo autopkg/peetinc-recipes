@@ -11,13 +11,13 @@
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/IntelliscapeComputerSolutions</string>
+		<string>apps/Intelliscape</string>
 		<key>NAME</key>
 		<string>Caffeine</string>
 		<key>DISPLAY_NAME</key>
 		<string>Caffeine</string>
-		<key>CATAGORY</key>
-		<string>Utility</string>
+		<key>CATEGORY</key>
+		<string>Utilities</string>
 		<key>DEVELOPER</key>
 		<string>Intelliscape Computer Solutions</string>
 		<key>pkginfo</key>
@@ -30,6 +30,8 @@
 			<string>Caffeine is a tiny program that puts an icon in the right side of your menu bar. Click it to prevent your Mac from automatically going to sleep, dimming the screen or starting screen savers. Click it again to go back.</string>
 			<key>developer</key>
 			<string>%DEVELOPER%</string>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>display_name</key>
 			<string>%DISPLAY_NAME%</string>
 			<key>name</key>
