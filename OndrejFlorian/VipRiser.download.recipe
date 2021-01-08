@@ -13,7 +13,7 @@
 		<key>NAME</key>
 		<string>VipRiser</string>
 		<key>SPARKLE_FEED_URL</key>
-		<string>http://onflapp.github.io/blog/releases/vipriser/appcast.xml</string>
+		<string>https://onflapp.github.io/blog/releases/vipriser/appcast.xml</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
