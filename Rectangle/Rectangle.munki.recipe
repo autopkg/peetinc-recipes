@@ -34,6 +34,38 @@
 			<string>%CATEGORY%</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>blocking_applications</key>
+			<array/>
+			<key>preinstall_script</key>
+			<string>#!/bin/bash
+
+ConsoleUSER=`stat -f "%Su" /dev/console`
+RestartApp="/Users/Shared/.RestartRectangle"
+
+if [ -f $RestartApp ]; then
+	rm $RestartApp
+fi
+
+if ( pgrep Rectangle ) then
+sudo -u $ConsoleUSER /usr/bin/osascript &lt;&lt;AppleScript
+	quit app "Rectangle"
+AppleScript
+touch $RestartApp
+fi
+
+exit 0</string>
+			<key>postinstall_script</key>
+			<string>#!/bin/bash
+
+ConsoleUSER=`stat -f "%Su" /dev/console`
+RestartApp="/Users/Shared/.RestartRectangle"
+
+if [ -f $RestartApp ]; then
+	su "$ConsoleUSER" -c "open -a /Applications/Rectangle.app"
+	rm $RestartApp
+fi
+
+exit 0</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
