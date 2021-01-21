@@ -39,17 +39,22 @@
 			<key>preinstall_script</key>
 			<string>#!/bin/bash
 
-ConsoleUSER=`stat -f "%Su" /dev/console`
-RestartApp="/Users/Shared/.RestartRectangle"
+AppName="Rectangle"
+AppPath="/Applications/$AppName.app"
+ConsoleUSER=$(stat -f "%Su" /dev/console)
+RestartApp="/Users/Shared/.Restart$AppName"
+
 
 if [ -f $RestartApp ]; then
 	rm $RestartApp
 fi
 
-if ( pgrep Rectangle ) then
-sudo -u $ConsoleUSER /usr/bin/osascript &lt;&lt;AppleScript
-	quit app "Rectangle"
+if ( pgrep "$AppName" ) then
+sudo -u $ConsoleUSER /usr/bin/osascript <<AppleScript
+	quit app "$AppName"
 AppleScript
+sleep 3
+killall "$AppName" > /dev/null 2>&1 
 touch $RestartApp
 fi
 
@@ -57,11 +62,13 @@ exit 0</string>
 			<key>postinstall_script</key>
 			<string>#!/bin/bash
 
-ConsoleUSER=`stat -f "%Su" /dev/console`
-RestartApp="/Users/Shared/.RestartRectangle"
+AppName="Rectangle"
+AppPath="/Applications/$AppName.app"
+ConsoleUSER=$(stat -f "%Su" /dev/console)
+RestartApp="/Users/Shared/.Restart$AppName"
 
 if [ -f $RestartApp ]; then
-	su "$ConsoleUSER" -c "open -a /Applications/Rectangle.app"
+	su "$ConsoleUSER" -c "open -a $AppPath"
 	rm $RestartApp
 fi
 
