@@ -36,6 +36,7 @@
 			<true/>
 			<key>blocking_applications</key>
 			<array/>
+			
 			<key>preinstall_script</key>
 			<string>#!/bin/bash
 
@@ -50,18 +51,18 @@ if [ -f $RestartApp ]; then
 fi
 
 if ( pgrep "$AppName" ) then
-sudo -u $ConsoleUSER /usr/bin/osascript <<AppleScript
+sudo -u $ConsoleUSER /usr/bin/osascript &lt;&lt;AppleScript
 	quit app "$AppName"
 AppleScript
 sleep 3
-killall "$AppName" > /dev/null 2>&1 
+killall "$AppName" &gt; /dev/null 2&gt;&amp;1
 touch $RestartApp
 fi
 
 exit 0</string>
 			<key>postinstall_script</key>
 			<string>#!/bin/bash
-
+			
 AppName="Rectangle"
 AppPath="/Applications/$AppName.app"
 ConsoleUSER=$(stat -f "%Su" /dev/console)
