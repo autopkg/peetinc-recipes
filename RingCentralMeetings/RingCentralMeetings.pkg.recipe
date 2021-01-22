@@ -76,8 +76,6 @@
 				<string>%pathname%</string>
 				<key>pkg_path</key>
 				<string>%RECIPE_CACHE_DIR%/downloads/RingCentralMeetings-%version%.pkg</string>
-				<key>overwrite</key>
-				<false/>
 			</dict>
 			<key>Processor</key>
 			<string>PkgCopier</string>
