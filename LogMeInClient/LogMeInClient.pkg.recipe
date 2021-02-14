@@ -10,8 +10,6 @@
 	<string>com.github.peetinc.pkg.LogMeInClient</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>com.logmein.ignition</string>
 		<key>NAME</key>
 		<string>LogMeIn Client</string>
 	</dict>

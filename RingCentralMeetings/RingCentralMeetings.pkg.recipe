@@ -11,8 +11,6 @@
 	<string>com.github.peetinc.pkg.RingCentralMeetings</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>us.zoom.ringcentral</string>
 		<key>NAME</key>
 		<string>RingCentralMeetings</string>
 	</dict>
@@ -72,10 +70,10 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>source_pkg</key>
-				<string>%pathname%</string>
 				<key>pkg_path</key>
 				<string>%RECIPE_CACHE_DIR%/downloads/RingCentralMeetings-%version%.pkg</string>
+				<key>source_pkg</key>
+				<string>%pathname%</string>
 			</dict>
 			<key>Processor</key>
 			<string>PkgCopier</string>

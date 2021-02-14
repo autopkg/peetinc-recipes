@@ -10,8 +10,6 @@
 	<string>com.github.peetinc.pkg.Caffeine</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>com.intelliscapesolutions.caffeine</string>
 		<key>NAME</key>
 		<string>Caffeine</string>
 	</dict>
