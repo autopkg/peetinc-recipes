@@ -46,6 +46,17 @@
         		<string>identifier "com.Kerio-Connect" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "7WC9K73933"</string>
         	</dict>
     	</dict>
+    	<dict>
+            <key>Processor</key>
+            <string>Versioner</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%pathname%/Kerio Connect.app/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleVersion</string>
+        	</dict>
+        </dict>
     </array>
 </dict>
 </plist>
