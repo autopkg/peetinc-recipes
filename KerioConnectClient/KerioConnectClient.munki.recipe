@@ -47,6 +47,8 @@
         <dict>
             <key>Arguments</key>
             <dict>
+            	<key>munkiimport_pkgname</key>
+				<string>%NAME%-%VERSION%</string>
             	<key>version_comparison_key</key>
 				<string>CFBundleVersion</string>
                 <key>pkg_path</key>
