@@ -36,6 +36,8 @@
 			<string>%CATAGORY%</string>
 			<key>developer</key>
 			<string>%DEVELOPER%</string>
+			<key>version_comparison_key</key>
+			<string>CFBundleVersion</string>
         </dict>
     </dict>
     <key>MinimumVersion</key>
