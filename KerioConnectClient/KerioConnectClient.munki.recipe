@@ -70,7 +70,7 @@
             	<key>version_comparison_key</key>
 				<string>CFBundleVersion</string>
                 <key>pkg_path</key>
-                <string>%RECIPE_CACHE_DIR%/downloads/%NAME%-%VERSION%.dmg</string>
+                <string>%pathname%</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
             </dict>
