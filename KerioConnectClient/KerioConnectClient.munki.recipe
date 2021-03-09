@@ -36,6 +36,8 @@
 			<string>%CATAGORY%</string>
 			<key>developer</key>
 			<string>%DEVELOPER%</string>
+			<key>version</key>
+			<string>%VERSION%</string>
         </dict>
     </dict>
     <key>MinimumVersion</key>
@@ -47,8 +49,6 @@
         <dict>
             <key>Arguments</key>
             <dict>
-            	<key>munkiimport_appname</key>
-				<string>%NAME%-%version%</string>
             	<key>version_comparison_key</key>
 				<string>CFBundleVersion</string>
                 <key>pkg_path</key>
