@@ -36,8 +36,6 @@
 			<string>%CATAGORY%</string>
 			<key>developer</key>
 			<string>%DEVELOPER%</string>
-			<key>version</key>
-			<string>%VERSION%</string>
         </dict>
     </dict>
     <key>MinimumVersion</key>
@@ -46,6 +44,17 @@
     <string>com.github.peetinc.download.KerioConnectClient</string>
     <key>Process</key>
         <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%pathname%/Kerio Connect.app/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleVersion</string>
+        	</dict>
+        	<key>Processor</key>
+        	<string>Versioner</string>
+        </dict>
         <dict>
             <key>Arguments</key>
             <dict>
