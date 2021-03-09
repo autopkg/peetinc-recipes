@@ -58,10 +58,21 @@
         <dict>
             <key>Arguments</key>
             <dict>
+                <key>source</key>
+                <string>%pathname%</string>
+				<key>target</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/%NAME%-%VERSION%.dmg</string>
+        	</dict>
+        	<key>Processor</key>
+        	<string>FileMover</string>
+        </dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
             	<key>version_comparison_key</key>
 				<string>CFBundleVersion</string>
                 <key>pkg_path</key>
-                <string>%pathname%</string>
+                <string>%RECIPE_CACHE_DIR%/downloads/%NAME%-%VERSION%.dmg</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
             </dict>
