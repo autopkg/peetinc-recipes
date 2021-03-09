@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
-	<key>Description</key>
-	<string>Downloads the latest version of VipRiser and imports it into Munki.</string>
-	<key>Identifier</key>
-	<string>com.github.peetinc.munki.VipRiser</string>
-	<key>Input</key>
 	<dict>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/OndrejFlorian</string>
-		<key>CATEGORY</key>
-		<string>Printing</string>
-		<key>NAME</key>
-		<string>VipRiser</string>
-		<key>pkginfo</key>
+		<key>Comment</key>
+		<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
+		<key>Description</key>
+		<string>Downloads the latest version of VipRiser and imports it into Munki.</string>
+		<key>Identifier</key>
+		<string>com.github.peetinc.munki.VipRiser</string>
+		<key>Input</key>
 		<dict>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>description</key>
-			<string>Extensible virtual PDF printer Its main purpose is to produce a PDF from any application that can print. A user can customise the entire process with Automator workflows, turning VipRiser into powerful publishing platform.</string>
-			<key>developer</key>
-			<string>Ondrej Florian</string>
-			<key>category</key>
-			<string>%CATEGORY%</string>
-			<key>display_name</key>
+			<key>MUNKI_REPO_SUBDIR</key>
+			<string>apps/OndrejFlorian</string>
+			<key>CATEGORY</key>
+			<string>Printing</string>
+			<key>NAME</key>
 			<string>VipRiser</string>
-			<key>name</key>
-			<string>%NAME%</string>
-			<key>postinstall_script</key>
-			<string>#!/bin/bash
+			<key>pkginfo</key>
+			<dict>
+				<key>catalogs</key>
+				<array>
+					<string>testing</string>
+				</array>
+				<key>description</key>
+				<string>Extensible virtual PDF printer Its main purpose is to produce a PDF from any application that can print. A user can customise the entire process with Automator workflows, turning VipRiser into powerful publishing platform.</string>
+				<key>developer</key>
+				<string>Ondrej Florian</string>
+				<key>category</key>
+				<string>%CATEGORY%</string>
+				<key>display_name</key>
+				<string>VipRiser</string>
+				<key>name</key>
+				<string>%NAME%</string>
+				<key>postinstall_script</key>
+				<string>#!/bin/bash
 installer -pkg /Applications/VipRiser.app/Contents/Resources/VipRiserCUPSDevice.pkg -target /
 lpadmin -D "Print to VipRiser" -p "Print_to_VipRiser" -v "vipriser:/" -P /Library/Printers/PPDs/Contents/Resources/vipriser.ppd -o printer-is-shared=false
 cupsenable "Print_to_VipRiser"
 cupsaccept "Print_to_VipRiser"
 exit 0</string>
-			<key>postuninstall_script</key>
-			<string>#!/bin/bash
-
-printers=`lpstat -p | awk '{print $2}'`
-consoleuser=`/usr/bin/stat -f "%Su" /dev/console | /usr/bin/xargs /usr/bin/id -u`
+				<key>postuninstall_script</key>
+				<string>#!/bin/bash printers=`lpstat -p | awk '{print $2}'` consoleuser=`/usr/bin/stat -f "%Su" /dev/console | /usr/bin/xargs /usr/bin/id -u`
  
 /bin/launchctl bootout gui/$consoleuser /Library/LaunchAgents/com.onflapp.VipRiserAgent.plist
 
@@ -64,38 +61,38 @@ fi
 pkgutil --forget com.onflapp.vipriser.driver
 
 exit 0</string>
-			<key>unattended_install</key>
-			<true/>
+				<key>unattended_install</key>
+				<true/>
+			</dict>
 		</dict>
+		<key>MinimumVersion</key>
+		<string>1.0.0</string>
+		<key>ParentRecipe</key>
+		<string>com.github.peetinc.download.VipRiser</string>
+		<key>Process</key>
+		<array>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>dmg_path</key>
+					<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+					<key>dmg_root</key>
+					<string>%RECIPE_CACHE_DIR%/%NAME%</string>
+				</dict>
+				<key>Processor</key>
+				<string>DmgCreator</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>pkg_path</key>
+					<string>%dmg_path%</string>
+					<key>repo_subdirectory</key>
+					<string>%MUNKI_REPO_SUBDIR%</string>
+				</dict>
+				<key>Processor</key>
+				<string>MunkiImporter</string>
+			</dict>
+		</array>
 	</dict>
-	<key>MinimumVersion</key>
-	<string>1.0.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.VipRiser</string>
-	<key>Process</key>
-	<array>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>dmg_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
-				<key>dmg_root</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%</string>
-			</dict>
-			<key>Processor</key>
-			<string>DmgCreator</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_path</key>
-				<string>%dmg_path%</string>
-				<key>repo_subdirectory</key>
-				<string>%MUNKI_REPO_SUBDIR%</string>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
-		</dict>
-	</array>
-</dict>
 </plist>
