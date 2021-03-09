@@ -56,6 +56,15 @@
         	<string>Versioner</string>
         </dict>
         <dict>
+			<key>Arguments</key>
+			<dict>
+                <key>version</key>
+                <string>%version%</string>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
+        <dict>
             <key>Arguments</key>
             <dict>
             	<key>version_comparison_key</key>
