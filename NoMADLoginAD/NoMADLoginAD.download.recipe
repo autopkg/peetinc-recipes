@@ -8,7 +8,7 @@ This recipe differs from the ones in bochoven-recipes in the following ways:
 - This one performs code signature verification.
 - This one acquires just the latest version NoMAD Login AD pkg.
 - This one adds check phase
-        </string>     
+        </string>
         <key>Identifier</key>
         <string>com.github.peetinc.download.NoMADLoginAD</string>
         <key>Input</key>
@@ -30,28 +30,28 @@ This recipe differs from the ones in bochoven-recipes in the following ways:
                     <key>url</key>
                     <string>%URL%</string>
                     <key>filename</key>
-					<string>%NAME%.pkg</string>
+                    <string>%NAME%.pkg</string>
                 </dict>
             </dict>
             <dict>
-			<key>Processor</key>
-				<string>EndOfCheckPhase</string>
-			</dict>
-			<dict>   
-    		<key>Processor</key>   
-    		<string>CodeSignatureVerifier</string>   
-    		<key>Arguments</key>   
-   			<dict>   
-        		<key>input_path</key>   
-        		<string>%pathname%</string>
-        		<key>expected_authority_names</key>
-        		<array>
-            		<string>Developer ID Installer: Orchard &#038; Grove Inc. (VRPY9KHGX6)</string>
-            		<string>Developer ID Certification Authority</string>
-            		<string>Apple Root CA</string>
-        		</array>
-   			 </dict>
-   			 </dict>
+                <key>Processor</key>
+                <string>EndOfCheckPhase</string>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>CodeSignatureVerifier</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>input_path</key>
+                    <string>%pathname%</string>
+                    <key>expected_authority_names</key>
+                    <array>
+                        <string>Developer ID Installer: Orchard &#038; Grove Inc. (VRPY9KHGX6)</string>
+                        <string>Developer ID Certification Authority</string>
+                        <string>Apple Root CA</string>
+                    </array>
+                </dict>
+            </dict>
         </array>
     </dict>
 </plist>
