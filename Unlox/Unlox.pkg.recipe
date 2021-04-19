@@ -10,8 +10,6 @@
 	<string>com.github.peetinc.pkg.Unlox</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>com.kanecheshire.macID-macOS</string>
 		<key>NAME</key>
 		<string>Unlox</string>
 	</dict>
