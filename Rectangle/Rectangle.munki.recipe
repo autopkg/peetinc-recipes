@@ -38,8 +38,10 @@
 				<array/>
 
 				<key>preinstall_script</key>
-				<string>#!/bin/bash AppName="Rectangle" AppPath="/Applications/$AppName.app" ConsoleUSER=$(stat -f "%Su" /dev/console) RestartApp="/Users/Shared/.Restart$AppName"
-
+				<string>#!/bin/bash AppName="Rectangle"
+AppPath="/Applications/$AppName.app"
+ConsoleUSER=$(stat -f "%Su" /dev/console)
+RestartApp="/Users/Shared/.Restart$AppName"
 
 if [ -f $RestartApp ]; then
 	rm $RestartApp
@@ -56,7 +58,10 @@ fi
 
 exit 0</string>
 				<key>postinstall_script</key>
-				<string>#!/bin/bash AppName="Rectangle" AppPath="/Applications/$AppName.app" ConsoleUSER=$(stat -f "%Su" /dev/console) RestartApp="/Users/Shared/.Restart$AppName"
+				<string>#!/bin/bash AppName="Rectangle" 
+AppPath="/Applications/$AppName.app" 
+ConsoleUSER=$(stat -f "%Su" /dev/console) 
+RestartApp="/Users/Shared/.Restart$AppName"
 
 if [ -f $RestartApp ]; then
 	su "$ConsoleUSER" -c "open -a $AppPath"
