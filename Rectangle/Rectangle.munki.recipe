@@ -58,7 +58,9 @@ fi
 
 exit 0</string>
 				<key>postinstall_script</key>
-				<string>#!/bin/bash AppName="Rectangle" 
+				<string>#!/bin/bash 
+				
+AppName="Rectangle" 
 AppPath="/Applications/$AppName.app" 
 ConsoleUSER=$(stat -f "%Su" /dev/console) 
 RestartApp="/Users/Shared/.Restart$AppName"
