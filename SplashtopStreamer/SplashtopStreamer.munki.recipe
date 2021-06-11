@@ -65,27 +65,48 @@ if [ ! -d /Users/Shared/SplashtopStreamer ]; then
 fi
 
 #Do not install Soundflower driver. This helps with deployment via Munki.
-#Installing Soundflower driver will hang if the Mac has no users logged in at the time of deployment. Install_Driver=false EulaAccepted=true HidePreferenceDomainSelection=true
+#Installing Soundflower driver will hang if the Mac has no users logged in at the time of deployment.
+Install_Driver=false
 
-#ShowDeployMode must be true to attempt to deploy ShowDeployMode=true SplashtopAccount="" DeployCode="%DEPLOY_CODE%"
+EulaAccepted=true
+HidePreferenceDomainSelection=true
 
-#show deploy warning ShowDeployLoginWarning=false
+#ShowDeployMode must be true to attempt to deploy
+ShowDeployMode=true
+SplashtopAccount=""
+DeployCode="%DEPLOY_CODE%"
 
-# This will be the name of the computer in Splashtop UI, not the computer hostname. Will be set to mac name by default #ComputerName=`scutil --get ComputerName` #HostName="$ComputerName" HostName="`scutil --get ComputerName`"
+#show deploy warning
+ShowDeployLoginWarning=false
 
-# Request permission to connect (0:off, 1:reject after request expires, 2:connect after request expires). EnablePermissionProtection=0
+# This will be the name of the computer in Splashtop UI, not the computer hostname. Will be set to mac name by default
+#ComputerName=`scutil --get ComputerName`
+#HostName="$ComputerName"
+HostName="`scutil --get ComputerName`"
 
-#Require additional password to connect EnableOSCredential to require macOS account auth" init_security_code="" EnableSecurityCodeProtection=false EnableOSCredential=true
+# Request permission to connect (0:off, 1:reject after request expires, 2:connect after request expires).
+EnablePermissionProtection=0
 
-#loopback connection only LegacyConnectionLoopbackOnly=false
+#Require additional password to connect EnableOSCredential to require macOS account auth"
+init_security_code=""
+EnableSecurityCodeProtection=false
+EnableOSCredential=true
 
-#Hide Menubar icon HideTrayIcon=false
+#loopback connection only
+LegacyConnectionLoopbackOnly=false
 
-#Default client name on connection bubble. DefaultClientDeviceName=""
+#Hide Menubar icon
+HideTrayIcon=false
 
-#Do NOT show Streamer UI after installation both need to be false FirstTimeClose=false FirstTimeLogin=false
+#Default client name on connection bubble.
+DefaultClientDeviceName=""
 
-if [ "$Install_Driver" == false ]; then No_Driver="/Users/Shared/SplashtopStreamer/.NoDriver"
+#Do NOT show Streamer UI after installation both need to be false
+FirstTimeClose=false
+FirstTimeLogin=false
+
+if [ "$Install_Driver" == false ]; then
+No_Driver="/Users/Shared/SplashtopStreamer/.NoDriver"
 touch "$No_Driver"
 echo NO DRIVER
 fi
@@ -138,7 +159,7 @@ fi
 chflags %HIDE_FOLDER% /Users/Shared/SplashtopStreamer
 
 exit 0
-				</string>
+			</string>
 			</dict>
 		</dict>
 		<key>MinimumVersion</key>
