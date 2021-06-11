@@ -38,7 +38,9 @@
 				<array/>
 
 				<key>preinstall_script</key>
-				<string>#!/bin/bash AppName="Rectangle"
+				<string>#!/bin/bash 
+				
+AppName="Rectangle"
 AppPath="/Applications/$AppName.app"
 ConsoleUSER=$(stat -f "%Su" /dev/console)
 RestartApp="/Users/Shared/.Restart$AppName"
@@ -56,7 +58,8 @@ killall "$AppName" &gt; /dev/null 2&gt;&amp;1
 touch $RestartApp
 fi
 
-exit 0</string>
+exit 0
+				</string>
 				<key>postinstall_script</key>
 				<string>#!/bin/bash 
 				
@@ -70,7 +73,8 @@ if [ -f $RestartApp ]; then
 	rm $RestartApp
 fi
 
-exit 0</string>
+exit 0
+				</string>
 			</dict>
 		</dict>
 		<key>MinimumVersion</key>
