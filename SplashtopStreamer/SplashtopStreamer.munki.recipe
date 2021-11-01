@@ -2,48 +2,50 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Comment</key>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.SplashtopStreamer</string>
 	<key>Input</key>
 	<dict>
-		<key>NAME</key>
-		<string>SplashtopStreamer</string>
+		<key>DEPLOY_CODE</key>
+		<string>-REPLACE-ME-</string>
 		<key>DISPLAY_NAME</key>
 		<string>Splashtop Streamer</string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/Splashtop</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Support</string>
 		<key>MUNKI_DEVELOPER</key>
 		<string>Splashtop</string>
 		<key>MUNKI_DESCRIPTION</key>
 		<string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
-		<key>DEPLOY_CODE</key>
-		<string>-REPLACE-ME-</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/Splashtop</string>
+		<key>NAME</key>
+		<string>SplashtopStreamer</string>
 		<key>PLIST_PERM</key>
 		<string>664</string>
 		<key>HIDE_FOLDER</key>
-		<string>hidden</string>				
+		<string>hidden</string>	
 		<key>pkginfo</key>
 		<dict>
+			<key>blocking_applications</key>
+			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
-			<key>category</key>
-			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>%MUNKI_DESCRIPTION%</string>
 			<key>developer</key>
 			<string>%MUNKI_DEVELOPER%</string>
 			<key>display_name</key>
-			<string>%DISPLAY_NAME%</string>
+			<string>Splashtop Streamer</string>
 			<key>name</key>
 			<string>%NAME%</string>
-			<key>blocking_applications</key>
-			<array/>
 			<key>unattended_install</key>
 			<true/>
 			<key>unattended_uninstall</key>
@@ -168,81 +170,17 @@ exit 0
 	<string>com.github.peetinc.download.SplashtopStreamer</string>
 	<key>Process</key>
 	<array>
-	<dict>
-        <key>Arguments</key>
-        <dict>
-            <key>flat_pkg_path</key>
-            <string>%pathname%/*.pkg</string>
-            <key>destination_path</key>
-            <string>%RECIPE_CACHE_DIR%/tmp/PKGs</string>
-         </dict>
-        <key>Processor</key>
-        <string>FlatPkgUnpacker</string>
-        </dict>
-	<dict>
-        <key>Arguments</key>
-        <dict>
-            <key>pkg_payload_path</key>
-            <string>%RECIPE_CACHE_DIR%/tmp/PKGs/Splashtop_Streamer-installer.pkg/Payload</string>
-            <key>destination_path</key>
-            <string>%RECIPE_CACHE_DIR%/tmp/payload/Applications/</string>
-         </dict>
-        <key>Processor</key>
-        <string>PkgPayloadUnpacker</string>
-    </dict>
-	 <dict>
-    	<key>Arguments</key>
-        	<dict>
-            	<key>faux_root</key>
-            	<string>%RECIPE_CACHE_DIR%/tmp/payload</string>
-            	<key>installs_item_paths</key>
-            		<array>
-                   		<string>/Applications/Splashtop Streamer.app</string>
-               		</array>
-            </dict>
-        <key>Processor</key>
-        <string>MunkiInstallsItemsCreator</string>
-    </dict>
-    <dict>
-    	<key>Processor</key>
-        <string>MunkiPkginfoMerger</string>
-    </dict>
-    <dict>
-     	<key>Arguments</key>
-        <dict>
-            <key>additional_pkginfo</key>
-            <dict>
-				<key>version</key>
-				<string>%version%</string>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
 			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
 		</dict>
-    	<key>Processor</key>
-        <string>MunkiPkginfoMerger</string>
-    </dict>
-    <dict>
-        <key>Arguments</key>
-	        <dict>
-                <key>force_munkiimport</key>
-                <false/>
-                <key>pkg_path</key>
-                <string>%pathname%</string>
-                <key>repo_subdirectory</key>
-                <string>%MUNKI_REPO_SUBDIR%</string>
-            </dict>
-        <key>Processor</key>
-	    <string>MunkiImporter</string>
-    </dict>
-    <dict>
-        <key>Arguments</key>
-        <dict>
-            <key>path_list</key>
-            <array>
-                <string>%RECIPE_CACHE_DIR%/tmp/</string>
-            </array>
-        </dict>
-        <key>Processor</key>
-        <string>PathDeleter</string>
-    </dict>
 	</array>
 </dict>
 </plist>
