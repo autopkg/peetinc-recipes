@@ -31,7 +31,7 @@
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
-			</array>
+			<array/>
 			<key>category</key>
 			<string>%MUNKI_CATEGORY%</string>
 			<key>catalogs</key>
@@ -183,4 +183,5 @@ exit 0
 		</dict>
 	</array>
 </dict>
+
 </plist>
