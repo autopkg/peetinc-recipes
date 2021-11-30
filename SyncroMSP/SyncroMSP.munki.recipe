@@ -46,6 +46,44 @@
 	<string>com.github.peetinc.download.SyncroMSP</string>
 	<key>Process</key>
 	<array>
+		<!-- Make a fake pkg root -->
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pkgroot</key>
+                <string>%RECIPE_CACHE_DIR%/unpack/root</string>
+                <key>pkgdirs</key>
+                <dict>
+                    <key>Library</key>
+                    <string>0775</string>
+                </dict>
+            </dict>
+            <key>Processor</key>
+            <string>PkgRootCreator</string>
+        </dict>
+        <!-- Expand packages into fake root -->
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/expanded</string>
+                <key>flat_pkg_path</key>
+                <string>%PATHNAME%</string>
+            </dict>
+            <key>Processor</key>
+            <string>FlatPkgUnpacker</string>
+        </dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpack/root/Applications</string>
+                <key>pkg_payload_path</key>
+                <string>%RECIPE_CACHE_DIR%/expanded/Google_Earth_Pro.pkg/Payload</string>
+                <key>Processor</key>
+            	<string>PkgPayloadUnpacker</string>
+            </dict>
+        </dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
