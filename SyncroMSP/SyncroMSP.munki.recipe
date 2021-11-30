@@ -128,8 +128,6 @@
             <string>MunkiPkginfoMerger</string>
         </dict>
         <dict>
-            <key>Processor</key>
-            <string>PathDeleter</string>
             <key>Arguments</key>
             <dict>
                 <key>path_list</key>
@@ -138,6 +136,8 @@
                     <string>%RECIPE_CACHE_DIR%/expanded</string>
                 </array>
             </dict>
+            <key>Processor</key>
+            <string>PathDeleter</string>
         </dict>
 		<dict>
 			<key>Arguments</key>
