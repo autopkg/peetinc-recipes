@@ -46,7 +46,6 @@
 	<string>com.github.peetinc.download.SyncroMSP</string>
 	<key>Process</key>
 	<array>
-		<!-- Make a fake pkg root -->
         <dict>
             <key>Arguments</key>
             <dict>
@@ -61,7 +60,6 @@
             <key>Processor</key>
             <string>PkgRootCreator</string>
         </dict>
-        <!-- Expand packages into fake root -->
         <dict>
             <key>Arguments</key>
             <dict>
