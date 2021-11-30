@@ -77,9 +77,9 @@
             <key>Arguments</key>
             <dict>
                 <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/unpack/root/Applications</string>
+                <string>%RECIPE_CACHE_DIR%/unpack/root/Library</string>
                 <key>pkg_payload_path</key>
-                <string>%RECIPE_CACHE_DIR%/expanded/Google_Earth_Pro.pkg/Payload</string>
+                <string>%RECIPE_CACHE_DIR%/expanded/SyncroMSP.pkg/Payload</string>
             </dict>
             <key>Processor</key>
             <string>PkgPayloadUnpacker</string>
