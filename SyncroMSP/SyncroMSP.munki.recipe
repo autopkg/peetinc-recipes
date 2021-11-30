@@ -68,7 +68,7 @@
                 <key>destination_path</key>
                 <string>%RECIPE_CACHE_DIR%/expanded</string>
                 <key>flat_pkg_path</key>
-                <string>%PATHNAME%</string>
+                <string>%pathname%</string>
             </dict>
             <key>Processor</key>
             <string>FlatPkgUnpacker</string>
