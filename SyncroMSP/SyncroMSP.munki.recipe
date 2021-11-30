@@ -80,9 +80,9 @@
                 <string>%RECIPE_CACHE_DIR%/unpack/root/Applications</string>
                 <key>pkg_payload_path</key>
                 <string>%RECIPE_CACHE_DIR%/expanded/Google_Earth_Pro.pkg/Payload</string>
-                <key>Processor</key>
-            	<string>PkgPayloadUnpacker</string>
             </dict>
+            <key>Processor</key>
+            <string>PkgPayloadUnpacker</string>
         </dict>
 		<dict>
 			<key>Arguments</key>
