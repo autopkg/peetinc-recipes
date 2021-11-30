@@ -25,7 +25,7 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Syncro SVN Client makes easier document and code sharing between content authors or developers.</string>
+			<string>SyncroMSP asset agent software.</string>
 			<key>developer</key>
 			<string>Servably</string>
 			<key>display_name</key>
