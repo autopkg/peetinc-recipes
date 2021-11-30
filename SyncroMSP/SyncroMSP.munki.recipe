@@ -4,6 +4,8 @@
 <dict>
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
+	<key>Comment</key>
+	<string>Make sure to POLICY_ID=TOKEN_GUID && echo $POLICY_ID > /tmp/syncro-deploy-id to associate with your tenant and customer.</string>
 	<key>Description</key>
 	<string>Downloads the latest version of SyncroMSP and imports it into Munki.</string>
 	<key>Identifier</key>
