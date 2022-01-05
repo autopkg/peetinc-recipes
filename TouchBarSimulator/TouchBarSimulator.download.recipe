@@ -18,14 +18,13 @@
 	<key>Process</key>
 	<array>
 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>appcast_url</key>
-				<string>https://sindresorhus.com/touch-bar-simulator/appcast.xml</string>
-			</dict>
-			<key>Processor</key>
-			<string>SparkleUpdateInfoProvider</string>
-		</dict>
+            <key>Arguments</key>
+            <dict>
+                <key>github_repo</key>
+                <string>sindresorhus/touch-bar-simulator</string>
+            </dict>
+            <key>Processor</key>
+            <string>GitHubReleasesInfoProvider</string>
 		<dict>
 			<key>Arguments</key>
 			<dict>
