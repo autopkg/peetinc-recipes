@@ -11,19 +11,17 @@
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/sindresorhus/%NAME%</string>
+		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>TouchBarSimulator</string>
-		<key>DEVELOPER</key>
-		<string>Sindre Sorhus</string>
-		<key>CATEGORY</key>
-		<string>Developer</string>
+		<string>Touch Bar Simulator</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>Utilities</string>
 			<key>description</key>
 			<string>Use the Touch Bar on any Mac</string>
 			<key>developer</key>
