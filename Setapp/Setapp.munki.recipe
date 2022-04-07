@@ -20,8 +20,10 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>AppStore</string>
 			<key>description</key>
-			<string>--Subscription-- Required Think tasks, not apps. Setapp membership gives you an all-access pass to curated Mac and iOS apps.</string>
+			<string>Required Think tasks, not apps. Setapp membership gives you an all-access pass to curated Mac and iOS apps.</string>
 			<key>developer</key>
 			<string>Setapp</string>
 			<key>display_name</key>
