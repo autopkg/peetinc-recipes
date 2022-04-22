@@ -30,6 +30,32 @@
 			<string>Setapp</string>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>postinstall_script</key>
+			<string>#!/bin/bash
+
+## Get logged in user and UID
+currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
+currentUID=$(id -u $currentUser)
+
+if [ -f /Users/Shared/.SetappRestart ]; then
+	rm /Users/Shared/.SetappRestart 
+	launchctl asuser $currentUID launchctl load /Users/$currentUser/Library/LaunchAgents/com.setapp.DesktopClient.*
+fi
+
+exit 0</string>
+			<key>preinstall_script</key>
+			<string>#!/bin/bash
+
+## Get logged in user and UID
+currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
+currentUID=$(id -u $currentUser)
+
+if ( pgrep -q Setapp ); then
+	touch /Users/Shared/.SetappRestart 
+	launchctl asuser $currentUID launchctl unload /Users/$currentUser/Library/LaunchAgents/com.setapp.DesktopClient.*
+fi
+
+exit 0</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
