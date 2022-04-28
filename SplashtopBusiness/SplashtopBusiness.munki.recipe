@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Comment</key>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
+	<key>Description</key>
+	<string>Downloads the latest version of Splashtop Business and imports it into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.peetinc.munki.SplashtopBusiness</string>
+	<key>Input</key>
+	<dict>
+		<key>CATEGORY</key>
+		<string>Remote Access</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/%NAME%</string>
+		<key>NAME</key>
+		<string>SplashtopBusiness</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>blocking_applications</key>
+			<array>
+				<string>Splashtop Business.app</string>
+			</array>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
+			<key>description</key>
+			<string>Install the Splashtop Business app on the Mac you want to remote from.</string>
+			<key>developer</key>
+			<string>Splashtop</string>
+			<key>display_name</key>
+			<string>Splashtop Business</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>unattended_install</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.peetinc.download.SplashtopBusiness</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>dmg_root</key>
+				<string>%RECIPE_CACHE_DIR%/payload/</string>
+				<key>dmg_path</key>
+				<string>%RECIPE_CACHE_DIR%/SplasthtopBusiness.dmg</string>
+			</dict>
+			<key>Processor</key>
+			<string>DmgCreator</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/SplasthtopBusiness.dmg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+		</dict>
+	</array>
+</dict>
+</plist>
