@@ -2,15 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
-	<key>Description</key>
-	<string>Downloads the latest version of Privileges and imports it into Munki.</string>
-	<key>Identifier</key>
-	<string>com.github.peetinc.munki.Privileges</string>
-	<key>Input</key>
-	<dict>
-		<key>DESCRIPTION</key>
+    <key>Description</key>
+    <string>Downloads the latest version of Privileges.app and imports it into Munki</string>
+    <key>Identifier</key>
+    <string>com.github.rtrouton.munki.privileges</string>
+    <key>Input</key>
+    <dict>
+        <key>DESCRIPTION</key>
         <string>Privileges.app for macOS is designed to allow users to work as a standard user for day-to-day use, by providing a quick and easy way to get administrator rights when needed. When you do need admin rights, you can get them by clicking on the Privileges icon in your Dock.</string>
         <key>DISPLAYNAME</key>
         <string>Privileges</string>
@@ -19,16 +17,16 @@
         <key>MUNKI_DEVELOPER</key>
         <string>SAP</string>
         <key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/%NAME%</string>
-		<key>NAME</key>
-		<string>Privileges</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>category</key>
+        <string></string>
+        <key>NAME</key>
+        <string>Privileges</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>category</key>
             <string>%MUNKI_CATEGORY%</string>
             <key>description</key>
             <string>%DESCRIPTION%</string>
@@ -36,112 +34,13 @@
             <string>%MUNKI_DEVELOPER%</string>
             <key>display_name</key>
             <string>%DISPLAYNAME%</string>
-            <key>postinstall_script</key>
-			<string>#!/bin/bash
-
-# postinstall.sh
-# Marc Thielemann, 2020/01/21
-
-exitCode=0
-
-helperPath="$3/Applications/Privileges.app/Contents/XPCServices/PrivilegesXPC.xpc/Contents/Library/LaunchServices/corp.sap.privileges.helper"
-
-if [[ -f "$helperPath" ]]; then
-
-	# create the target directory if needed
-	if [[ ! -d "$3/Library/PrivilegedHelperTools" ]]; then
-		/bin/mkdir -p "$3/Library/PrivilegedHelperTools"
-		/bin/chmod 755 "$3/Library/PrivilegedHelperTools"
-		/usr/sbin/chown -R root:wheel "$3/Library/PrivilegedHelperTools"
-	fi
-	
-	# move the privileged helper into place
-	/bin/cp -f "$helperPath" "$3/Library/PrivilegedHelperTools"
-	
-	if [[ $? -eq 0 ]]; then
-		/bin/chmod 755 "$3/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
-
-		# create the launchd plist
-		helperPlistPath="$3/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
-	
-		/bin/cat &gt; "$helperPlistPath" &lt;&lt; EOF
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD helperPlistPath 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
-&lt;plist version="1.0"&gt;
-&lt;dict&gt;
-	&lt;key&gt;Label&lt;/key&gt;
-	&lt;string&gt;corp.sap.privileges.helper&lt;/string&gt;
-	&lt;key&gt;MachServices&lt;/key&gt;
-	&lt;dict&gt;
-		&lt;key&gt;corp.sap.privileges.helper&lt;/key&gt;
-		&lt;true/&gt;
-	&lt;/dict&gt;
-	&lt;key&gt;ProgramArguments&lt;/key&gt;
-	&lt;array&gt;
-		&lt;string&gt;/Library/PrivilegedHelperTools/corp.sap.privileges.helper&lt;/string&gt;
-	&lt;/array&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;
-EOF
-
-		/bin/chmod 644 "$helperPlistPath"
-		
-		# load the launchd plist only if installing on the boot volume
-		if [[ "$3" = "/" ]]; then
-			/bin/launchctl bootstrap system "$helperPlistPath"
-		fi
-		
-		# restart the Dock if Privileges is in there. This ensures proper loading
-		# of the (updated) Dock tile plug-in
-		
-		# get the currently logged-in user and go ahead if it's not root
-		currentUser=$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')
-
-		if [[ -n "$currentUser" &amp;&amp; "$currentUser" != "root" ]]; then
-			if [[ -n $(/usr/bin/sudo -u "$currentUser" /usr/bin/defaults read com.apple.dock "persistent-apps" | /usr/bin/grep "/Applications/Privileges.app") ]]; then
-				/usr/bin/killall Dock
-			fi
-		fi
-		
-		# make sure PrivilegesCLI can be accessed without specifying the full path
-		echo "/Applications/Privileges.app/Contents/Resources" &gt; "$3/private/etc/paths.d/PrivilegesCLI"
-
-	else
-		exitCode=1
-	fi
-else
-	exitCode=1
-fi
-
-exit $exitCode
-				</string>
-				<key>preinstall_script</key>
-				<string>#!/bin/bash
-
-# preinstall.sh
-# Marc Thielemann, 2019/09/15
-
-# redirect all output to /dev/null
-exec &gt;/dev/null 2&gt;&amp;1
-
-helperPlistPath="$3/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
-
-/usr/bin/killall Privileges
-
-# unload the launchd plist only if installing on the boot volume
-if [[ "$3" = "/" ]]; then
-	/bin/launchctl bootout system "$helperPlistPath"
-fi
-
-/bin/rm -rf "$helperPlistPath" \
-            "$3/Library/PrivilegedHelperTools/corp.sap.privileges.helper" \
-            "$3/Applications/Privileges.app"
-
-exit 0
-			</string>
-			<key>unattended_install</key>
-			<true/>
-			<key>unattended_uninstall</key>
+            <key>minimum_os_version</key>
+            <string>10.12</string>
+            <key>name</key>
+            <string>%NAME%</string>
+            <key>unattended_install</key>
+            <true/>
+            <key>unattended_uninstall</key>
             <true/>
             <key>uninstall_method</key>
             <string>uninstall_script</string>
@@ -157,36 +56,72 @@ rm -rf "/Applications/Privileges.app"
 rm -rf "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
 pkgutil --forget com.sap.privileges
 </string>
-		</dict>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>1.0.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.rtrouton.download.privileges</string>
-	<key>Process</key>
-	<array>
-		<dict>
+        </dict>
+    </dict>
+    <key>ParentRecipe</key>
+    <string>com.github.rtrouton.pkg.privileges</string>
+    <key>Process</key>
+    <array>
+        <dict>
             <key>Processor</key>
-            <string>DmgCreator</string>
+            <string>MunkiInstallsItemsCreator</string>
             <key>Arguments</key>
             <dict>
-                <key>dmg_root</key>
+                <key>faux_root</key>
                 <string>%RECIPE_CACHE_DIR%/%NAME%/</string>
-                <key>dmg_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+                <key>installs_item_paths</key>
+                <array>
+                    <string>/Applications/Privileges.app</string>
+                </array>
             </dict>
         </dict>
-		<dict>
+        <dict>
+            <key>Processor</key>
+            <string>MunkiPkginfoMerger</string>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>PlistReader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>info_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%/Applications/Privileges.app/Contents/Info.plist</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>MunkiPkginfoMerger</string>
+            <key>Arguments</key>
+            <dict>
+                <key>additional_pkginfo</key>
+                <dict>
+                    <key>version</key>
+                    <string>%version%</string>
+                </dict>
+            </dict>
+        </dict>
+        <dict>
             <key>Processor</key>
             <string>MunkiImporter</string>
             <key>Arguments</key>
             <dict>
                 <key>pkg_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+                <string>%pkg_path%</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
             </dict>
         </dict>
-	</array>
+        <dict>
+            <key>Processor</key>
+            <string>PathDeleter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>path_list</key>
+                <array>
+                    <string>%RECIPE_CACHE_DIR%/%NAME%/</string>                    
+                </array>
+            </dict>
+        </dict>
+    </array>
 </dict>
 </plist>
