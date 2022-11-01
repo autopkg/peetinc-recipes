@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads the latest version of Privileges.app and imports it into Munki</string>
     <key>Identifier</key>
-    <string>com.github.rtrouton.munki.privileges</string>
+    <string>com.github.peetinc.munki.privileges</string>
     <key>Input</key>
     <dict>
         <key>DESCRIPTION</key>
