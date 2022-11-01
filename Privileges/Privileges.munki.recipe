@@ -36,6 +36,109 @@
             <string>%MUNKI_DEVELOPER%</string>
             <key>display_name</key>
             <string>%DISPLAYNAME%</string>
+            <key>postinstall_script</key>
+			<string>#!/bin/bash
+
+# postinstall.sh
+# Marc Thielemann, 2020/01/21
+
+exitCode=0
+
+helperPath="$3/Applications/Privileges.app/Contents/XPCServices/PrivilegesXPC.xpc/Contents/Library/LaunchServices/corp.sap.privileges.helper"
+
+if [[ -f "$helperPath" ]]; then
+
+	# create the target directory if needed
+	if [[ ! -d "$3/Library/PrivilegedHelperTools" ]]; then
+		/bin/mkdir -p "$3/Library/PrivilegedHelperTools"
+		/bin/chmod 755 "$3/Library/PrivilegedHelperTools"
+		/usr/sbin/chown -R root:wheel "$3/Library/PrivilegedHelperTools"
+	fi
+	
+	# move the privileged helper into place
+	/bin/cp -f "$helperPath" "$3/Library/PrivilegedHelperTools"
+	
+	if [[ $? -eq 0 ]]; then
+		/bin/chmod 755 "$3/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
+
+		# create the launchd plist
+		helperPlistPath="$3/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+	
+		/bin/cat &gt; "$helperPlistPath" &lt;&lt; EOF
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD helperPlistPath 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+	&lt;key&gt;Label&lt;/key&gt;
+	&lt;string&gt;corp.sap.privileges.helper&lt;/string&gt;
+	&lt;key&gt;MachServices&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;corp.sap.privileges.helper&lt;/key&gt;
+		&lt;true/&gt;
+	&lt;/dict&gt;
+	&lt;key&gt;ProgramArguments&lt;/key&gt;
+	&lt;array&gt;
+		&lt;string&gt;/Library/PrivilegedHelperTools/corp.sap.privileges.helper&lt;/string&gt;
+	&lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+EOF
+
+		/bin/chmod 644 "$helperPlistPath"
+		
+		# load the launchd plist only if installing on the boot volume
+		if [[ "$3" = "/" ]]; then
+			/bin/launchctl bootstrap system "$helperPlistPath"
+		fi
+		
+		# restart the Dock if Privileges is in there. This ensures proper loading
+		# of the (updated) Dock tile plug-in
+		
+		# get the currently logged-in user and go ahead if it's not root
+		currentUser=$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')
+
+		if [[ -n "$currentUser" &amp;&amp; "$currentUser" != "root" ]]; then
+			if [[ -n $(/usr/bin/sudo -u "$currentUser" /usr/bin/defaults read com.apple.dock "persistent-apps" | /usr/bin/grep "/Applications/Privileges.app") ]]; then
+				/usr/bin/killall Dock
+			fi
+		fi
+		
+		# make sure PrivilegesCLI can be accessed without specifying the full path
+		echo "/Applications/Privileges.app/Contents/Resources" &gt; "$3/private/etc/paths.d/PrivilegesCLI"
+
+	else
+		exitCode=1
+	fi
+else
+	exitCode=1
+fi
+
+exit $exitCode
+				</string>
+				<key>preinstall_script</key>
+				<string>#!/bin/bash
+
+# preinstall.sh
+# Marc Thielemann, 2019/09/15
+
+# redirect all output to /dev/null
+exec &gt;/dev/null 2&gt;&amp;1
+
+helperPlistPath="$3/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+
+/usr/bin/killall Privileges
+
+# unload the launchd plist only if installing on the boot volume
+if [[ "$3" = "/" ]]; then
+	/bin/launchctl bootout system "$helperPlistPath"
+fi
+
+/bin/rm -rf "$helperPlistPath" \
+            "$3/Library/PrivilegedHelperTools/corp.sap.privileges.helper" \
+            "$3/Applications/Privileges.app"
+
+exit 0
+			</string>
 			<key>unattended_install</key>
 			<true/>
 			<key>unattended_uninstall</key>
