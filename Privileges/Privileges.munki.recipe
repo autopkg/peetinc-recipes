@@ -17,7 +17,7 @@
         <key>MUNKI_DEVELOPER</key>
         <string>SAP</string>
         <key>MUNKI_REPO_SUBDIR</key>
-        <string></string>
+        <string>/apps/%NAME%</string>
         <key>NAME</key>
         <string>Privileges</string>
         <key>pkginfo</key>
