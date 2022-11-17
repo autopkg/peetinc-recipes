@@ -6,6 +6,7 @@
 		<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
 		<key>Description</key>
 		<string>Downloads the latest version of Rectangle.
+	--Temporarily migrated to 'GitHubReleasesInfoProvider ... issue with 'SparkleUpdateInfoProvider'://github.com/autopkg/autopkg/issues/839
 	This recipe differs from the ones in dataJAR-recipes in the following ways:
 - This one uses the sparkle feed to download the most recent version
 - The Developer was requireing "sparkle" in the user agent header for the sparkle feed. After contacting him, he removed the requirement.
