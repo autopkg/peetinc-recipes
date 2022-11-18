@@ -55,7 +55,7 @@
 				<key>flat_pkg_path</key>
 				<string>%pathname%/.Splashtop Streamer.pkg</string>
 				<key>purge_destination</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>Processor</key>
 			<string>FlatPkgUnpacker</string>
