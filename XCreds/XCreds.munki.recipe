@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.munki.XCreds</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>Authentication</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
@@ -17,10 +19,9 @@
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
-			<array>
-				<string>XCreds.app</string>
-				<string>XCreds Login Overlay.app</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
