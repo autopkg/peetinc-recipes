@@ -59,9 +59,9 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>extract_root</key>
+				<key>destination_path</key>
 				<string>%RECIPE_CACHE_DIR%/distribution</string>
-				<key>pkg_path</key>
+				<key>flat_pkg_path</key>
 				<string>%pathname%/%NAME%.pkg</string>
 				<key>purge_destination</key>
 				<true/>
