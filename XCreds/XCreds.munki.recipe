@@ -19,7 +19,7 @@
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
-			</array>
+			<array/>
 			<key>category</key>
 			<string>%CATEGORY%</string>
 			<key>catalogs</key>
