@@ -59,15 +59,13 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpack</string>
-				<key>flat_pkg_path</key>
+				<key>extract_root</key>
+				<string>%RECIPE_CACHE_DIR%/root</string>
+				<key>pkg_path</key>
 				<string>%pathname%/%NAME%.pkg</string>
-				<key>purge_destination</key>
-				<true/>
 			</dict>
 			<key>Processor</key>
-			<string>FlatPkgUnpacker</string>
+			<string>PkgExtractor</string>
 		</dict>
 	</array>
 </dict>
