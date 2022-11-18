@@ -66,7 +66,7 @@
 				<key>purge_destination</key>
 				<true/>
 				<key>skip_payload</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>Processor</key>
 			<string>FlatPkgUnpacker</string>
