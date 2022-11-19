@@ -75,7 +75,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/root/Applications</string>
+				<string>%RECIPE_CACHE_DIR%/root</string>
 				<key>pkg_payload_path</key>
 				<string>%RECIPE_CACHE_DIR%/distribution/Xcreds.pkg/Payload</string>
 				<key>purge_destination</key>
