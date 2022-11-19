@@ -12,8 +12,7 @@
 	<dict>
 		<key>NAME</key>
 		<string>XCreds</string>
-		<key>INCLUDE_PRERELEASES</key>
-		<string></string>
+
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
