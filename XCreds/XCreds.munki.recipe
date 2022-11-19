@@ -43,7 +43,6 @@
 	<key>ParentRecipe</key>
 	<string>com.github.peetinc.download.XCreds</string>
 	<key>Process</key>
-	<key>Process</key>
 	<array>
 		<dict>
 			<key>Arguments</key>
@@ -71,6 +70,9 @@
 				<dict>
 					<key>LSMinimumSystemVersion</key>
 					<string>min_os_ver</string>
+				</dict><dict>
+				<key>CFBundleShortVersionString</key>
+					<string>version</string>
 				</dict>
 			</dict>
 			<key>Processor</key>
@@ -83,6 +85,8 @@
 				<dict>
 					<key>minimum_os_version</key>
 					<string>%min_os_ver%</string>
+					<key>version</key>
+					<string>%version%</string>
 				</dict>
 			</dict>
 			<key>Processor</key>
