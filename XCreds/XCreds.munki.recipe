@@ -70,8 +70,7 @@
 				<dict>
 					<key>LSMinimumSystemVersion</key>
 					<string>min_os_ver</string>
-				</dict><dict>
-				<key>CFBundleShortVersionString</key>
+					<key>CFBundleShortVersionString</key>
 					<string>version</string>
 				</dict>
 			</dict>
