@@ -12,7 +12,7 @@
 	<dict>
 		<key>NAME</key>
 		<string>XCreds</string>
-		<key>PRERELEASE</key>
+		<key>INCLUDE_PRERELEASES</key>
 		<string></string>
 	</dict>
 	<key>MinimumVersion</key>
@@ -28,7 +28,7 @@
 				<key>github_repo</key>
 				<string>twocanoes/xcreds</string>
 				<key>include_prereleases</key>
-				<string>%PRERELEASE%</string>
+				<string>%INCLUDE_PRERELEASES%</string>
 			</dict>
 			<key>Processor</key>
 			<string>GitHubReleasesInfoProvider</string>
