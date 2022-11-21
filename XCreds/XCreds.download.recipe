@@ -4,8 +4,6 @@
 <dict>
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
-	<key>Comment</key>
-	<string>Enter "PreBeta" for %PREBETA% downloads.</string>
 	<key>Description</key>
 	<string>Downloads the latest version of XCreds.</string>
 	<key>Identifier</key>
@@ -14,12 +12,8 @@
 	<dict>
 		<key>NAME</key>
 		<string>XCreds</string>
-		<key>INCLUDE_PRERELEASES</key>
+		<key>PRERELEASES</key>
 		<string></string>
-		<key>PREBETA</key>
-		<string></string>
-		<key>REGEX</key>
-		<string>.*\.pkg$(?![\s\S]*.*\.pkg$)</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -29,11 +23,11 @@
 			<key>Arguments</key>
 			<dict>
 				<key>asset_regex</key>
-				<string>%REGEX%</string>
+				<string>.*\.pkg$</string>
 				<key>github_repo</key>
 				<string>twocanoes/xcreds</string>
 				<key>include_prereleases</key>
-				<string>%INCLUDE_PRERELEASES%</string>
+				<string>%PRERELEASES%</string>
 			</dict>
 			<key>Processor</key>
 			<string>GitHubReleasesInfoProvider</string>
