@@ -14,6 +14,8 @@
 		<string>XCreds</string>
 		<key>PRERELEASES</key>
 		<string></string>
+		<key>ASSET_REGEX</key>
+		<string>.*\.pkg$(?![\s\S]*.*\.pkg$)</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -23,7 +25,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>asset_regex</key>
-				<string>.*\.pkg$(?![\s\S]*.*\.pkg$)</string>
+				<string>%ASSET_REGEX%</string>
 				<key>github_repo</key>
 				<string>twocanoes/xcreds</string>
 				<key>include_prereleases</key>
