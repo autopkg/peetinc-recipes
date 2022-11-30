@@ -31,7 +31,7 @@
 			<key>developer</key>
 			<string>Istvan Toth</string>
 			<key>display_name</key>
-			<string>BetterDummy</string>
+			<string>BetterDisplay</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
