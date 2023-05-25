@@ -20,8 +20,10 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>Finance</string>
 			<key>description</key>
-			<string> </string>
+			<string>Leave your browser behind with the QuickBooks Online Mac app.</string>
 			<key>developer</key>
 			<string>Intuit Inc.</string>
 			<key>display_name</key>
