@@ -35,7 +35,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.UTM</string>
+	<string>com.github.ahousseini-recipes.download.UTM</string>
 	<key>Process</key>
 	<array>
 		<dict>
