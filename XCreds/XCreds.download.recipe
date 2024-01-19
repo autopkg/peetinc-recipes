@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of XCreds.</string>
 	<key>Identifier</key>
@@ -12,33 +12,18 @@
 	<dict>
 		<key>NAME</key>
 		<string>XCreds</string>
-		<key>PRERELEASES</key>
-		<string></string>
-		<key>ASSET_REGEX</key>
-		<string>.*\.pkg$(?![\s\S]*.*\.pkg$)</string>
 	</dict>
 	<key>MinimumVersion</key>
-	<string>1.0.0</string>
+	<string>2.3</string>
 	<key>Process</key>
 	<array>
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>asset_regex</key>
-				<string>%ASSET_REGEX%</string>
-				<key>github_repo</key>
-				<string>twocanoes/xcreds</string>
-				<key>include_prereleases</key>
-				<string>%PRERELEASES%</string>
-			</dict>
-			<key>Processor</key>
-			<string>GitHubReleasesInfoProvider</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
 				<key>filename</key>
 				<string>%NAME%.pkg</string>
+				<key>url</key>
+				<string>https://twocanoes-software-updates.s3.amazonaws.com/XCreds.pkg</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
@@ -61,45 +46,6 @@
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/distribution</string>
-				<key>flat_pkg_path</key>
-				<string>%pathname%</string>
-				<key>purge_destination</key>
-				<true/>
-				<key>skip_payload</key>
-				<false/>
-			</dict>
-			<key>Processor</key>
-			<string>FlatPkgUnpacker</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/root</string>
-				<key>pkg_payload_path</key>
-				<string>%RECIPE_CACHE_DIR%/distribution/%NAME%.pkg/Payload</string>
-				<key>purge_destination</key>
-				<true/>
-			</dict>
-			<key>Processor</key>
-			<string>PkgPayloadUnpacker</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%RECIPE_CACHE_DIR%/root/Applications/XCreds.app/Contents/Info.plist</string>
-				<key>plist_version_key</key>
-				<string>CFBundleShortVersionString</string>
-			</dict>
-			<key>Processor</key>
-			<string>Versioner</string>
 		</dict>
 	</array>
 </dict>
