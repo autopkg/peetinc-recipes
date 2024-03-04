@@ -30,6 +30,8 @@
 		<string>664</string>
 		<key>pkginfo</key>
 		<dict>
+			<key>autoremove</key>
+			<true/>
 			<key>blocking_applications</key>
 			<array/>
 			<key>catalogs</key>
@@ -161,6 +163,478 @@ exit 0
 			<true/>
 			<key>unattended_uninstall</key>
 			<true/>
+			<key>uninstall_script</key>
+			<string>#!/bin/bash
+#
+# uninstall Splashtop Streamer script file
+#
+# Created by Cartor on 2019-11-18.
+# Copyright 2019 Splashtop Inc. All rights reserved.
+#
+
+currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
+appBundleId="com.splashtop.Splashtop-Streamer"
+appName="Splashtop Streamer"
+appOldName="$(pkgutil --only-dirs --files ${appBundleId} 2&gt;/dev/null | head -n 1 2&gt;/dev/null)"
+[ -z "${appOldName}" ] &amp;&amp; appOldName="${appName}.app"
+
+function vercomp () {
+    if [[ $1 == $2 ]]
+    then
+        return 0
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i&lt;${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i&lt;${#ver1[@]}; i++))
+    do
+        if [[ -z ${ver2[i]} ]]
+        then
+            # fill empty fields in ver2 with zeros
+            ver2[i]=0
+        fi
+        if ((10#${ver1[i]} &gt; 10#${ver2[i]}))
+        then
+            return 1
+        fi
+        if ((10#${ver1[i]} &lt; 10#${ver2[i]}))
+        then
+            return 2
+        fi
+    done
+    return 0
+}
+
+function exceCMD() {
+	local cmd="${1}"
+	echo "${cmd}" | sh
+	#echo "${cmd}"
+	#echo "${cmd}" &gt;&gt; ~/uninstaller.log
+}
+
+function kill_process() {
+    local process_list=("$@")
+
+    for process in "${process_list[@]}" ; do
+        [ -z "$(ps axc -Ouser | grep "${process}" | awk '{print $1}')" ] &amp;&amp; continue;
+        exceCMD "sudo killall \"${process}\" 2&gt;/dev/null || sudo killall -9 \"${process}\" 2&gt;/dev/null || true"
+
+        # check again, force kill.
+        [ -z "$(ps axc -Ouser | grep "${process}" | awk '{print $1}')" ] || exceCMD "sudo killall -9 \"${process}\" 2&gt;/dev/null || true"
+    done
+}
+
+function del_files() {
+    local file_list=("$@")
+
+	for file in "${file_list[@]}" ; do
+        exceCMD "sudo rm -rf ${file} 2&gt;/dev/null || true"
+    done
+}
+
+function unloadAgentSetting() {
+    local _PID="$1"
+    local _UID="$2"
+    local PLISTFILE="$3"
+
+    local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+    vercomp "${MAJOR_MAC_VERSION}" "10.10"
+    local ret=$?
+    if [[ $ret -eq 1 ]]; then
+        exceCMD "launchctl bootout gui/${_UID} \"${PLISTFILE}\" 2&gt;&amp;1 || true"
+    elif [[ $ret -eq 0 ]]; then
+        exceCMD "launchctl bsexec \"${_PID}\" chroot -u \"${_UID}\" / launchctl unload \"${PLISTFILE}\" 2&gt;&amp;1 || true"
+    fi
+}
+
+function unloadAgents() {
+    local PLISTFILE="$1"
+
+    local loggedInUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ &amp;&amp; ! /loginwindow/ { print $3 }' )
+
+    local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+    vercomp "${MAJOR_MAC_VERSION}" "10.9"
+    if [[ $? -eq 1 ]]; then
+        for pid_uid in $(ps -axo pid,uid,args | grep -i "[l]oginwindow.app" | awk '{print $1 "," $2}'); do
+            local pid=$(echo $pid_uid | cut -d, -f1)
+            local uid=$(echo $pid_uid | cut -d, -f2)
+            
+            if [[ "${uid}" == "0" &amp;&amp; -z "${loggedInUser}" ]]; then
+                continue
+            fi
+
+            unloadAgentSetting "${pid}" "${uid}" "${PLISTFILE}"
+        done
+    else
+        exceCMD "/usr/bin/sudo -u \"$(stat -f '%Su' /dev/console)\" /bin/launchctl unload -w \"${PLISTFILE}\" 2&gt;&amp;1 || true"
+    fi
+}
+
+function del_launchctl_file() {
+    local file="$1"
+
+    if [ -f "${file}" ]; then
+	    if [ -z "$2" ]; then
+	    	exceCMD "sudo /bin/launchctl unload -w \"${file}\" 2&gt;&amp;1 || true"
+	    else
+	   		unloadAgents "${file}"
+	   	fi
+		exceCMD "sudo rm -rf \"${file}\"* 2&gt;/dev/null || true"
+	fi
+}
+
+function del_launchctl_files_by_user() {
+	local user="$1"
+	shift
+    local file_list=("$@")
+
+	for file in "${file_list[@]}" ; do
+        del_launchctl_file "${file}" "${user}"
+    done
+}
+
+function remove_kext() {
+    local _kext="$1"
+    local bundle_id="$2"
+
+    if [ ! -z "${bundle_id}" ]; then
+        exceCMD "sudo kextstat -b \"${bundle_id}\" &gt; /dev/null 2&gt;&amp;1 &amp;&amp; sudo kextunload -b \"${bundle_id}\" &gt; /dev/null 2&gt;&amp;1 || true"
+    fi
+
+    exceCMD "sudo kextunload \"${_kext}\" &gt; /dev/null 2&gt;&amp;1 || true"
+    exceCMD "sudo rm -rf \"${_kext}\" || true"
+    exceCMD "sudo kextcache --clear-staging &gt; /dev/null 2&gt;&amp;1 || true"
+}
+
+function killOtherProductProcess() {
+	echo "do kill killOtherProductProcess"
+	local process_list=("Splashtop Streamer Pro" "Splashtop Streamer for eno")
+	kill_process "${process_list[@]}"
+}
+
+function killprocess() {
+	if [ -d "/Applications/${appOldName}" ] ; then
+		echo "do logout"
+		exceCMD "open st-streamer://com.splashtop.streamer?logout=1 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; sleep 4"
+	fi
+	echo "do kill process"
+
+	local process_list=("Splashtop Streamer" "inputserv" "spupnp" "SRProxy" "SRFeature" "SplashtopRemote" "SRIOFrameBuffer" "SRStreamerDaemon")
+	kill_process "${process_list[@]}"
+}
+
+function killS4Bprocess() {
+	echo "do kill killS4Bprocess"
+
+	local process_list=("Splashtop Streamer for Business" "SRStreamerBusinessDaemon")
+	kill_process "${process_list[@]}"
+}
+
+function restartCoreAudioService() {
+    local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+    vercomp "${MAJOR_MAC_VERSION}" "10.9"
+    if [ $? -eq 1 ]; then
+        sleep 1; sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod; sleep 1;
+    else
+        sleep 1; sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`; sleep 1;
+    fi
+}
+
+function removePrinterDriver() {
+	local PDFWriterBundleId="de.lisanet.PDFwriter.pkg"
+	local PDFWriterInstallPath="$(pkgutil --only-dirs --files ${PDFWriterBundleId} 2&gt;/dev/null | head -n 1 2&gt;/dev/null)"
+	local uninstallScript="/Applications/${appOldName}/Contents/Resources/uninstall_pdfwriter.sh"
+
+	if [ ! -z "${PDFWriterInstallPath}" ]; then
+		script="${PDFWriterInstallPath}/uninstall.sh"
+		if [ -f "${script}" ]; then
+			exceCMD "sudo \"${script}\" 2&gt;/dev/null || true"
+		fi
+	fi
+
+	if [ -f "${uninstallScript}" ]; then
+		exceCMD "sudo \"${uninstallScript}\" 2&gt;/dev/null || true"
+	fi
+
+	if [ -d "/Users/Shared/PDFwriter" ]; then
+		exceCMD "sudo rm -rf /Users/Shared/PDFwriter 2&gt;/dev/null || true"
+	fi
+
+	for f in /Users/*; do
+		local PrinterFolder="${f}/Library/Printers/Splashtop Remote Printer.app"
+		if [ -d "${PrinterFolder}" ]; then
+			exceCMD "sudo rm -rf \"${PrinterFolder}\" 2&gt;/dev/null || true"
+		fi
+	done
+}
+
+function removedriver() {
+	local KextInstallPath=("/Library/Extensions" "/System/Library/Extensions")
+	local KextInstaller="/Applications/${appOldName}/Contents/MacOS/KextInstaller.app/Contents/MacOS/KextInstaller"
+
+	local _kextName="SRXFrameBufferConnector.kext"
+
+	removePrinterDriver
+
+	if [ -f "${KextInstaller}" ]; then
+		for _kextPath in "${KextInstallPath[@]}" ; do
+			local _kext="${_kextPath}/${_kextName}"
+
+			[ -d "${_kext}" ] || continue
+
+			exceCMD "sudo \"${KextInstaller}\" -u -n \"${_kext}\" 2&gt;/dev/null || true"
+		done
+	else
+	    echo "kext installer exit -1"
+	fi
+}
+
+function removeKextSoundDriver() {
+    local KextInstallPath=("/Library/Extensions" "/System/Library/Extensions")
+    local KextName=("SplashtopSoundDriver.kext" "Soundflower.kext")
+
+    for _kextPath in "${KextInstallPath[@]}" ; do
+        for _kextName in "${KextName[@]}" ; do
+            local is_unload=true
+            local _kext="${_kextPath}/${_kextName}"
+            local _plist="${_kext}/Contents/Info.plist"
+
+            local BundleIdentifier=""
+            local Version=""
+
+            [ -d "${_kext}" ] || continue
+
+            if [ -f "${_plist}" ]; then
+                #CFBundleIdentifier
+                #CFBundleShortVersionString
+                echo "${_plist}"
+
+                BundleIdentifier=$(/usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "${_plist}")
+                Version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "${_plist}")
+            fi
+
+            if [[ "${_kextName}" == "Soundflower.kext" &amp;&amp; "${Version}" != "1.6.7" ]]; then
+                is_unload=false
+            fi
+
+            if [ "$is_unload" = true ]; then
+                [ -d "${_kext}" ] &amp;&amp; echo "unstall kext... [${_kext}]" ; remove_kext "${_kext}" "${BundleIdentifier}"
+            fi
+        done
+    done
+}
+
+function removePlugInsSoundDriver() {
+    local is_unload=false
+    local DriverName1=("Splashtop Remote Sound" "Splashtop Remote Microphone")
+    local DriverName2=("SplashtopRemoteSound.driver" "SplashtopRemoteMic.driver")
+
+    n=${#DriverName1[@]}
+    for (( i=0; i&lt;n; i++ )); do
+        local _name=${DriverName1[i]}
+        local _driver="/Library/Audio/Plug-Ins/HAL/${DriverName2[i]}"
+        local _plist="${_driver}/Contents/Info.plist"
+
+        local BundleIdentifier=""
+        local Version=""
+
+        [ -d "${_driver}" ] || continue
+
+        if sudo rm -rf "${_driver}" &amp;&amp; system_profiler SPAudioDataType | grep "${_name}:"; then
+            is_unload=true
+        fi
+    done
+
+    if [ ${is_unload} = true ]; then
+        restartCoreAudioService
+    fi
+}
+
+function removeSoundDriver() {
+    removeKextSoundDriver
+    removePlugInsSoundDriver
+}
+
+function removeOtherProductPlist() {
+	echo "do removeOtherProductPlist"
+
+	local file_list=("/Users/*/Library/Preferences/${appBundleId}-Pro.plist*" "/Users/*/Library/Preferences/${appBundleId}-for-eno.plist*")
+	del_files "${file_list[@]}"
+}
+
+function removeplist() {
+	echo "remove plist"
+	exceCMD "[ -f ~/Library/Preferences/${appBundleId}.plist ] &amp;&amp; defaults delete ${appBundleId} || echo 0"
+	
+	local file_list=("/Users/Shared/SplashtopStreamer/*.plist" "/Users/*/Library/Preferences/com.splashtop.SRFeature.plist*" "/Users/*/Library/Preferences/com.splashtop.SplashtopRemote.plist*" "/Users/*/Library/Preferences/${appBundleId}.plist*" "/var/root/Library/Preferences/${appBundleId}.plist*" "/Users/*/Library/Preferences/${appBundleId}-UsageTracking.plist*" "/Users/*/Library/Preferences/${appBundleId}.plist*")
+	del_files "${file_list[@]}"
+
+	local pkgutil_list=("com.splashtop.splashtopStreamer.com.splashtop.streamer-daemon.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-daemon.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-for-user.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-srioframebuffer.pkg" "com.splashtop.splashtopStreamer.postflight.pkg" "com.splashtop.splashtopStreamer.SplashtopStreamer.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-for-root.pkg" "${appBundleId}")
+
+	for pkgutil in "${pkgutil_list[@]}" ; do
+        exceCMD "sudo pkgutil --forget ${pkgutil} 2&gt;/dev/null || true"
+    done
+}
+
+function removeS4bPlist() {
+	echo "remove s4b plist"
+
+	local file_list=("/Users/*/Library/Preferences/${appBundleId}-for-Business.plist*" "/var/root/Library/Preferences/${appBundleId}-for-Business.plist*" "/Library/LaunchAgents/com.splashtop.s4b-for-root.plist*" "/Library/LaunchAgents/com.splashtop.s4b-for-user.plist*")
+	del_files "${file_list[@]}"
+}
+
+function clearSplashtopStreamer() {
+	echo "remove SplashtopStreamer files"
+
+	for file in `ls -A /Users/Shared/SplashtopStreamer`; do
+		if [[ ! "$file" =~ ^com.splashtop.* ]]; then
+			exceCMD "sudo rm -rf /Users/Shared/SplashtopStreamer/${file} 2&gt;/dev/null || true"
+		fi
+	done
+}
+
+function removefiles() {
+	echo "remove files"
+	# try to remove uri setting.
+	local lsregister="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister" # or `locate -l1 lsregister`
+	exceCMD "${lsregister} -u '/Applications/${appOldName}'"
+
+	local file_list=("/Users/*/Library/Caches/iris-proxy-pipe*" "/Users/*/Library/Logs/iris-log-pipe" "/Users/*/Library/Logs/SPLog.txt*" "/Applications/SplashtopRemote.app" "'/Applications/SplashtopRemoteStreamer.app'" "'/Applications/${appOldName}'" "'/Applications/Splashtop Streamer for Business.app'" "/System/Library/Extensions/SRXDisplayCard.kext" "/System/Library/Extensions/SRXFrameBufferConnector.kext" "/Library/Extensions/SRXDisplayCard.kext" "/Library/Extensions/SRXFrameBufferConnector.kext" "/Library/Frameworks/SRFrameBufferConnection.framework" "/Users/Shared/SplashtopStreamer/scheduleData" "/Users/*/Library/Caches/${appBundleId}" "/Users/*/Library/'Application Support/${appName}'" "/Library/'Application Support/${appName}'" "/Users/*/Library/'Application Support/Splashtop Whiteboard'" "/Library/'Application Support/Splashtop Whiteboard'" "/Users/*/Documents/'${appName}'" "/Users/*/Documents/'Splashtop Whiteboard'" "/Users/Shared/Logs/'${appName}'")
+	del_files "${file_list[@]}"
+	
+	clearSplashtopStreamer
+}
+
+function removeAntivirus() {
+	echo "remove antivirus"
+
+	local SplashtopAntivirusDaemon="/Applications/${appOldName}/Contents/MacOS/SplashtopAntivirusDaemon"
+	[ -f "${SplashtopAntivirusDaemon}" ] &amp;&amp; exceCMD "sudo \"${SplashtopAntivirusDaemon}\" \"remove_agent\" 2&gt;/dev/null || true"
+
+	local uninstall_cmd_path="AVP/product/bin/UninstallTool"
+	#local file_list=("/Library/[InternalName]" "/Library/SplashtopAntivirus")
+	local file_list=("/Library/SplashtopAntivirus")
+	
+	for _search_path in "${file_list[@]}" ; do
+        [ -e "${_search_path}/${uninstall_cmd_path}" ] || continue;
+
+        exceCMD "sudo \"${_search_path}/${uninstall_cmd_path}\"&amp;"
+    done
+}
+
+function removeOtherProductFiles() {
+	echo "do removeOtherProductFiles"
+
+	local file_list=("'/Applications/Splashtop Streamer Pro.app'" "'/Applications/Splashtop Streamer for eno.app'")
+	del_files "${file_list[@]}"
+}
+
+function removeS4Bfiles() {
+	echo "do removeS4Bfiles"
+	local file_list=("'/Applications/Splashtop Streamer for Business.app'")
+	del_files "${file_list[@]}"
+}
+
+function rmsystemplist() {
+	echo "do system check"
+
+	local file_list=("/Library/LaunchAgents/com.splashtop.streamer.SRServiceAgent.plist" "/Library/LaunchAgents/com.splashtop.streamer-for-user.plist" "/Library/LaunchAgents/com.splashtop.streamer.plist")
+	del_launchctl_files_by_user "$(stat -f '%Su' /dev/console)" "${file_list[@]}"
+
+	local file_list=("/Library/LaunchDaemons/com.splashtop.streamer.SRServiceDaemon.plist" "/Library/LaunchDaemons/com.splashtop.streamer-srioframebuffer.plist" "/Library/LaunchAgents/com.splashtop.streamer-for-root.plist" "/Library/LaunchAgents/com.splashtop.business.SRServiceAgent.plist" "/Library/LaunchAgents/com.splashtop.business.SRServicePreLogin.plist" "/Library/LaunchDaemons/com.splashtop.s4b-daemon.plist" "/Library/LaunchDaemons/com.splashtop-streamer.usbhelper.plist" "/Library/LaunchDaemons/com.splashtop.streamer-daemon.plist")
+	del_launchctl_files_by_user "" "${file_list[@]}"
+
+	if [ -f "/Library/LaunchAgents/com.splashtop.streamer-for-root.plist" ]; then
+		local file_list=("/Library/LaunchAgents/com.splashtop.streamer-for-root.plist" "/Users/*/Library/LaunchAgents/com.splashtop.streamer-for-user.plist")
+		del_files "${file_list[@]}"
+	fi
+}
+
+function resetTCC() {
+	echo "reset TCC"
+
+	reset_privacy_permissions="/Applications/${appOldName}/Contents/Resources/scripts/reset_privacy_permissions.sh"
+	[ -f "${reset_privacy_permissions}" ] &amp;&amp; exceCMD "sudo \"${reset_privacy_permissions}\" \"Install Splashtop Streamer\" 2&gt;/dev/null || true"
+	[ -f "${reset_privacy_permissions}" ] &amp;&amp; exceCMD "sudo \"${reset_privacy_permissions}\" \"${appOldName}\" 2&gt;/dev/null || true"
+}
+
+
+function clearPlistCache() {
+	if [ -z "$1" ]; then
+		exceCMD "ps axc -Ouser | grep [c]fprefsd | awk '{print \$1}' | xargs kill"
+	else
+		exceCMD "ps axc -Ouser | grep [c]fprefsd | grep \"$1\" | awk '{print \$1}' | xargs kill"
+	fi
+}
+
+function initLog() {
+	exceCMD "sudo rm -rf /Users/Shared/SplashtopStreamer/SPLOG.txt*"
+	echo "installlog"
+	[ -f "/Users/Shared/SplashtopStreamer/SPLOG.txt" ] || exceCMD "sudo touch /Users/Shared/SplashtopStreamer/SPLOG.txt"
+	exceCMD "sudo chmod 666 /Users/Shared/SplashtopStreamer/SPLOG.txt"
+}
+
+function doinstall() {
+	echo "install"
+	rmsystemplist
+	killprocess
+	local process_list=("Splashtop Streamer" "SRStreamerDaemon")
+	kill_process "${process_list[@]}"
+
+	resetTCC
+	
+	removedriver
+	removeAntivirus
+	removefiles
+
+	removeplist
+	removeSoundDriver
+}
+
+function doupdate() {
+	echo "update"
+	killprocess
+	delay 1
+	rmsystemplist
+}
+
+function doInstallWithRmAll() {
+	echo "doInstallWithRmAll"
+	killS4Bprocess
+	killOtherProductProcess
+	rmsystemplist
+
+	killprocess
+	local process_list=("Splashtop Streamer" "SRStreamerDaemon")
+	kill_process "${process_list[@]}"
+	
+	resetTCC
+
+	removeS4bPlist
+	removeOtherProductPlist
+	removeOtherProductFiles
+	removeS4Bfiles
+
+	removedriver
+	removefiles
+
+	removeplist
+	removeSoundDriver
+	clearPlistCache "${currentUser}"
+}
+
+#echo "argv : $@" &gt; ~/uninstaller.log
+
+echo "argv : $@"
+
+initLog
+doinstall</string>
+		<key>uninstallable</key>
+		<true/>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
