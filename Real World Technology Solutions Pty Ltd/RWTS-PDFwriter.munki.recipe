@@ -11,7 +11,7 @@
 	<key>Input</key>
 	<dict>
 		<key>MIN_OS</key>
-		<string>11</string>
+		<string>11.0</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
@@ -38,8 +38,22 @@
 			<string>%MIN_OS%</string>
 			<key>name</key>
 			<string>%NAME%</string>
+			<key>postinstall_script</key>
+			<string>!#/bin/bash
+
+rm -rf "/Applications/Utilities/PDFWriter Utility.app"
+
+ln -s "/Library/Printers/RWTS/Utilities/PDFWriter Utility.app" "/Applications/Utilities/PDFWriter Utility.app"</string>
+			<key>postuninstall_script</key>
+			<string>!#/bin/bash
+
+rm -rf "/Applications/Utilities/PDFWriter Utility.app"</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>uninstall_script</key>
+			<string>#!/bin/sh
+
+/Library/Printers/RWTS/PDFwriter/uninstall</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
