@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Please mind the postinstall_script. It creates a hands-off experience for endusers, but my not suite your needs.</string>
 	<key>Description</key>
 	<string>Downloads the latest version of RWTS-PDFwriter and imports it into Munki.</string>
 	<key>Identifier</key>
@@ -41,7 +41,56 @@
 			<key>postinstall_script</key>
 			<string>#!/bin/bash
 
+loggedInUser=$( scutil &lt;&lt;&lt; "show State:/Users/ConsoleUser" | awk '/Name :/ &amp;&amp; ! /loginwindow/ { print $3 }' )
+iconSource=/Library/Printers/RWTS/PDFwriter/PDFfolder.png
+iconDestination=/var/spool/pdfwriter/$loggedInUser
+icon=/tmp/`basename $iconSource`
+rsrc=/tmp/icon.rsrc
+
+if [ ! -d "/private/var/spool/pdfwriter/$loggedInUser" ]; then
+  mkdir -p "/private/var/spool/pdfwriter/$loggedInUser"
+  chown -R $loggedInUser:Staff "/private/var/spool/pdfwriter/$loggedInUser"
+  chmod -R 700 "/private/var/spool/pdfwriter/$loggedInUser"
+  chmod 755 "/private/var/spool/pdfwriter/"
+fi
+
+if [ -f $iconSource ]; then
+    ###Ensure Custom icon is set before symlinking spool folder    
+    # Create icon from the iconSource
+    cp $iconSource $icon
+    
+    # Add icon to image file, meaning use itself as the icon
+    sips -i $icon
+    
+    # Take that icon and put it into a rsrc file
+    DeRez -only icns $icon &gt; $rsrc
+    
+    # Apply the rsrc file to
+    SetFile -a C $iconDestination
+    
+    if [ -f $iconDestination ]; then
+        # Destination is a file
+        Rez -append $rsrc -o $iconDestination
+    elif [ -d $iconDestination ]; then
+        # Destination is a directory
+        # Create the magical Icon\r file
+        touch $iconDestination/$'Icon\r'
+        Rez -append $rsrc -o $iconDestination/Icon?
+        SetFile -a V $iconDestination/Icon?
+    fi
+    
+    rm $rsrc $icon
+fi
+
+if [ -L /Users/$loggedInUser/Desktop/PDFWriter ];then 
+  	rm /Users/$loggedInUser/Desktop/PDFWriter
+fi
+
+ln -s /private/var/spool/pdfwriter/$loggedInUser /Users/$loggedInUser/Desktop/PDFWriter
+
+if [ -L "/Applications/Utilities/PDFWriter Utility.app" ];then 
 rm -rf "/Applications/Utilities/PDFWriter Utility.app"
+fi
 
 ln -s "/Library/Printers/RWTS/Utilities/PDFWriter Utility.app" "/Applications/Utilities/PDFWriter Utility.app"</string>
 			<key>postuninstall_script</key>
