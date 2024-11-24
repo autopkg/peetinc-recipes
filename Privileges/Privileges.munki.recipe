@@ -8,7 +8,7 @@
     <string>com.github.peetinc.munki.privileges</string>
     <key>Input</key>
     <dict>
-    	<key>DERIVE_MIN_OS</key>
+        <key>DERIVE_MIN_OS</key>
         <string>YES</string>
         <key>DESCRIPTION</key>
         <string>Privileges.app for macOS is designed to allow users to work as a standard user for day-to-day use, by providing a quick and easy way to get administrator rights when needed. When you do need admin rights, you can get them by clicking on the Privileges icon in your Dock.</string>
@@ -67,7 +67,7 @@ pkgutil --forget com.sap.privileges /</string>
             <string>MunkiInstallsItemsCreator</string>
             <key>Arguments</key>
             <dict>
-            	<key>derive_minimum_os_version</key>
+                <key>derive_minimum_os_version</key>
                 <string>%DERIVE_MIN_OS%</string>
                 <key>faux_root</key>
                 <string>%RECIPE_CACHE_DIR%/%NAME%/</string>
