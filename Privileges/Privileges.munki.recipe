@@ -49,15 +49,49 @@
             <key>uninstall_script</key>
             <string>#!/bin/bash
 
-if [[ -f "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" ]]; then
-    launchctl unload "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
-    rm -rf "/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
-fi
+# Adapted from pre-install script inside Privileges v2 pkg installer
 
-rm -rf "/Applications/Privileges.app"
-rm -rf "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
+# Current console user information
+current_user=$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')
+current_user_uid=$(/usr/bin/id -u "${current_user}")
+current_user_home=$(/usr/bin/dscl . read "/Users/${current_user}" NFSHomeDirectory | /usr/bin/cut -d' ' -f2)
 
-pkgutil --forget com.sap.privileges /</string>
+# unload the agent plist
+/bin/launchctl bootout gui/$(/usr/bin/id -u "$currentUser") /Library/LaunchAgents/corp.sap.privileges.agent.plist
+/bin/sleep 2
+/usr/bin/sudo -u "$currentUser" /usr/bin/killall "Privileges" "PrivilegesAgent" "PrivilegesCLI"
+
+# unload the old helper
+/bin/launchctl bootout system /Library/LaunchDaemons/corp.sap.privileges.helper.plist
+
+# unload the daemon plist
+/bin/launchctl bootout system /Library/LaunchDaemons/corp.sap.privileges.daemon.plist
+
+# just for sure ...
+/bin/sleep 2
+/usr/bin/killall "corp.sap.privileges.helper" "PrivilegesDaemon"
+
+# remove old stuff
+/bin/rm -rf "/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+/bin/rm -rf "/Library/LaunchAgents/corp.sap.privileges.plist"
+/bin/rm -rf "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
+/bin/rm -rf "/Applications/Privileges.app"
+	
+# Remove v2 files
+# Ref: https://github.com/SAP/macOS-enterprise-privileges/wiki/Uninstallation
+/bin/rm -rf "/Library/LaunchAgents/corp.sap.privileges.agent.plist"
+/bin/rm -rf "/Library/LaunchDaemons/corp.sap.privileges.daemon.plist"
+/bin/rm -rf "/Library/Preferences/corp.sap.PrivilegesDaemon.plist"
+/bin/rm -rf "/Library/Scripts/VoiceOver/Privileges Time Left.scpt"
+/bin/rm -rf "/private/etc/paths.d/PrivilegesCLI"
+/bin/rm -rf "${current_user_home}/Library/Containers/corp.sap.privileges."*
+/bin/rm -rf "${current_user_home}/Library/Application Scripts/corp.sap.privileges"*
+/bin/rm -rf "${current_user_home}/Library/Group Containers/7R5ZEU67FQ.corp.sap.privileges"
+/bin/rm -rf "${current_user_home}/Library/Preferences/corp.sap.privileges"*
+
+pkgutil --forget com.sap.privileges /
+
+exit 0</string>
         </dict>
     </dict>
     <key>ParentRecipe</key>
