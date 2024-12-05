@@ -44,6 +44,32 @@
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>uninstall_method</key>
+		<string>uninstall_script</string>
+		<key>uninstall_script</key>
+		<string>#!/bin/bash
+loggedInUser=$( scutil &lt;&lt;&lt; "show State:/Users/ConsoleUser" | awk '/Name :/ &amp;&amp; ! /loginwindow/ { print $3 }' )
+loggedInUID=$(id -u $loggedInUser)
+
+if [[ -f "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" ]]; then
+    launchctl unload "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
+    rm -rf "/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+    rm -rf "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
+fi
+
+launchctl asuser $loggedInUID launchctl unload  "/Library/LaunchAgents/corp.sap.privileges.agent.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
+rm -rf "/Library/LaunchAgents/corp.sap.privileges.agent.plist"
+
+launchctl unload  "/Library/LaunchDaemons/corp.sap.privileges.daemon.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
+rm -rf "/Library/LaunchDaemons/corp.sap.privileges.daemon.plist"
+
+rm -rf "/Applications/Privileges.app"
+rm -rf "/Library/Preferences/corp.sap.PrivilegesDaemon.plist"
+rm -rf "/Library/Scripts/VoiceOver/Privileges Time Left.scpt"
+rm -rf "/private/etc/paths.d/PrivilegesCLI"
+
+pkgutil --forget com.sap.privileges
+		</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
