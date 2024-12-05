@@ -14,6 +14,12 @@
 		<string>YES</string>
 		<key>INSTALLED_APP</key>
 		<string>/Applications/Privileges.app</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Security</string>
+		<key>MUNKI_DEVELOPER</key>
+		<string>SAP SE</string>
+		<key>MUNKI_DISPLAYNAME</key>
+		<string>Privileges</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
@@ -26,12 +32,14 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>For Mac users in enterprise environments, this application gives users control over the administration of their machine by elevating their level of access to administrator privileges on macOS.  Users can set a timeframe in the application's settings to perform specific tasks, such as installing or removing an application.</string>
 			<key>developer</key>
-			<string>SAP SE</string>
+			<string>%MUNKI_DEVELOPER%</string>
 			<key>display_name</key>
-			<string>Privileges</string>
+			<string>%MUNKI_DISPLAYNAME%</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
