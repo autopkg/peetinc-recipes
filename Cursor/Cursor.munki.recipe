@@ -10,7 +10,7 @@
 	- 'arm64' (Apple Silicon, default)
 	- 'x64' (Intel)
 	Possible values for the SUPPORTED_ARCH input variable include:
-	- 'arm_64' (Apple Silicon, default)
+	- 'arm64' (Apple Silicon, default)
 	- 'x86_64' (Intel)
 	</string>
 	<key>Identifier</key>
@@ -19,30 +19,36 @@
 	<dict>
 		<key>ARCH</key>
 		<string>arm64</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Developer</string>
+		<key>MUNKI_DEVELOPER</key>
+		<string>Hilary Stout</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
 		<string>Cursor</string>
 		<key>SUPPORTED_ARCH</key>
-		<string>arm_64</string>
+		<string>arm64</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
 			<string>Built to make you extraordinarily productive,
 Cursor is the best way to code with AI.</string>
 			<key>developer</key>
-			<string>Hilary Stout</string>
+			<string>%MUNKI_DEVELOPER%</string>
 			<key>display_name</key>
 			<string>Cursor</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>supported_architectures</key>
 			<array>
-				<string>arm_64</string>
+				<string>%SUPPORTED_ARCH%</string>
 			</array>
 			<key>unattended_install</key>
 			<true/>
