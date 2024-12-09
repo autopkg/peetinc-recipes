@@ -16,6 +16,8 @@
 		<string>Finance</string>
 		<key>MUNKI_DISPLAYNAME</key>
 		<string>First Interstate Bank Secure Browser</string>
+		<key>MUNKI_INSTALLED_APP</key>
+		<string>First Interstate Bank Secure Browser.app</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
@@ -50,6 +52,53 @@
 	<string>com.github.peetinc.download.FIB</string>
 	<key>Process</key>
 	<array>
+		<dict>
+            <key>Arguments</key>
+            <dict>
+                <key>flat_pkg_path</key>
+                <string>%pathname%</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg</string>
+                <key>purge_destination</key>
+                <true/>
+            </dict>
+            <key>Processor</key>
+            <string>FlatPkgUnpacker</string>
+        </dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_payload_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg/First_Interstate_Bank_Secure_Browser.pkg/Payload</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+                <key>purge_destination</key>
+                <true/>
+            </dict>
+            <key>Processor</key>
+            <string>PkgPayloadUnpacker</string>
+        </dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+            	<key>derive_minimum_os_version</key>
+                <string>%DERIVE_MIN_OS%</string>
+                <key>faux_root</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+                <key>installs_item_paths</key>
+                <array>
+                    <string>/Applications/%MUNKI_INSTALLED_APP%</string>
+                </array>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiInstallsItemsCreator</string>
+        </dict>
+         <dict>
+			<key>Arguments</key>
+			<dict/>
+			<key>Processor</key>
+            <string>MunkiPkginfoMerger</string>
+        </dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
