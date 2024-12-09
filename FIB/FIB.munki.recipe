@@ -1,115 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
-	<key>Description</key>
-	<string>Downloads the latest version of FIB and imports it into Munki.</string>
-	<key>Identifier</key>
-	<string>com.github.peetinc.munki.FIB</string>
-	<key>Input</key>
-	<dict>
-		<key>APP_FILENAME</key>
-		<string>First Interstate Bank Secure Browser</string>
-		<key>MUNKI_CATEGORY</key>
-		<string>Finance</string>
-		<key>MUNKI_DISPLAYNAME</key>
-		<string>First Interstate Bank Secure Browser</string>
-		<key>MUNKI_INSTALLED_APP</key>
-		<string>First Interstate Bank Secure Browser.app</string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/%NAME%</string>
-		<key>NAME</key>
-		<string>FIB</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>blocking_applications</key>
-			<array>
-				<string>First Interstate Bank Secure Browser.app</string>
-			</array>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>category</key>
-			<string>%MUNKI_CATEGORY%</string>
-			<key>description</key>
-			<string>Trading and technical analysis software.</string>
-			<key>developer</key>
-			<string>Online Banking Solutions, Inc.</string>
-			<key>display_name</key>
-			<string>%MUNKI_DISPLAYNAME%</string>
-			<key>name</key>
-			<string>%NAME%</string>
-			<key>unattended_install</key>
-			<true/>
-		</dict>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>2.3</string>
-	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.FIB</string>
-	<key>Process</key>
-	<array>
-		<dict>
-            <key>Arguments</key>
-            <dict>
-                <key>flat_pkg_path</key>
-                <string>%pathname%</string>
-                <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg</string>
-                <key>purge_destination</key>
-                <true/>
-            </dict>
-            <key>Processor</key>
-            <string>FlatPkgUnpacker</string>
-        </dict>
+    <dict>
+        <key>Comment</key>
+        <string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
+        <key>Description</key>
+        <string>Downloads the latest version of FIB and imports it into Munki.</string>
+        <key>Identifier</key>
+        <string>com.github.peetinc.munki.FIB</string>
+        <key>Input</key>
         <dict>
-            <key>Arguments</key>
+            <key>APP_FILENAME</key>
+            <string>First Interstate Bank Secure Browser</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Finance</string>
+            <key>MUNKI_DISPLAYNAME</key>
+            <string>First Interstate Bank Secure Browser</string>
+            <key>MUNKI_INSTALLED_APP</key>
+            <string>First Interstate Bank Secure Browser.app</string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>apps/%NAME%</string>
+            <key>NAME</key>
+            <string>FIB</string>
+            <key>pkginfo</key>
             <dict>
-                <key>pkg_payload_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg/First_Interstate_Bank_Secure_Browser.pkg/Payload</string>
-                <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
-                <key>purge_destination</key>
-                <true/>
-            </dict>
-            <key>Processor</key>
-            <string>PkgPayloadUnpacker</string>
-        </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-            	<key>derive_minimum_os_version</key>
-                <string>%DERIVE_MIN_OS%</string>
-                <key>faux_root</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
-                <key>installs_item_paths</key>
+                <key>blocking_applications</key>
                 <array>
-                    <string>/Applications/%MUNKI_INSTALLED_APP%</string>
+                    <string>First Interstate Bank Secure Browser.app</string>
                 </array>
+                <key>catalogs</key>
+                <array>
+                    <string>testing</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>Trading and technical analysis software.</string>
+                <key>developer</key>
+                <string>Online Banking Solutions, Inc.</string>
+                <key>display_name</key>
+                <string>%MUNKI_DISPLAYNAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true/>
             </dict>
-            <key>Processor</key>
-            <string>MunkiInstallsItemsCreator</string>
         </dict>
-         <dict>
-			<key>Arguments</key>
-			<dict/>
-			<key>Processor</key>
-            <string>MunkiPkginfoMerger</string>
-        </dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_path</key>
-				<string>%pathname%</string>
-				<key>repo_subdirectory</key>
-				<string>%MUNKI_REPO_SUBDIR%</string>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
-		</dict>
-	</array>
-</dict>
+        <key>MinimumVersion</key>
+        <string>2.3</string>
+        <key>ParentRecipe</key>
+        <string>com.github.peetinc.download.FIB</string>
+        <key>Process</key>
+        <array>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>flat_pkg_path</key>
+                    <string>%pathname%</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAME%_pkg</string>
+                    <key>purge_destination</key>
+                    <true/>
+                </dict>
+                <key>Processor</key>
+                <string>FlatPkgUnpacker</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_payload_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAME%_pkg/First_Interstate_Bank_Secure_Browser.pkg/Payload</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+                    <key>purge_destination</key>
+                    <true/>
+                </dict>
+                <key>Processor</key>
+                <string>PkgPayloadUnpacker</string>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>Versioner</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>input_plist_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload/Applications/First Interstate Bank Secure Browser.app/Contents/Info.plist</string>
+                    <key>plist_version_key</key>
+                    <string>CFBundleShortVersionString</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>additional_pkginfo</key>
+                    <dict>
+                        <key>version</key>
+                        <string>%version%</string>
+                    </dict>
+                </dict>
+                <key>Processor</key>
+                <string>MunkiPkginfoMerger</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>derive_minimum_os_version</key>
+                    <string>%DERIVE_MIN_OS%</string>
+                    <key>faux_root</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+                    <key>installs_item_paths</key>
+                    <array>
+                        <string>/Applications/%MUNKI_INSTALLED_APP%</string>
+                    </array>
+                </dict>
+                <key>Processor</key>
+                <string>MunkiInstallsItemsCreator</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict/>
+                <key>Processor</key>
+                <string>MunkiPkginfoMerger</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_path</key>
+                    <string>%pathname%</string>
+                    <key>repo_subdirectory</key>
+                    <string>%MUNKI_REPO_SUBDIR%</string>
+                </dict>
+                <key>Processor</key>
+                <string>MunkiImporter</string>
+            </dict>
+        </array>
+    </dict>
 </plist>
