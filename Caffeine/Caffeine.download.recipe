@@ -30,9 +30,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
-				<string>%NAME%.zip</string>
-				<key>url</key>
-				<string>https://dr-caffeine-mac.s3.amazonaws.com/Caffeine_1.4.3.zip</string>
+				<string>%NAME%-%version%.zip</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
