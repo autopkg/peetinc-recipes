@@ -25,7 +25,7 @@
 				<key>Arguments</key>
 				<dict>
 					<key>warning_message</key>
-					<string>VipRiser is no longer available for download. This recipe is deprecated and will be removed in the future.</string>
+					<string>VipRiser is no longer available for download. If you need direct to PDF Printer for macOS, take a look at RWTS-PDFwriter (https://github.com/rodyager/RWTS-PDFwriter). This recipe is deprecated and will be removed in the future.</string>
 				</dict>
 			</dict>
 			<dict>
