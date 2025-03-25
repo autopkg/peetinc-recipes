@@ -2,20 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Cursor.
-	Possible values for the ARCH input variable include:
-	- 'arm64' (Apple Silicon)
-	- 'x64' (Intel, default)
-</string>
+	<string>Downloads the latest Universal version of Cursor.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.download.Cursor</string>
 	<key>Input</key>
 	<dict>
-		<key>DOWNLOAD_ARCH</key>
-		<string>x64</string>
 		<key>NAME</key>
 		<string>Cursor</string>
 	</dict>
@@ -26,10 +18,21 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>re_pattern</key>
+				<string>"downloadUrl":"(https[^"]+)"</string>
+				<key>url</key>
+				<string>https://www.cursor.com/api/download?platform=darwin-universal&amp;releaseTrack=stable</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 				<key>url</key>
-				<string>https://downloader.cursor.sh/mac/dmg/%DOWNLOAD_ARCH%</string>
+				<string>%match%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
