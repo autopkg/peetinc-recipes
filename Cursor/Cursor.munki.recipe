@@ -2,33 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Cursor and imports it into Munki.
-	Possible values for the ARCH input variable include:
-	- 'arm64' (Apple Silicon)
-	- 'x64' (Intel, default)
-	Possible values for the SUPPORTED_ARCH input variable include:
-	- 'arm64' (Apple Silicon)
-	- 'x86_64' (Intel, default)
-	</string>
+	<string>Downloads the latest version of Cursor and imports it into Munki.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.Cursor</string>
 	<key>Input</key>
 	<dict>
-		<key>DOWNLOAD_ARCH</key>
-		<string>x64</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Developer</string>
-		<key>MUNKI_DEVELOPER</key>
-		<string>Hilary Stout</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
-		<key>MUNKI_SUPPORTED_ARCH</key>
-		<string>x86_64</string>
 		<key>NAME</key>
-		<string>Cursor</string>		
+		<string>Cursor</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -40,16 +25,16 @@
 			<key>description</key>
 			<string>Built to make you extraordinarily productive, Cursor is the best way to code with AI.</string>
 			<key>developer</key>
-			<string>%MUNKI_DEVELOPER%</string>
+			<string>Anysphere, Inc.</string>
 			<key>display_name</key>
 			<string>Cursor</string>
+			<key>icon_name</key>
+			<string>%NAME%.png</string>
 			<key>name</key>
 			<string>%NAME%</string>
-			<key>supported_architectures</key>
-			<array>
-				<string>%MUNKI_SUPPORTED_ARCH%</string>
-			</array>
 			<key>unattended_install</key>
+			<true/>
+			<key>unattended_uninstall</key>
 			<true/>
 		</dict>
 	</dict>
@@ -62,8 +47,6 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>derive_minimum_os_version</key>
-				<string>true</string>
 				<key>pkg_path</key>
 				<string>%pathname%</string>
 				<key>repo_subdirectory</key>
