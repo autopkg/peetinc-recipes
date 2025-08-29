@@ -17,7 +17,7 @@
             <key>HIDE_FOLDER</key>
             <string>hidden</string>
             <key>MUNKI_CATEGORY</key>
-            <string>Support</string>
+            <string>Remote Access</string>
             <key>MUNKI_DESCRIPTION</key>
             <string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
             <key>MUNKI_DEVELOPER</key>
@@ -52,6 +52,11 @@
                 <string>uninstall_script</string>
                 <key>postinstall_script</key>
                 <string>#!/bin/bash
+#Clean up new .PreInstall file
+PreInstallDirectory="/Library/Managed Installs/Cache"
+if [ -f  "$PreInstallDirectory/.PreInstall" ]; then
+	rm -rf "$PreInstallDirectory/.PreInstall"
+fi
 
 #Splashtop runs as user, so the settings plist permissions are 666. Any user could delete the plist or change settings,
 #even if changing settings is denied by your Splashtop deployment policy. So chown root:admin, chmod 644, chmod +a "everyone deny delete"
@@ -89,7 +94,7 @@ HidePreferenceDomainSelection=true
 #ShowDeployMode must be true to attempt to deploy
 ShowDeployMode=true
 SplashtopAccount=""
-DeployCode="-REPLACE-ME-"
+DeployCode="%DEPLOY_CODE%"
 
 #show deploy warning
 ShowDeployLoginWarning=false
