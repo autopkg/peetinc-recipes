@@ -19,7 +19,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>re_pattern</key>
-				<string>"downloadUrl":"(https[^"]+)"</string>
+				<string>"downloadUrl":"(https[^"]+\.dmg)"</string>
 				<key>url</key>
 				<string>https://www.cursor.com/api/download?platform=darwin-universal&amp;releaseTrack=stable</string>
 			</dict>
