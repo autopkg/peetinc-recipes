@@ -68,7 +68,13 @@ rm -rf "/Library/Preferences/corp.sap.PrivilegesDaemon.plist"
 rm -rf "/Library/Scripts/VoiceOver/Privileges Time Left.scpt"
 rm -rf "/private/etc/paths.d/PrivilegesCLI"
 
-pkgutil --forget com.sap.privileges
+if (pkgutil --pkgs | grep -q com.sap.privileges); then 
+	pkgutil --forget com.sap.privileges
+fi
+
+if (pkgutil --pkgs | grep -q com.sap.privileges.pkg); then 
+	pkgutil --forget com.sap.privileges.pkg
+fi
 		</string>
 		</dict>
 	</dict>

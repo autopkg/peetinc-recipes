@@ -5,13 +5,13 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Caffeine.</string>
+	<string>Downloads the latest version of DNSMonitor.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.download.Caffeine</string>
+	<string>com.github.peetinc.download.DNSMonitor</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>Caffeine</string>
+		<string>DNSMonitor</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>2.3</string>
@@ -20,11 +20,11 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>appcast_url</key>
-				<string>https://dr-caffeine-mac.s3.amazonaws.com/appcast.xml</string>
+				<key>github_repo</key>
+				<string>objective-see/DNSMonitor</string>
 			</dict>
 			<key>Processor</key>
-			<string>SparkleUpdateInfoProvider</string>
+			<string>GitHubReleasesInfoProvider</string>
 		</dict>
 		<dict>
 			<key>Arguments</key>
@@ -56,12 +56,23 @@
 			<key>Arguments</key>
 			<dict>
 				<key>input_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%/Caffeine.app</string>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/DNSMonitor.app</string>
 				<key>requirement</key>
-				<string>anchor apple generic and identifier "net.domzilla.caffeine" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "568T6RKXH7")</string>
+				<string>anchor apple generic and identifier "com.objective-see.dnsmonitor.app" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VBG97UB4TA)</string>
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_plist_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/DNSMonitor.app/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleShortVersionString</string>
+			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
 		</dict>
 	</array>
 </dict>

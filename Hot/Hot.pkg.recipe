@@ -3,23 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Rectangle and creates a package.</string>
+	<string>Downloads the latest version of Hot and creates a package.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.pkg.Rectangle</string>
+	<string>com.github.peetinc.pkg.Hot</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>Rectangle</string>
+		<string>Hot</string>
 	</dict>
 	<key>MinimumVersion</key>
-	<string>2.3</string>
+	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.Rectangle</string>
+	<string>com.github.peetinc.download.Hot</string>
 	<key>Process</key>
 	<array>
 		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>app_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/Hot.app</string>
+			</dict>
 			<key>Processor</key>
 			<string>AppPkgCreator</string>
 		</dict>

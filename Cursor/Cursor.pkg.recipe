@@ -5,17 +5,11 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Cursor and creates a package.
-	Possible values for the ARCH input variable include:
-	- 'arm64' (Apple Silicon)
-	- 'x64' (Intel, default)
-	</string>
+	<string>Downloads the latest version of Cursor and creates a package.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.pkg.Cursor</string>
 	<key>Input</key>
 	<dict>
-		<key>DOWNLOAD_ARCH</key>
-		<string>x64</string>
 		<key>NAME</key>
 		<string>Cursor</string>
 	</dict>

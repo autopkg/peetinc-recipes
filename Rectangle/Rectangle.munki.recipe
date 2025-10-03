@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>Comment</key>
+	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
+	<key>Description</key>
+	<string>Downloads the latest version of Rectangle and imports it into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.peetinc.munki.Rectangle</string>
+	<key>Input</key>
 	<dict>
-		<key>Comment</key>
-		<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
-		<key>Description</key>
-		<string>Downloads the latest version of Rectangle and imports it into Munki.</string>
-		<key>Identifier</key>
-		<string>com.github.peetinc.munki.Rectangle</string>
-		<key>Input</key>
+		<key>CATEGORY</key>
+		<string>Utilities</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/RyanHanson</string>
+		<key>NAME</key>
+		<string>Rectangle</string>
+		<key>pkginfo</key>
 		<dict>
-			<key>MUNKI_REPO_SUBDIR</key>
-			<string>apps/RyanHanson</string>
-			<key>NAME</key>
+			<key>blocking_applications</key>
+			<array/>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
+			<key>description</key>
+			<string>&lt;a href=https://rectangleapp.com/&gt;Rectangle&lt;/a&gt;: Move and resize windows in macOS using keyboard shortcuts or snap areas.</string>
+			<key>developer</key>
+			<string>Ryan Hanson</string>
+			<key>display_name</key>
 			<string>Rectangle</string>
-			<key>CATEGORY</key>
-			<string>Utilities</string>
-			<key>pkginfo</key>
-			<dict>
-				<key>catalogs</key>
-				<array>
-					<string>testing</string>
-				</array>
-				<key>description</key>
-				<string>Move and resize windows on macOS with keyboard shortcuts. Rectangle is a window management app based on &lt;a href='//alternativeto.net/software/spectacle/'&gt;Spectacle&lt;/a&gt;, written in &lt;a href='//alternativeto.net/software/swift-programming-language/'&gt;Apple Swift&lt;/a&gt;.</string>
-				<key>developer</key>
-				<string>Ryan Hanson</string>
-				<key>display_name</key>
-				<string>Rectangle</string>
-				<key>name</key>
-				<string>%NAME%</string>
-				<key>category</key>
-				<string>%CATEGORY%</string>
-				<key>unattended_install</key>
-				<true/>
-				<key>blocking_applications</key>
-				<array/>
-
-				<key>preinstall_script</key>
-				<string>#!/bin/bash 
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>preinstall_script</key>
+			<string>#!/bin/bash 
 				
 AppName="Rectangle"
 AppPath="/Applications/$AppName.app"
@@ -58,10 +55,9 @@ killall "$AppName" &gt; /dev/null 2&gt;&amp;1
 touch $RestartApp
 fi
 
-exit 0
-				</string>
-				<key>postinstall_script</key>
-				<string>#!/bin/bash 
+exit 0</string>
+			<key>postinstall_script</key>
+			<string>#!/bin/bash 
 				
 AppName="Rectangle" 
 AppPath="/Applications/$AppName.app" 
@@ -73,27 +69,28 @@ if [ -f $RestartApp ]; then
 	rm $RestartApp
 fi
 
-exit 0
-				</string>
-			</dict>
+exit 0</string>
+			<key>unattended_install</key>
+			<true/>
 		</dict>
-		<key>MinimumVersion</key>
-		<string>1.0.0</string>
-		<key>ParentRecipe</key>
-		<string>com.github.peetinc.download.Rectangle</string>
-		<key>Process</key>
-		<array>
-			<dict>
-				<key>Arguments</key>
-				<dict>
-					<key>pkg_path</key>
-					<string>%pathname%</string>
-					<key>repo_subdirectory</key>
-					<string>%MUNKI_REPO_SUBDIR%</string>
-				</dict>
-				<key>Processor</key>
-				<string>MunkiImporter</string>
-			</dict>
-		</array>
 	</dict>
+	<key>MinimumVersion</key>
+	<string>2.3</string>
+	<key>ParentRecipe</key>
+	<string>com.github.peetinc.download.Rectangle</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+		</dict>
+	</array>
+</dict>
 </plist>

@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
-	<key>Description</key>
-	<string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
-	<key>Identifier</key>
-	<string>com.github.peetinc.munki.SplashtopStreamer</string>
-	<key>Input</key>
-	<dict>
-		<key>DEPLOY_CODE</key>
-		<string>-REPLACE-ME-</string>
-		<key>DISPLAY_NAME</key>
-		<string>Splashtop Streamer</string>
-		<key>HIDE_FOLDER</key>
-		<string>hidden</string>
-		<key>MUNKI_CATEGORY</key>
-		<string>Support</string>
-		<key>MUNKI_DESCRIPTION</key>
-		<string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
-		<key>MUNKI_DEVELOPER</key>
-		<string>Splashtop</string>
-		<key>MUNKI_REPO_SUBDIR</key>
-		<string>apps/Splashtop</string>
-		<key>NAME</key>
-		<string>SplashtopStreamer</string>
-		<key>PLIST_PERM</key>
-		<string>664</string>
-		<key>pkginfo</key>
-		<dict>
-			<key>autoremove</key>
-			<true/>
-			<key>blocking_applications</key>
-			<array/>
-			<key>catalogs</key>
-			<array>
-				<string>testing</string>
-			</array>
-			<key>category</key>
-			<string>%MUNKI_CATEGORY%</string>
-			<key>description</key>
-			<string>%MUNKI_DESCRIPTION%</string>
-			<key>developer</key>
-			<string>%MUNKI_DEVELOPER%</string>
-			<key>display_name</key>
-			<string>%DISPLAY_NAME%</string>
-			<key>name</key>
-			<string>%NAME%</string>
-			<key>uninstall_method</key>
-			<string>uninstall_script</string>
-			<key>postinstall_script</key>
-			<string>#!/bin/bash
+    <dict>
+        <key>Comment</key>
+        <string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
+        <key>Description</key>
+        <string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
+        <key>Identifier</key>
+        <string>com.github.peetinc.munki.SplashtopStreamer</string>
+        <key>Input</key>
+        <dict>
+            <key>DEPLOY_CODE</key>
+            <string>-REPLACE-ME-</string>
+            <key>DISPLAY_NAME</key>
+            <string>Splashtop Streamer</string>
+            <key>HIDE_FOLDER</key>
+            <string>hidden</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Remote Access</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>Splashtop</string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>apps/Splashtop</string>
+            <key>NAME</key>
+            <string>SplashtopStreamer</string>
+            <key>PLIST_PERM</key>
+            <string>664</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>autoremove</key>
+                <true/>
+                <key>blocking_applications</key>
+                <array/>
+                <key>catalogs</key>
+                <array>
+                    <string>testing</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>uninstall_method</key>
+                <string>uninstall_script</string>
+                <key>postinstall_script</key>
+                <string>#!/bin/bash
+#Clean up new .PreInstall file
+PreInstallDirectory="/Library/Managed Installs/Cache"
+if [ -f  "$PreInstallDirectory/.PreInstall" ]; then
+	rm -rf "$PreInstallDirectory/.PreInstall"
+fi
 
 #Splashtop runs as user, so the settings plist permissions are 666. Any user could delete the plist or change settings,
 #even if changing settings is denied by your Splashtop deployment policy. So chown root:admin, chmod 644, chmod +a "everyone deny delete"
@@ -66,10 +71,10 @@ fi
 chflags %HIDE_FOLDER% /Users/Shared/SplashtopStreamer
 
 exit 0</string>
-			<key>preinstall_script</key>
-			<string>#!/bin/bash
+                <key>preinstall_script</key>
+                <string>#!/bin/bash
 
-#Script to create /Users/Shared/SplashtopStreamer/.PreInstall with appropriate variables.
+#Script to create "$PreInstallDirectory/.PreInstall" with appropriate variables. In 2024/2025 Splashtop changed this to need to be next to the .pkg
 #If /Users/Shared/SplashtopStreamer/.PreInstall is in place when splashtop package is installed then it will be correctly deployed
 
 if [ -f "/Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist" ]; then
@@ -77,10 +82,7 @@ if [ -f "/Users/Shared/SplashtopStreamer/Splashtop-Streamer.plist" ]; then
   exit 0
 fi
 
-if [ ! -d /Users/Shared/SplashtopStreamer ]; then
-  mkdir -p /Users/Shared/SplashtopStreamer;
-  chmod -R 777 /Users/Shared/SplashtopStreamer
-fi
+PreInstallDirectory="/Library/Managed Installs/Cache"
 
 #Do not install Soundflower driver. This helps with deployment via Munki.
 #Installing Soundflower driver will hang if the Mac has no users logged in at the time of deployment.
@@ -129,44 +131,43 @@ touch "$No_Driver"
 echo NO DRIVER
 fi
 
-/usr/libexec/PlistBuddy -c "Add Common:EulaAccepted bool $EulaAccepted" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add Common:HidePreferenceDomainSelection bool $HidePreferenceDomainSelection" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add Common:EulaAccepted bool $EulaAccepted" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add Common:HidePreferenceDomainSelection bool $HidePreferenceDomainSelection" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:ShowDeployLoginWarning bool $ShowDeployLoginWarning" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:ShowDeployMode bool $ShowDeployMode" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:SplashtopAccount string $SplashtopAccount" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:DeployCode string $DeployCode" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:DeployTeamNameCache string" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:DeployTeamOwnerCache string" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:LastDeployCode string" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:TeamCode string" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:TeamCodeInUse string" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:ShowDeployLoginWarning bool $ShowDeployLoginWarning" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:ShowDeployMode bool $ShowDeployMode" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:SplashtopAccount string $SplashtopAccount" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:DeployCode string $DeployCode" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:DeployTeamNameCache string" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:DeployTeamOwnerCache string" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:LastDeployCode string" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:TeamCode string" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:TeamCodeInUse string" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:HostName string $HostName" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:HostName string $HostName" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:EnablePermissionProtection integer $EnablePermissionProtection" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:EnablePermissionProtection integer $EnablePermissionProtection" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:init_security_code string $init_security_code" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:EnableSecurityCodeProtection bool $EnableSecurityCodeProtection" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:EnableOSCredential bool $EnableOSCredential" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:init_security_code string $init_security_code" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:EnableSecurityCodeProtection bool $EnableSecurityCodeProtection" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:EnableOSCredential bool $EnableOSCredential" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:LegacyConnectionLoopbackOnly bool $LegacyConnectionLoopbackOnly" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:LegacyConnectionLoopbackOnly bool $LegacyConnectionLoopbackOnly" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:HideTrayIcon bool $HideTrayIcon" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:HideTrayIcon bool $HideTrayIcon" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:DefaultClientDeviceName string $DefaultClientDeviceName" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:DefaultClientDeviceName string $DefaultClientDeviceName" "$PreInstallDirectory/.PreInstall"
 
-/usr/libexec/PlistBuddy -c "Add STP:FirstTimeClose bool $FirstTimeClose" /Users/Shared/SplashtopStreamer/.PreInstall
-/usr/libexec/PlistBuddy -c "Add STP:FirstTimeLogin bool $FirstTimeLogin" /Users/Shared/SplashtopStreamer/.PreInstall
+/usr/libexec/PlistBuddy -c "Add STP:FirstTimeClose bool $FirstTimeClose" "$PreInstallDirectory/.PreInstall"
+/usr/libexec/PlistBuddy -c "Add STP:FirstTimeLogin bool $FirstTimeLogin" "$PreInstallDirectory/.PreInstall"
 
-exit 0
-        </string>
-			<key>unattended_install</key>
-			<true/>
-			<key>unattended_uninstall</key>
-			<true/>
-			<key>uninstall_script</key>
-			<string>#!/bin/bash
+exit 0</string>
+                <key>unattended_install</key>
+                <true/>
+                <key>unattended_uninstall</key>
+                <true/>
+                <key>uninstall_script</key>
+                <string>#!/bin/bash
 #
 # uninstall Splashtop Streamer script file
 #
@@ -635,70 +636,81 @@ echo "argv : $@"
 
 initLog
 doinstall</string>
-		<key>uninstallable</key>
-		<true/>
-		</dict>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>1.0.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.SplashtopStreamer</string>
-	<key>Process</key>
-	<array>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>faux_root</key>
-				<string>%RECIPE_CACHE_DIR%</string>
-				<key>installs_item_paths</key>
-				<array>
-					<string>/Applications/Splashtop Streamer.app</string>
-				</array>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiInstallsItemsCreator</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>MunkiPkginfoMerger</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>info_path</key>
-				<string>%RECIPE_CACHE_DIR%/Applications/Splashtop Streamer.app</string>
-				<key>plist_keys</key>
-				<dict>
-					<key>LSMinimumSystemVersion</key>
-					<string>min_os_ver</string>
-				</dict>
-			</dict>
-			<key>Processor</key>
-			<string>PlistReader</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>additional_pkginfo</key>
-				<dict>
-					<key>minimum_os_version</key>
-					<string>%min_os_ver%</string>
-				</dict>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiPkginfoMerger</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_path</key>
-				<string>%pathname%</string>
-				<key>repo_subdirectory</key>
-				<string>%MUNKI_REPO_SUBDIR%</string>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
-		</dict>
-	</array>
-</dict>
+                <key>uninstallable</key>
+                <true/>
+            </dict>
+        </dict>
+        <key>MinimumVersion</key>
+        <string>1.0.0</string>
+        <key>ParentRecipe</key>
+        <string>com.github.peetinc.download.SplashtopStreamer</string>
+        <key>Process</key>
+        <array>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>faux_root</key>
+                    <string>%RECIPE_CACHE_DIR%</string>
+                    <key>installs_item_paths</key>
+                    <array>
+                        <string>/Applications/Splashtop Streamer.app</string>
+                    </array>
+                </dict>
+                <key>Processor</key>
+                <string>MunkiInstallsItemsCreator</string>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>MunkiPkginfoMerger</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>info_path</key>
+                    <string>%RECIPE_CACHE_DIR%/Applications/Splashtop Streamer.app</string>
+                    <key>plist_keys</key>
+                    <dict>
+                        <key>LSMinimumSystemVersion</key>
+                        <string>min_os_ver</string>
+                    </dict>
+                </dict>
+                <key>Processor</key>
+                <string>PlistReader</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>additional_pkginfo</key>
+                    <dict>
+                        <key>minimum_os_version</key>
+                        <string>%min_os_ver%</string>
+                    </dict>
+                </dict>
+                <key>Processor</key>
+                <string>MunkiPkginfoMerger</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>source_path</key>
+                    <string>%pathname%/Splashtop Streamer.pkg</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/Splashtop Streamer.pkg</string>
+                </dict>
+                <key>Processor</key>
+                <string>Copier</string>
+            </dict>
+            <dict>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_path</key>
+                    <string>%RECIPE_CACHE_DIR%/Splashtop Streamer.pkg</string>
+                    <key>repo_subdirectory</key>
+                    <string>%MUNKI_REPO_SUBDIR%</string>
+                </dict>
+                <key>Processor</key>
+                <string>MunkiImporter</string>
+            </dict>
+        </array>
+    </dict>
 </plist>

@@ -2,53 +2,58 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Comment</key>
+	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Cursor and imports it into Munki.</string>
+	<string>Downloads the latest version of DNSMonitor and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.munki.Cursor</string>
+	<string>com.github.peetinc.munki.DNSMonitor</string>
 	<key>Input</key>
 	<dict>
-		<key>MUNKI_CATEGORY</key>
-		<string>Developer</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>Cursor</string>
+		<string>DNSMonitor</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
-			<key>category</key>
-			<string>%MUNKI_CATEGORY%</string>
 			<key>description</key>
-			<string>Built to make you extraordinarily productive, Cursor is the best way to code with AI.</string>
+			<string>A DNS Monitor, leveraging Apple's NEDNSProxyProvider/Network Extension Framework</string>
 			<key>developer</key>
-			<string>Anysphere, Inc.</string>
+			<string>Objective-See, LLC</string>
 			<key>display_name</key>
-			<string>Cursor</string>
-			<key>icon_name</key>
-			<string>%NAME%.png</string>
+			<string>DNSMonitor</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
-			<true/>
-			<key>unattended_uninstall</key>
 			<true/>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>2.3</string>
 	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.Cursor</string>
+	<string>com.github.peetinc.download.DNSMonitor</string>
 	<key>Process</key>
 	<array>
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>dmg_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+				<key>dmg_root</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%</string>
+			</dict>
+			<key>Processor</key>
+			<string>DmgCreator</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>pkg_path</key>
-				<string>%pathname%</string>
+				<string>%dmg_path%</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
 			</dict>
