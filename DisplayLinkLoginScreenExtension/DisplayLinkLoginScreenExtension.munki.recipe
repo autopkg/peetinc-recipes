@@ -27,7 +27,7 @@
 			<key>category</key>
 			<string>%CATEGORY%</string>
 			<key>description</key>
-			<string>Allows for DisplayLink video adapters to work at the LoginWindow.</string>
+			<string>Allows for DisplayLink video adapters to work at the LoginWindow.NOTE: This function is included in DisplayLink Manager v14.0 and later.</string>
 			<key>developer</key>
 			<string>DisplayLink</string>
 			<key>display_name</key>
