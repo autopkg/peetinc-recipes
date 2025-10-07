@@ -38,6 +38,32 @@
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>uninstall_method</key>
+			<string>uninstall_script</string>
+			<key>uninstall_script</key>
+			<string>#!/bin/bash
+
+# DisplayLink Manager Uninstall Script
+
+# Unload LaunchAgent if it's loaded
+if launchctl list | grep -q "com.displaylink.loginscreen"; then
+    echo "Unloading DisplayLink login screen agent..."
+    launchctl unload "/Library/LaunchAgents/com.displaylink.loginscreen.plist" 2&gt;/dev/null
+fi
+
+# Remove LaunchAgent plist
+if [ -f "/Library/LaunchAgents/com.displaylink.loginscreen.plist" ]; then
+    echo "Removing DisplayLink login screen agent plist..."
+    rm -f "/Library/LaunchAgents/com.displaylink.loginscreen.plist"
+fi
+
+# Forget package receipts
+echo "Forgetting DisplayLink package receipts..."
+pkgutil --forget "com.displaylink.displaylinkloginscreenext" 2&gt;/dev/null
+
+echo "DisplayLink LaunchAgent uninstall complete."
+
+exit 0</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
