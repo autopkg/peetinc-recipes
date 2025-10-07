@@ -21,7 +21,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
-				<string>%NAME%.dmg</string>
+				<string>%NAME%.pkg</string>
 				<key>url</key>
 				<string>https://www.displaylink.com/downloads/macos_extension</string>
 			</dict>
