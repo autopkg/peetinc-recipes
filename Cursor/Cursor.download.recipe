@@ -3,13 +3,33 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest Universal version of Cursor.</string>
+	<string>Downloads the latest Universal version of Cursor.
+
+Possible values for PLATFORM include:
+- darwin-universal (default)
+- darwin (Intel only)
+- darwin-arm64 (Apple Silicon only)
+- win32-x64
+- win32-arm64
+- win32-x64-user
+- win32-arm64-user
+- linux-x64
+- linux-arm64
+
+Possible values for RELEASETRACK include:
+- stable (default)
+- latest
+</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.download.Cursor</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>Cursor</string>
+		<key>PLATFORM</key>
+		<string>darwin-universal</string>
+		<key>RELEASETRACK</key>
+		<string>stable</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>2.3</string>
@@ -21,7 +41,7 @@
 				<key>re_pattern</key>
 				<string>"downloadUrl":"(https[^"]+\.dmg)"</string>
 				<key>url</key>
-				<string>https://www.cursor.com/api/download?platform=darwin-universal&amp;releaseTrack=stable</string>
+				<string>https://www.cursor.com/api/download?platform=%PLATFORM%&amp;releaseTrack=%RELEASETRACK%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLTextSearcher</string>
