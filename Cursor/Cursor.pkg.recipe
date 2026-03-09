@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.pkg.Cursor</string>
 	<key>Input</key>
 	<dict>
+		<key>DOWNLOAD_ARCH</key>
+		<string>universal</string>
 		<key>NAME</key>
 		<string>Cursor</string>
 	</dict>
