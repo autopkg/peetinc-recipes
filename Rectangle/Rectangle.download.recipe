@@ -5,10 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>DEPRECATED: Use dataJAR-recipes or rtrouton-recipes Rectangle recipes instead.
-		- The Developer was requireing "sparkle" in the user agent for downloads from the sparkle feed. 
-		After discussion, the agent requirement was removed. https://github.com/rxhanson/Rectangle/issues/73#issuecomment-581141111 
-		</string>
+	<string>Downloads the latest version of Rectangle.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.download.Rectangle</string>
 	<key>Input</key>
@@ -20,24 +17,6 @@
 	<string>2.3</string>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>warning_message</key>
-				<string>This recipe is deprecated. Use dataJAR-recipes or rtrouton-recipes Rectangle recipes instead.</string>
-			</dict>
-			<key>Processor</key>
-			<string>DeprecationWarning</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>predicate</key>
-				<string>TRUEPREDICATE</string>
-			</dict>
-			<key>Processor</key>
-			<string>StopProcessingIf</string>
-		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>

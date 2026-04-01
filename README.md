@@ -19,6 +19,7 @@ Artichoke Consulting crafted autopkg recipes. (With more than a little help from
 - MonitorControl
 - Privileges
 - QuickBooksOnline
+- Rectangle
 - RWTS-PDFwriter
 - Setapp
 - SplashtopBusiness

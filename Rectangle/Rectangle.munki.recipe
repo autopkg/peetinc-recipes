@@ -5,7 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.3.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>DEPRECATED: Use dataJAR-recipes or rtrouton-recipes Rectangle recipes instead.</string>
+	<string>Downloads the latest version of Rectangle and imports it into Munki.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.Rectangle</string>
 	<key>Input</key>
