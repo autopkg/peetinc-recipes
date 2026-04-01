@@ -31,7 +31,7 @@
 			<key>description</key>
 			<string>Garmin BaseCamp is a 3D mapping application that allows you to transfer Garmin Custom Maps, BirdsEye Imagery, waypoints, tracks, and routes between your Mac and Garmin device. It allows you to manage your data on practically all Garmin map products, but topographic maps are required for 3-D rendering.</string>
 			<key>developer</key>
-			<string>%DEVELOPER%</string>
+			<string>Garmin Ltd.</string>
 			<key>display_name</key>
 			<string>%DISPLAY_NAME%</string>
 			<key>name</key>

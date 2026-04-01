@@ -22,9 +22,7 @@
             <string>Remote Access</string>
             <key>MUNKI_DESCRIPTION</key>
             <string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
-            <key>MUNKI_DEVELOPER</key>
-            <string>Splashtop</string>
-            <key>MUNKI_REPO_SUBDIR</key>
+<key>MUNKI_REPO_SUBDIR</key>
             <string>apps/Splashtop</string>
             <key>NAME</key>
             <string>SplashtopStreamer</string>
@@ -45,7 +43,7 @@
                 <key>description</key>
                 <string>%MUNKI_DESCRIPTION%</string>
                 <key>developer</key>
-                <string>%MUNKI_DEVELOPER%</string>
+                <string>Splashtop</string>
                 <key>display_name</key>
                 <string>%DISPLAY_NAME%</string>
                 <key>name</key>
