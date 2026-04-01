@@ -5,7 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Touch Bar Simulator.</string>
+	<string>DEPRECATED: Touch Bar Simulator is archived and Touch Bar hardware has been removed from all Macs.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.download.TouchBarSimulator</string>
 	<key>Input</key>
@@ -17,6 +17,24 @@
 	<string>1.0.0</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>warning_message</key>
+				<string>This recipe is deprecated. Touch Bar Simulator is archived and Touch Bar hardware has been removed from all Macs.</string>
+			</dict>
+			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>predicate</key>
+				<string>TRUEPREDICATE</string>
+			</dict>
+			<key>Processor</key>
+			<string>StopProcessingIf</string>
+		</dict>
 		<dict>
             <key>Arguments</key>
             <dict>

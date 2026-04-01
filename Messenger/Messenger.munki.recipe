@@ -5,7 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Messenger and imports it into Munki.</string>
+	<string>DEPRECATED: Meta discontinued the Messenger desktop app on December 15, 2025.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.Messenger</string>
 	<key>Input</key>

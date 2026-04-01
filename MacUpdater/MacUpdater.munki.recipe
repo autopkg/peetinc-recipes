@@ -5,7 +5,7 @@
 		<key>Comment</key>
 		<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
 		<key>Description</key>
-		<string>Downloads the latest version of MacUpdater and imports it into Munki.</string>
+		<string>DEPRECATED: MacUpdater was discontinued on January 1, 2026.</string>
 		<key>Identifier</key>
 		<string>com.github.peetinc.munki.MacUpdater</string>
 		<key>Input</key>

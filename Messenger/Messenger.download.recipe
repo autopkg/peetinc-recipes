@@ -5,7 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Messenger.</string>
+	<string>DEPRECATED: Meta discontinued the Messenger desktop app on December 15, 2025.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.download.Messenger</string>
 	<key>Input</key>
@@ -17,6 +17,24 @@
 	<string>1.0.0</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>warning_message</key>
+				<string>This recipe is deprecated. Meta discontinued the Messenger desktop app on December 15, 2025.</string>
+			</dict>
+			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>predicate</key>
+				<string>TRUEPREDICATE</string>
+			</dict>
+			<key>Processor</key>
+			<string>StopProcessingIf</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
