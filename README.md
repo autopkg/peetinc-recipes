@@ -4,9 +4,9 @@ Artichoke Consulting crafted autopkg recipes. (With more than a little help from
 ## Recipes
 
 - AcronisCyberProtectConnect
-- autopkg
+- AutoPkg
 - Banktivity
-- BaseCamp (Garmin)
+- GarminBaseCamp
 - BetterDisplay
 - Caffeine
 - Cursor
