@@ -4,7 +4,6 @@ Artichoke Consulting crafted autopkg recipes. (With more than a little help from
 ## Recipes
 
 - AcronisCyberProtectConnect
-- AutoPkg
 - Banktivity
 - GarminBaseCamp
 - BetterDisplay
