@@ -16,7 +16,7 @@
 		<string>/Applications/Privileges.app</string>
 		<key>MUNKI_CATEGORY</key>
 		<string>Security</string>
-<key>MUNKI_DISPLAYNAME</key>
+		<key>MUNKI_DISPLAYNAME</key>
 		<string>Privileges</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
@@ -43,9 +43,9 @@
 			<key>unattended_install</key>
 			<true/>
 			<key>uninstall_method</key>
-		<string>uninstall_script</string>
-		<key>uninstall_script</key>
-		<string>#!/bin/bash
+			<string>uninstall_script</string>
+			<key>uninstall_script</key>
+			<string>#!/bin/bash
 loggedInUser=$( scutil &lt;&lt;&lt; "show State:/Users/ConsoleUser" | awk '/Name :/ &amp;&amp; ! /loginwindow/ { print $3 }' )
 loggedInUID=$(id -u $loggedInUser)
 
@@ -85,10 +85,10 @@ fi
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>flat_pkg_path</key>
-				<string>%pathname%</string>
 				<key>destination_path</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg</string>
+				<key>flat_pkg_path</key>
+				<string>%pathname%</string>
 				<key>purge_destination</key>
 				<true/>
 			</dict>
@@ -98,10 +98,10 @@ fi
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>pkg_payload_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg/%NAME%.pkg/Payload</string>
 				<key>destination_path</key>
 				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg/%NAME%.pkg/Payload</string>
 				<key>purge_destination</key>
 				<true/>
 			</dict>
@@ -123,7 +123,7 @@ fi
 			<key>Processor</key>
 			<string>MunkiInstallsItemsCreator</string>
 		</dict>
-		 <dict>
+		<dict>
 			<key>Arguments</key>
 			<dict/>
 			<key>Processor</key>
