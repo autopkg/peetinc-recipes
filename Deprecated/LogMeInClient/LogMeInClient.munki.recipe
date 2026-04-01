@@ -5,7 +5,7 @@
 		<key>Comment</key>
 		<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
 		<key>Description</key>
-		<string>Downloads the latest version of LogMeIn Client and imports it into Munki.</string>
+		<string>DEPRECATED: Use dataJAR-recipes LogMeIn recipes instead.</string>
 		<key>Identifier</key>
 		<string>com.github.peetinc.munki.LogMeInClient</string>
 		<key>Input</key>

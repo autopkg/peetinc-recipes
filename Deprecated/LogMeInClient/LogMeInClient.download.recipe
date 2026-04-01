@@ -5,7 +5,7 @@
 		<key>Comment</key>
 		<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
 		<key>Description</key>
-		<string>Downloads the latest version of LogMeIn Client.</string>
+		<string>DEPRECATED: Use dataJAR-recipes LogMeIn recipes instead.</string>
 		<key>Identifier</key>
 		<string>com.github.peetinc.download.LogMeInClient</string>
 		<key>Input</key>
@@ -19,6 +19,24 @@
 		<string>1.0.0</string>
 		<key>Process</key>
 		<array>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>warning_message</key>
+					<string>This recipe is deprecated. Use dataJAR-recipes LogMeIn recipes instead.</string>
+				</dict>
+				<key>Processor</key>
+				<string>DeprecationWarning</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>predicate</key>
+					<string>TRUEPREDICATE</string>
+				</dict>
+				<key>Processor</key>
+				<string>StopProcessingIf</string>
+			</dict>
 			<dict>
 				<key>Arguments</key>
 				<dict>
