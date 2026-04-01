@@ -22,12 +22,12 @@
 		<dict>
 			<key>blocking_applications</key>
 			<array/>
-			<key>category</key>
-			<string>%CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>Open Source Project for Syncing IdP password with macOS login password</string>
 			<key>developer</key>

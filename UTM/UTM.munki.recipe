@@ -20,12 +20,12 @@
 		<string>UTM</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>category</key>
-			<string>%CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>Securely run operating systems on your Mac.</string>
 			<key>developer</key>

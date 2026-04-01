@@ -10,24 +10,26 @@
 	<string>com.github.peetinc.munki.GarminBaseCamp</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>Maps</string>
 		<key>DERIVE_MIN_OS</key>
 		<string>true</string>
 		<key>DEVELOPER</key>
 		<string>Garmin Ltd.</string>
-		<key>NAME</key>
-		<string>GarminBaseCamp</string>
 		<key>DISPLAY_NAME</key>
 		<string>Garmin BaseCamp</string>
-		<key>CATEGORY</key>
-		<string>Maps</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%DEVELOPER%/%NAME%</string>
+		<key>NAME</key>
+		<string>GarminBaseCamp</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>Garmin BaseCamp is a 3D mapping application that allows you to transfer Garmin Custom Maps, BirdsEye Imagery, waypoints, tracks, and routes between your Mac and Garmin device. It allows you to manage your data on practically all Garmin map products, but topographic maps are required for 3-D rendering.</string>
 			<key>developer</key>
@@ -36,8 +38,6 @@
 			<string>%DISPLAY_NAME%</string>
 			<key>name</key>
 			<string>%NAME%</string>
-			<key>category</key>
-			<string>%CATEGORY%</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
@@ -72,7 +72,7 @@
 			<key>Processor</key>
 			<string>FlatPkgUnpacker</string>
 		</dict>
-				<dict>
+		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>pkg_payload_path</key>
