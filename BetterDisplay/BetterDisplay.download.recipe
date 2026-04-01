@@ -2,18 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>DEPRECATED: BetterDummy has been renamed to BetterDisplay. Use the BetterDisplay recipes instead.</string>
+	<string>Downloads the latest version of BetterDisplay.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.download.BetterDummy</string>
+	<string>com.github.peetinc.download.BetterDisplay</string>
 	<key>Input</key>
 	<dict>
-		<key>APP_FILENAME</key>
-		<string>BetterDisplay</string>
 		<key>NAME</key>
-		<string>BetterDummy</string>
+		<string>BetterDisplay</string>
+		<key>SPARKLE_FEED_URL</key>
+		<string>https://betterdisplay.pro/betterdummy/sparkle/appcast.xml</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -22,26 +20,8 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>warning_message</key>
-				<string>This recipe is deprecated. BetterDummy has been renamed to BetterDisplay. Use the BetterDisplay recipes instead.</string>
-			</dict>
-			<key>Processor</key>
-			<string>DeprecationWarning</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>predicate</key>
-				<string>TRUEPREDICATE</string>
-			</dict>
-			<key>Processor</key>
-			<string>StopProcessingIf</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
 				<key>appcast_url</key>
-				<string>https://betterdisplay.pro/betterdummy/sparkle/appcast.xml</string>
+				<string>%SPARKLE_FEED_URL%</string>
 			</dict>
 			<key>Processor</key>
 			<string>SparkleUpdateInfoProvider</string>

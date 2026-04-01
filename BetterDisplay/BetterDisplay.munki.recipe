@@ -2,38 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Elevate UC and imports it into Munki.</string>
+	<string>Downloads the latest version of BetterDisplay and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>com.github.peetinc.munki.ElevateUC</string>
+	<string>com.github.peetinc.munki.BetterDisplay</string>
 	<key>Input</key>
 	<dict>
-		<key>APP_FILENAME</key>
-		<string>Elevate UC</string>
+		<key>CATEGORY</key>
+		<string>Utilities</string>
 		<key>DERIVE_MIN_OS</key>
 		<string>true</string>
-		<key>CATEGORY</key>
-		<string>Communication</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>ElevateUC</string>
+		<string>BetterDisplay</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>category</key>
-			<string>%CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
-			<string>Call, message, meet, and access files, from wherever you are.</string>
+			<string>Unlock your displays on your Mac! Smooth scaling, HiDPI unlock, XDR/HDR extra brightness upscale, DDC, brightness and dimming, dummy displays, PIP and lots more!</string>
 			<key>developer</key>
-			<string>Serverdata.Net, Inc.</string>
+			<string>Istvan Toth</string>
 			<key>display_name</key>
-			<string>Elevate UC</string>
+			<string>BetterDisplay</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -43,7 +39,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.peetinc.download.ElevateUC</string>
+	<string>com.github.peetinc.download.BetterDisplay</string>
 	<key>Process</key>
 	<array>
 		<dict>
@@ -64,9 +60,9 @@
 			<key>Arguments</key>
 			<dict>
 				<key>source_path</key>
-				<string>%pathname%/%APP_FILENAME%.app</string>
+				<string>%pathname%/%NAME%.app</string>
 				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/%APP_FILENAME%.app</string>
+				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/%NAME%.app</string>
 			</dict>
 			<key>Processor</key>
 			<string>Copier</string>
@@ -80,7 +76,7 @@
 				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 				<key>installs_item_paths</key>
 				<array>
-					<string>/Applications/%APP_FILENAME%.app</string>
+					<string>/Applications/%NAME%.app</string>
 				</array>
 			</dict>
 			<key>Processor</key>
