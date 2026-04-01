@@ -39,7 +39,7 @@
                 <key>description</key>
                 <string>Trading and technical analysis software.</string>
                 <key>developer</key>
-                <string>Online Banking Solutions, Inc.</string>
+                <string>Online Banking Solutions Inc.</string>
                 <key>display_name</key>
                 <string>%MUNKI_DISPLAYNAME%</string>
                 <key>name</key>

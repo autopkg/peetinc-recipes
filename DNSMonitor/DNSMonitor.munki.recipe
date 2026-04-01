@@ -29,7 +29,7 @@
 			<key>description</key>
 			<string>A DNS Monitor, leveraging Apple's NEDNSProxyProvider/Network Extension Framework</string>
 			<key>developer</key>
-			<string>Objective-See, LLC</string>
+			<string>Objective-See</string>
 			<key>display_name</key>
 			<string>DNSMonitor</string>
 			<key>name</key>

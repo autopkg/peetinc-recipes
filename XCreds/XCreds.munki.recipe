@@ -31,7 +31,7 @@
 			<key>description</key>
 			<string>Open Source Project for Syncing IdP password with macOS login password</string>
 			<key>developer</key>
-			<string>Twocanoes Software, Inc.</string>
+			<string>Twocanoes Software Inc.</string>
 			<key>display_name</key>
 			<string>XCreds</string>
 			<key>name</key>
