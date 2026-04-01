@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.munki.Setapp</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>IT Management</string>
 		<key>DERIVE_MIN_OS</key>
 		<string>true</string>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -25,7 +27,7 @@
 				<string>testing</string>
 			</array>
 			<key>category</key>
-			<string>AppStore</string>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>Required Think tasks, not apps. Setapp membership gives you an all-access pass to curated Mac and iOS apps.</string>
 			<key>developer</key>

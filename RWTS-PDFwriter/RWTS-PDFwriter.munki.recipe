@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.munki.RWTS-PDFwriter</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>Printing</string>
 		<key>MIN_OS</key>
 		<string>11.0</string>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -23,7 +25,7 @@
 				<string>PDFWriter Utility.app</string>
 			</array>
 			<key>category</key>
-			<string>Printing</string>
+			<string>%CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>

@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.munki.Banktivity</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>Business</string>
 		<key>DERIVE_MIN_OS</key>
 		<string>true</string>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -22,6 +24,8 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>Personal finance management for Mac. Track accounts, budgets, investments, and more.</string>
 			<key>developer</key>

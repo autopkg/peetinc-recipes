@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.munki.DNSMonitor</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>Networking &amp; Security</string>
 		<key>DERIVE_MIN_OS</key>
 		<string>true</string>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -22,6 +24,8 @@
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>A DNS Monitor, leveraging Apple's NEDNSProxyProvider/Network Extension Framework</string>
 			<key>developer</key>

@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.munki.Hot</string>
 	<key>Input</key>
 	<dict>
+		<key>CATEGORY</key>
+		<string>Utilities</string>
 		<key>DERIVE_MIN_OS</key>
 		<string>true</string>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -23,7 +25,7 @@
 				<string>testing</string>
 			</array>
 			<key>category</key>
-			<string>Utilities</string>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>Hot is macOS menu bar application that displays the CPU speed limit due to thermal issues.</string>
 			<key>developer</key>
