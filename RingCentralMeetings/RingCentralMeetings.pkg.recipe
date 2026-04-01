@@ -3,10 +3,7 @@
 <plist version="1.0">
 	<dict>
 		<key>Description</key>
-		<string>Downloads the current release version of RingCentral Meetings and builds a package.
-	This recipe differs from the ones in homebysix-recipes in the following ways:
-	- This one does not repackage the downloaded pkg
-		</string>
+		<string>DEPRECATED: RingCentral Meetings has been rebranded to RingCentral App. The parent download recipe no longer exists.</string>
 		<key>Identifier</key>
 		<string>com.github.peetinc.pkg.RingCentralMeetings</string>
 		<key>Input</key>
@@ -20,6 +17,24 @@
 		<string>com.github.homebysix.download.RingCentralMeetings</string>
 		<key>Process</key>
 		<array>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>warning_message</key>
+					<string>This recipe is deprecated. RingCentral Meetings has been rebranded to RingCentral App and the parent download recipe no longer exists.</string>
+				</dict>
+				<key>Processor</key>
+				<string>DeprecationWarning</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>predicate</key>
+					<string>TRUEPREDICATE</string>
+				</dict>
+				<key>Processor</key>
+				<string>StopProcessingIf</string>
+			</dict>
 			<dict>
 				<key>Arguments</key>
 				<dict>

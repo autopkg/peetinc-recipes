@@ -5,11 +5,13 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Logitech Options and imports it into Munki.</string>
+	<string>Downloads the latest version of Garmin BaseCamp and imports it into Munki.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.GarminBaseCamp</string>
 	<key>Input</key>
 	<dict>
+		<key>DERIVE_MIN_OS</key>
+		<string>true</string>
 		<key>DEVELOPER</key>
 		<string>Garmin Ltd.</string>
 		<key>NAME</key>
@@ -47,6 +49,17 @@
 	<key>Process</key>
 	<array>
 		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
+				<key>pkgdirs</key>
+				<dict/>
+			</dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+		</dict>
+		<dict>
             <key>Arguments</key>
             <dict>
                 <key>flat_pkg_path</key>
@@ -75,6 +88,8 @@
         <dict>
 			<key>Arguments</key>
 			<dict>
+				<key>derive_minimum_os_version</key>
+				<string>%DERIVE_MIN_OS%</string>
 				<key>faux_root</key>
 				<string>%RECIPE_CACHE_DIR%/pkgroot</string>
 				<key>installs_item_paths</key>
@@ -88,37 +103,33 @@
 		<dict>
 			<key>Processor</key>
 			<string>MunkiPkginfoMerger</string>
-    	</dict>
+		</dict>
 		<dict>
 			<key>Arguments</key>
+			<dict>
+				<key>info_path</key>
+				<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/Garmin BaseCamp.app</string>
+				<key>plist_keys</key>
 				<dict>
-					<key>info_path</key>
-					<string>%RECIPE_CACHE_DIR%/pkgroot/Applications/Garmin BaseCamp.app</string>
-					<key>plist_keys</key>
-					<dict>
-						<key>CFBundleVersion</key>
-						<string>VERSION</string>
-						<key>LSMinimumSystemVersion</key>
-						<string>MIN_OS_VER</string>
-					</dict>
+					<key>CFBundleVersion</key>
+					<string>VERSION</string>
 				</dict>
-				<key>Processor</key>
-				<string>PlistReader</string>
+			</dict>
+			<key>Processor</key>
+			<string>PlistReader</string>
 		</dict>
 		<dict>
-     	<key>Arguments</key>
-        <dict>
-            <key>additional_pkginfo</key>
-            <dict>
-				<key>version</key>
-				<string>%VERSION%</string>
-				<key>minimum_os_version</key>
-				<string>%MIN_OS_VER%</string>
+			<key>Arguments</key>
+			<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%VERSION%</string>
+				</dict>
 			</dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
 		</dict>
-		<key>Processor</key>
-        <string>MunkiPkginfoMerger</string>
-   		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>

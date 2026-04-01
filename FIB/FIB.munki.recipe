@@ -12,6 +12,8 @@
         <dict>
             <key>APP_FILENAME</key>
             <string>First Interstate Bank Secure Browser</string>
+            <key>DERIVE_MIN_OS</key>
+            <string>true</string>
             <key>MUNKI_CATEGORY</key>
             <string>Finance</string>
             <key>MUNKI_DISPLAYNAME</key>

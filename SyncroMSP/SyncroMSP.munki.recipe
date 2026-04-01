@@ -12,6 +12,8 @@
 	<dict>
 		<key>CATEGORY</key>
 		<string>RMM</string>
+		<key>DERIVE_MIN_OS</key>
+		<string>true</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
@@ -91,6 +93,8 @@
                 <array>
                     <string>/Library/Application Support/SyncroMSP/SyncroMSP.app</string>
                 </array>
+                <key>derive_minimum_os_version</key>
+                <string>%DERIVE_MIN_OS%</string>
                 <key>version_comparison_key</key>
                 <string>CFBundleShortVersionString</string>
             </dict>
@@ -98,32 +102,6 @@
             <string>MunkiInstallsItemsCreator</string>
         </dict>
         <dict>
-            <key>Processor</key>
-            <string>MunkiPkginfoMerger</string>
-        </dict>
-        <dict>
-			<key>Arguments</key>
-			<dict>
-				<key>info_path</key>
-				<string>%RECIPE_CACHE_DIR%/root/Library/Application Support/SyncroMSP/SyncroMSP.app</string>
-				<key>plist_keys</key>
-				<dict>
-					<key>LSMinimumSystemVersion</key>
-					<string>MIN_OS</string>
-				</dict>
-			</dict>
-			<key>Processor</key>
-			<string>PlistReader</string>
-		</dict>
-		 <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>additional_pkginfo</key>
-                <dict>
-                    <key>minimum_os_version</key>
-                    <string>%MIN_OS%</string>
-                </dict>
-            </dict>
             <key>Processor</key>
             <string>MunkiPkginfoMerger</string>
         </dict>

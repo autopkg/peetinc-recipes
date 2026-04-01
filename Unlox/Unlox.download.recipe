@@ -5,7 +5,7 @@
 	<key>Comment</key>
 	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Unlox.</string>
+	<string>DEPRECATED: Unlox is no longer available. The developer website and Sparkle feed are offline.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.download.Unlox</string>
 	<key>Input</key>
@@ -19,6 +19,24 @@
 	<string>1.0.0</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>warning_message</key>
+				<string>This recipe is deprecated. Unlox is no longer available and the developer website is offline.</string>
+			</dict>
+			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>predicate</key>
+				<string>TRUEPREDICATE</string>
+			</dict>
+			<key>Processor</key>
+			<string>StopProcessingIf</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>

@@ -10,6 +10,8 @@
         <string>com.github.peetinc.munki.SplashtopStreamer</string>
         <key>Input</key>
         <dict>
+            <key>DERIVE_MIN_OS</key>
+            <string>true</string>
             <key>DEPLOY_CODE</key>
             <string>-REPLACE-ME-</string>
             <key>DISPLAY_NAME</key>
@@ -649,6 +651,8 @@ doinstall</string>
             <dict>
                 <key>Arguments</key>
                 <dict>
+                    <key>derive_minimum_os_version</key>
+                    <string>%DERIVE_MIN_OS%</string>
                     <key>faux_root</key>
                     <string>%RECIPE_CACHE_DIR%</string>
                     <key>installs_item_paths</key>
@@ -660,32 +664,6 @@ doinstall</string>
                 <string>MunkiInstallsItemsCreator</string>
             </dict>
             <dict>
-                <key>Processor</key>
-                <string>MunkiPkginfoMerger</string>
-            </dict>
-            <dict>
-                <key>Arguments</key>
-                <dict>
-                    <key>info_path</key>
-                    <string>%RECIPE_CACHE_DIR%/Applications/Splashtop Streamer.app</string>
-                    <key>plist_keys</key>
-                    <dict>
-                        <key>LSMinimumSystemVersion</key>
-                        <string>min_os_ver</string>
-                    </dict>
-                </dict>
-                <key>Processor</key>
-                <string>PlistReader</string>
-            </dict>
-            <dict>
-                <key>Arguments</key>
-                <dict>
-                    <key>additional_pkginfo</key>
-                    <dict>
-                        <key>minimum_os_version</key>
-                        <string>%min_os_ver%</string>
-                    </dict>
-                </dict>
                 <key>Processor</key>
                 <string>MunkiPkginfoMerger</string>
             </dict>
