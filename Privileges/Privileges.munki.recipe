@@ -50,9 +50,9 @@ loggedInUser=$( scutil &lt;&lt;&lt; "show State:/Users/ConsoleUser" | awk '/Name
 loggedInUID=$(id -u $loggedInUser)
 
 if [[ -f "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" ]]; then
-    launchctl unload "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
-    rm -rf "/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
-    rm -rf "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
+	launchctl unload "/Library/LaunchDaemons/corp.sap.privileges.helper.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
+	rm -rf "/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+	rm -rf "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
 fi
 
 launchctl asuser $loggedInUID launchctl unload  "/Library/LaunchAgents/corp.sap.privileges.agent.plist" &gt;&gt; /dev/null 2&gt;&amp;1 
@@ -83,52 +83,52 @@ fi
 	<key>Process</key>
 	<array>
 		<dict>
-            <key>Arguments</key>
-            <dict>
-                <key>flat_pkg_path</key>
-                <string>%pathname%</string>
-                <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg</string>
-                <key>purge_destination</key>
-                <true/>
-            </dict>
-            <key>Processor</key>
-            <string>FlatPkgUnpacker</string>
-        </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>pkg_payload_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg/%NAME%.pkg/Payload</string>
-                <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
-                <key>purge_destination</key>
-                <true/>
-            </dict>
-            <key>Processor</key>
-            <string>PkgPayloadUnpacker</string>
-        </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-            	<key>derive_minimum_os_version</key>
-                <string>%DERIVE_MIN_OS%</string>
-                <key>faux_root</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
-                <key>installs_item_paths</key>
-                <array>
-                    <string>%INSTALLED_APP%</string>
-                </array>
-            </dict>
-            <key>Processor</key>
-            <string>MunkiInstallsItemsCreator</string>
-        </dict>
-         <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>flat_pkg_path</key>
+				<string>%pathname%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg/%NAME%.pkg/Payload</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>derive_minimum_os_version</key>
+				<string>%DERIVE_MIN_OS%</string>
+				<key>faux_root</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%_pkg_payload</string>
+				<key>installs_item_paths</key>
+				<array>
+					<string>%INSTALLED_APP%</string>
+				</array>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiInstallsItemsCreator</string>
+		</dict>
+		 <dict>
 			<key>Arguments</key>
 			<dict/>
 			<key>Processor</key>
-            <string>MunkiPkginfoMerger</string>
-        </dict>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>

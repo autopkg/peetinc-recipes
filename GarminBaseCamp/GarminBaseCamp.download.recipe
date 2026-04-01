@@ -56,7 +56,7 @@
 				<array>
 					<string>Developer ID Installer: Garmin International (72ES32VZUA)</string>
 					<string>Developer ID Certification Authority</string>
-            		<string>Apple Root CA</string>
+					<string>Apple Root CA</string>
 				</array>
 			</dict>
 			<key>Processor</key>

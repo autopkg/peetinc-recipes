@@ -24,12 +24,12 @@
 			<array>
 				<string>PDFWriter Utility.app</string>
 			</array>
-			<key>category</key>
-			<string>%CATEGORY%</string>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
+			<key>category</key>
+			<string>%CATEGORY%</string>
 			<key>description</key>
 			<string>A print to pdf-file printer driver.</string>
 			<key>developer</key>
@@ -57,35 +57,35 @@ if [ ! -d "/private/var/spool/pdfwriter/$loggedInUser" ]; then
 fi
 
 if [ -f $iconSource ]; then
-    ###Ensure Custom icon is set before symlinking spool folder    
-    # Create icon from the iconSource
-    cp $iconSource $icon
-    
-    # Add icon to image file, meaning use itself as the icon
-    sips -i $icon
-    
-    # Take that icon and put it into a rsrc file
-    DeRez -only icns $icon &gt; $rsrc
-    
-    # Apply the rsrc file to
-    SetFile -a C $iconDestination
-    
-    if [ -f $iconDestination ]; then
-        # Destination is a file
-        Rez -append $rsrc -o $iconDestination
-    elif [ -d $iconDestination ]; then
-        # Destination is a directory
-        # Create the magical Icon\r file
-        touch $iconDestination/$'Icon\r'
-        Rez -append $rsrc -o $iconDestination/Icon?
-        SetFile -a V $iconDestination/Icon?
-    fi
-    
-    rm $rsrc $icon
+	###Ensure Custom icon is set before symlinking spool folder    
+	# Create icon from the iconSource
+	cp $iconSource $icon
+	
+	# Add icon to image file, meaning use itself as the icon
+	sips -i $icon
+	
+	# Take that icon and put it into a rsrc file
+	DeRez -only icns $icon &gt; $rsrc
+	
+	# Apply the rsrc file to
+	SetFile -a C $iconDestination
+	
+	if [ -f $iconDestination ]; then
+		# Destination is a file
+		Rez -append $rsrc -o $iconDestination
+	elif [ -d $iconDestination ]; then
+		# Destination is a directory
+		# Create the magical Icon\r file
+		touch $iconDestination/$'Icon\r'
+		Rez -append $rsrc -o $iconDestination/Icon?
+		SetFile -a V $iconDestination/Icon?
+	fi
+	
+	rm $rsrc $icon
 fi
 
 if [ -L /Users/$loggedInUser/Desktop/PDFWriter ];then 
-  	rm /Users/$loggedInUser/Desktop/PDFWriter
+	  rm /Users/$loggedInUser/Desktop/PDFWriter
 fi
 
 ln -s /private/var/spool/pdfwriter/$loggedInUser /Users/$loggedInUser/Desktop/PDFWriter

@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-        <key>Comment</key>
-        <string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
-        <key>Description</key>
-        <string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
-        <key>Identifier</key>
-        <string>com.github.peetinc.munki.SplashtopStreamer</string>
-        <key>Input</key>
-        <dict>
-            <key>DERIVE_MIN_OS</key>
-            <string>true</string>
-            <key>DEPLOY_CODE</key>
-            <string>-REPLACE-ME-</string>
-            <key>DISPLAY_NAME</key>
-            <string>Splashtop Streamer</string>
-            <key>HIDE_FOLDER</key>
-            <string>hidden</string>
-            <key>MUNKI_CATEGORY</key>
-            <string>Remote Access</string>
-            <key>MUNKI_DESCRIPTION</key>
-            <string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
-<key>MUNKI_REPO_SUBDIR</key>
-            <string>apps/Splashtop</string>
-            <key>NAME</key>
-            <string>SplashtopStreamer</string>
-            <key>PLIST_PERM</key>
-            <string>664</string>
-            <key>pkginfo</key>
-            <dict>
-                <key>autoremove</key>
-                <true/>
-                <key>blocking_applications</key>
-                <array/>
-                <key>catalogs</key>
-                <array>
-                    <string>testing</string>
-                </array>
-                <key>category</key>
-                <string>%MUNKI_CATEGORY%</string>
-                <key>description</key>
-                <string>%MUNKI_DESCRIPTION%</string>
-                <key>developer</key>
-                <string>Splashtop</string>
-                <key>display_name</key>
-                <string>%DISPLAY_NAME%</string>
-                <key>name</key>
-                <string>%NAME%</string>
-                <key>uninstall_method</key>
-                <string>uninstall_script</string>
-                <key>postinstall_script</key>
-                <string>#!/bin/bash
+<dict>
+	<key>Comment</key>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
+	<key>Description</key>
+	<string>Downloads the current version of Splashtop streamer. Set DEPLOY_CODE with your deploy code. Set PLIST_PERM to your desired chmod permissions for the plashtop-Streamer.plist. Permissions on the Splashtop-Streamer.plist are installed as 666, any user can change and delete settings. Set HIDE_FOLDER "hidden" to hide the /Users/Shared/Splashtop folder and "nohidden" to keep the default visibility.</string>
+	<key>Identifier</key>
+	<string>com.github.peetinc.munki.SplashtopStreamer</string>
+	<key>Input</key>
+	<dict>
+		<key>DEPLOY_CODE</key>
+		<string>-REPLACE-ME-</string>
+		<key>DERIVE_MIN_OS</key>
+		<string>true</string>
+		<key>DISPLAY_NAME</key>
+		<string>Splashtop Streamer</string>
+		<key>HIDE_FOLDER</key>
+		<string>hidden</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Remote Access</string>
+		<key>MUNKI_DESCRIPTION</key>
+		<string>Splashtop Business Access provides fast, simple, secure remote computer access for individuals and teams. With it you can access computers remotely from any device.</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/Splashtop</string>
+		<key>NAME</key>
+		<string>SplashtopStreamer</string>
+		<key>PLIST_PERM</key>
+		<string>664</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>autoremove</key>
+			<true/>
+			<key>blocking_applications</key>
+			<array/>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
+			<key>description</key>
+			<string>%MUNKI_DESCRIPTION%</string>
+			<key>developer</key>
+			<string>Splashtop</string>
+			<key>display_name</key>
+			<string>%DISPLAY_NAME%</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>postinstall_script</key>
+			<string>#!/bin/bash
 #Clean up new .PreInstall file
 PreInstallDirectory="/Library/Managed Installs/Cache"
 if [ -f  "$PreInstallDirectory/.PreInstall" ]; then
@@ -71,8 +69,8 @@ fi
 chflags %HIDE_FOLDER% /Users/Shared/SplashtopStreamer
 
 exit 0</string>
-                <key>preinstall_script</key>
-                <string>#!/bin/bash
+			<key>preinstall_script</key>
+			<string>#!/bin/bash
 
 #Script to create "$PreInstallDirectory/.PreInstall" with appropriate variables. In 2024/2025 Splashtop changed this to need to be next to the .pkg
 #If /Users/Shared/SplashtopStreamer/.PreInstall is in place when splashtop package is installed then it will be correctly deployed
@@ -162,12 +160,14 @@ fi
 /usr/libexec/PlistBuddy -c "Add STP:FirstTimeLogin bool $FirstTimeLogin" "$PreInstallDirectory/.PreInstall"
 
 exit 0</string>
-                <key>unattended_install</key>
-                <true/>
-                <key>unattended_uninstall</key>
-                <true/>
-                <key>uninstall_script</key>
-                <string>#!/bin/bash
+			<key>unattended_install</key>
+			<true/>
+			<key>unattended_uninstall</key>
+			<true/>
+			<key>uninstall_method</key>
+			<string>uninstall_script</string>
+			<key>uninstall_script</key>
+			<string>#!/bin/bash
 #
 # uninstall Splashtop Streamer script file
 #
@@ -182,34 +182,34 @@ appOldName="$(pkgutil --only-dirs --files ${appBundleId} 2&gt;/dev/null | head -
 [ -z "${appOldName}" ] &amp;&amp; appOldName="${appName}.app"
 
 function vercomp () {
-    if [[ $1 == $2 ]]
-    then
-        return 0
-    fi
-    local IFS=.
-    local i ver1=($1) ver2=($2)
-    # fill empty fields in ver1 with zeros
-    for ((i=${#ver1[@]}; i&lt;${#ver2[@]}; i++))
-    do
-        ver1[i]=0
-    done
-    for ((i=0; i&lt;${#ver1[@]}; i++))
-    do
-        if [[ -z ${ver2[i]} ]]
-        then
-            # fill empty fields in ver2 with zeros
-            ver2[i]=0
-        fi
-        if ((10#${ver1[i]} &gt; 10#${ver2[i]}))
-        then
-            return 1
-        fi
-        if ((10#${ver1[i]} &lt; 10#${ver2[i]}))
-        then
-            return 2
-        fi
-    done
-    return 0
+	if [[ $1 == $2 ]]
+	then
+		return 0
+	fi
+	local IFS=.
+	local i ver1=($1) ver2=($2)
+	# fill empty fields in ver1 with zeros
+	for ((i=${#ver1[@]}; i&lt;${#ver2[@]}; i++))
+	do
+		ver1[i]=0
+	done
+	for ((i=0; i&lt;${#ver1[@]}; i++))
+	do
+		if [[ -z ${ver2[i]} ]]
+		then
+			# fill empty fields in ver2 with zeros
+			ver2[i]=0
+		fi
+		if ((10#${ver1[i]} &gt; 10#${ver2[i]}))
+		then
+			return 1
+		fi
+		if ((10#${ver1[i]} &lt; 10#${ver2[i]}))
+		then
+			return 2
+		fi
+	done
+	return 0
 }
 
 function exceCMD() {
@@ -220,72 +220,72 @@ function exceCMD() {
 }
 
 function kill_process() {
-    local process_list=("$@")
+	local process_list=("$@")
 
-    for process in "${process_list[@]}" ; do
-        [ -z "$(ps axc -Ouser | grep "${process}" | awk '{print $1}')" ] &amp;&amp; continue;
-        exceCMD "sudo killall \"${process}\" 2&gt;/dev/null || sudo killall -9 \"${process}\" 2&gt;/dev/null || true"
+	for process in "${process_list[@]}" ; do
+		[ -z "$(ps axc -Ouser | grep "${process}" | awk '{print $1}')" ] &amp;&amp; continue;
+		exceCMD "sudo killall \"${process}\" 2&gt;/dev/null || sudo killall -9 \"${process}\" 2&gt;/dev/null || true"
 
-        # check again, force kill.
-        [ -z "$(ps axc -Ouser | grep "${process}" | awk '{print $1}')" ] || exceCMD "sudo killall -9 \"${process}\" 2&gt;/dev/null || true"
-    done
+		# check again, force kill.
+		[ -z "$(ps axc -Ouser | grep "${process}" | awk '{print $1}')" ] || exceCMD "sudo killall -9 \"${process}\" 2&gt;/dev/null || true"
+	done
 }
 
 function del_files() {
-    local file_list=("$@")
+	local file_list=("$@")
 
 	for file in "${file_list[@]}" ; do
-        exceCMD "sudo rm -rf ${file} 2&gt;/dev/null || true"
-    done
+		exceCMD "sudo rm -rf ${file} 2&gt;/dev/null || true"
+	done
 }
 
 function unloadAgentSetting() {
-    local _PID="$1"
-    local _UID="$2"
-    local PLISTFILE="$3"
+	local _PID="$1"
+	local _UID="$2"
+	local PLISTFILE="$3"
 
-    local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
-    vercomp "${MAJOR_MAC_VERSION}" "10.10"
-    local ret=$?
-    if [[ $ret -eq 1 ]]; then
-        exceCMD "launchctl bootout gui/${_UID} \"${PLISTFILE}\" 2&gt;&amp;1 || true"
-    elif [[ $ret -eq 0 ]]; then
-        exceCMD "launchctl bsexec \"${_PID}\" chroot -u \"${_UID}\" / launchctl unload \"${PLISTFILE}\" 2&gt;&amp;1 || true"
-    fi
+	local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+	vercomp "${MAJOR_MAC_VERSION}" "10.10"
+	local ret=$?
+	if [[ $ret -eq 1 ]]; then
+		exceCMD "launchctl bootout gui/${_UID} \"${PLISTFILE}\" 2&gt;&amp;1 || true"
+	elif [[ $ret -eq 0 ]]; then
+		exceCMD "launchctl bsexec \"${_PID}\" chroot -u \"${_UID}\" / launchctl unload \"${PLISTFILE}\" 2&gt;&amp;1 || true"
+	fi
 }
 
 function unloadAgents() {
-    local PLISTFILE="$1"
+	local PLISTFILE="$1"
 
-    local loggedInUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ &amp;&amp; ! /loginwindow/ { print $3 }' )
+	local loggedInUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ &amp;&amp; ! /loginwindow/ { print $3 }' )
 
-    local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
-    vercomp "${MAJOR_MAC_VERSION}" "10.9"
-    if [[ $? -eq 1 ]]; then
-        for pid_uid in $(ps -axo pid,uid,args | grep -i "[l]oginwindow.app" | awk '{print $1 "," $2}'); do
-            local pid=$(echo $pid_uid | cut -d, -f1)
-            local uid=$(echo $pid_uid | cut -d, -f2)
-            
-            if [[ "${uid}" == "0" &amp;&amp; -z "${loggedInUser}" ]]; then
-                continue
-            fi
+	local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+	vercomp "${MAJOR_MAC_VERSION}" "10.9"
+	if [[ $? -eq 1 ]]; then
+		for pid_uid in $(ps -axo pid,uid,args | grep -i "[l]oginwindow.app" | awk '{print $1 "," $2}'); do
+			local pid=$(echo $pid_uid | cut -d, -f1)
+			local uid=$(echo $pid_uid | cut -d, -f2)
+			
+			if [[ "${uid}" == "0" &amp;&amp; -z "${loggedInUser}" ]]; then
+				continue
+			fi
 
-            unloadAgentSetting "${pid}" "${uid}" "${PLISTFILE}"
-        done
-    else
-        exceCMD "/usr/bin/sudo -u \"$(stat -f '%Su' /dev/console)\" /bin/launchctl unload -w \"${PLISTFILE}\" 2&gt;&amp;1 || true"
-    fi
+			unloadAgentSetting "${pid}" "${uid}" "${PLISTFILE}"
+		done
+	else
+		exceCMD "/usr/bin/sudo -u \"$(stat -f '%Su' /dev/console)\" /bin/launchctl unload -w \"${PLISTFILE}\" 2&gt;&amp;1 || true"
+	fi
 }
 
 function del_launchctl_file() {
-    local file="$1"
+	local file="$1"
 
-    if [ -f "${file}" ]; then
-	    if [ -z "$2" ]; then
-	    	exceCMD "sudo /bin/launchctl unload -w \"${file}\" 2&gt;&amp;1 || true"
-	    else
-	   		unloadAgents "${file}"
-	   	fi
+	if [ -f "${file}" ]; then
+		if [ -z "$2" ]; then
+			exceCMD "sudo /bin/launchctl unload -w \"${file}\" 2&gt;&amp;1 || true"
+		else
+			   unloadAgents "${file}"
+		   fi
 		exceCMD "sudo rm -rf \"${file}\"* 2&gt;/dev/null || true"
 	fi
 }
@@ -293,24 +293,24 @@ function del_launchctl_file() {
 function del_launchctl_files_by_user() {
 	local user="$1"
 	shift
-    local file_list=("$@")
+	local file_list=("$@")
 
 	for file in "${file_list[@]}" ; do
-        del_launchctl_file "${file}" "${user}"
-    done
+		del_launchctl_file "${file}" "${user}"
+	done
 }
 
 function remove_kext() {
-    local _kext="$1"
-    local bundle_id="$2"
+	local _kext="$1"
+	local bundle_id="$2"
 
-    if [ ! -z "${bundle_id}" ]; then
-        exceCMD "sudo kextstat -b \"${bundle_id}\" &gt; /dev/null 2&gt;&amp;1 &amp;&amp; sudo kextunload -b \"${bundle_id}\" &gt; /dev/null 2&gt;&amp;1 || true"
-    fi
+	if [ ! -z "${bundle_id}" ]; then
+		exceCMD "sudo kextstat -b \"${bundle_id}\" &gt; /dev/null 2&gt;&amp;1 &amp;&amp; sudo kextunload -b \"${bundle_id}\" &gt; /dev/null 2&gt;&amp;1 || true"
+	fi
 
-    exceCMD "sudo kextunload \"${_kext}\" &gt; /dev/null 2&gt;&amp;1 || true"
-    exceCMD "sudo rm -rf \"${_kext}\" || true"
-    exceCMD "sudo kextcache --clear-staging &gt; /dev/null 2&gt;&amp;1 || true"
+	exceCMD "sudo kextunload \"${_kext}\" &gt; /dev/null 2&gt;&amp;1 || true"
+	exceCMD "sudo rm -rf \"${_kext}\" || true"
+	exceCMD "sudo kextcache --clear-staging &gt; /dev/null 2&gt;&amp;1 || true"
 }
 
 function killOtherProductProcess() {
@@ -338,13 +338,13 @@ function killS4Bprocess() {
 }
 
 function restartCoreAudioService() {
-    local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
-    vercomp "${MAJOR_MAC_VERSION}" "10.9"
-    if [ $? -eq 1 ]; then
-        sleep 1; sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod; sleep 1;
-    else
-        sleep 1; sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`; sleep 1;
-    fi
+	local MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+	vercomp "${MAJOR_MAC_VERSION}" "10.9"
+	if [ $? -eq 1 ]; then
+		sleep 1; sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod; sleep 1;
+	else
+		sleep 1; sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`; sleep 1;
+	fi
 }
 
 function removePrinterDriver() {
@@ -392,74 +392,74 @@ function removedriver() {
 			exceCMD "sudo \"${KextInstaller}\" -u -n \"${_kext}\" 2&gt;/dev/null || true"
 		done
 	else
-	    echo "kext installer exit -1"
+		echo "kext installer exit -1"
 	fi
 }
 
 function removeKextSoundDriver() {
-    local KextInstallPath=("/Library/Extensions" "/System/Library/Extensions")
-    local KextName=("SplashtopSoundDriver.kext" "Soundflower.kext")
+	local KextInstallPath=("/Library/Extensions" "/System/Library/Extensions")
+	local KextName=("SplashtopSoundDriver.kext" "Soundflower.kext")
 
-    for _kextPath in "${KextInstallPath[@]}" ; do
-        for _kextName in "${KextName[@]}" ; do
-            local is_unload=true
-            local _kext="${_kextPath}/${_kextName}"
-            local _plist="${_kext}/Contents/Info.plist"
+	for _kextPath in "${KextInstallPath[@]}" ; do
+		for _kextName in "${KextName[@]}" ; do
+			local is_unload=true
+			local _kext="${_kextPath}/${_kextName}"
+			local _plist="${_kext}/Contents/Info.plist"
 
-            local BundleIdentifier=""
-            local Version=""
+			local BundleIdentifier=""
+			local Version=""
 
-            [ -d "${_kext}" ] || continue
+			[ -d "${_kext}" ] || continue
 
-            if [ -f "${_plist}" ]; then
-                #CFBundleIdentifier
-                #CFBundleShortVersionString
-                echo "${_plist}"
+			if [ -f "${_plist}" ]; then
+				#CFBundleIdentifier
+				#CFBundleShortVersionString
+				echo "${_plist}"
 
-                BundleIdentifier=$(/usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "${_plist}")
-                Version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "${_plist}")
-            fi
+				BundleIdentifier=$(/usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "${_plist}")
+				Version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "${_plist}")
+			fi
 
-            if [[ "${_kextName}" == "Soundflower.kext" &amp;&amp; "${Version}" != "1.6.7" ]]; then
-                is_unload=false
-            fi
+			if [[ "${_kextName}" == "Soundflower.kext" &amp;&amp; "${Version}" != "1.6.7" ]]; then
+				is_unload=false
+			fi
 
-            if [ "$is_unload" = true ]; then
-                [ -d "${_kext}" ] &amp;&amp; echo "unstall kext... [${_kext}]" ; remove_kext "${_kext}" "${BundleIdentifier}"
-            fi
-        done
-    done
+			if [ "$is_unload" = true ]; then
+				[ -d "${_kext}" ] &amp;&amp; echo "unstall kext... [${_kext}]" ; remove_kext "${_kext}" "${BundleIdentifier}"
+			fi
+		done
+	done
 }
 
 function removePlugInsSoundDriver() {
-    local is_unload=false
-    local DriverName1=("Splashtop Remote Sound" "Splashtop Remote Microphone")
-    local DriverName2=("SplashtopRemoteSound.driver" "SplashtopRemoteMic.driver")
+	local is_unload=false
+	local DriverName1=("Splashtop Remote Sound" "Splashtop Remote Microphone")
+	local DriverName2=("SplashtopRemoteSound.driver" "SplashtopRemoteMic.driver")
 
-    n=${#DriverName1[@]}
-    for (( i=0; i&lt;n; i++ )); do
-        local _name=${DriverName1[i]}
-        local _driver="/Library/Audio/Plug-Ins/HAL/${DriverName2[i]}"
-        local _plist="${_driver}/Contents/Info.plist"
+	n=${#DriverName1[@]}
+	for (( i=0; i&lt;n; i++ )); do
+		local _name=${DriverName1[i]}
+		local _driver="/Library/Audio/Plug-Ins/HAL/${DriverName2[i]}"
+		local _plist="${_driver}/Contents/Info.plist"
 
-        local BundleIdentifier=""
-        local Version=""
+		local BundleIdentifier=""
+		local Version=""
 
-        [ -d "${_driver}" ] || continue
+		[ -d "${_driver}" ] || continue
 
-        if sudo rm -rf "${_driver}" &amp;&amp; system_profiler SPAudioDataType | grep "${_name}:"; then
-            is_unload=true
-        fi
-    done
+		if sudo rm -rf "${_driver}" &amp;&amp; system_profiler SPAudioDataType | grep "${_name}:"; then
+			is_unload=true
+		fi
+	done
 
-    if [ ${is_unload} = true ]; then
-        restartCoreAudioService
-    fi
+	if [ ${is_unload} = true ]; then
+		restartCoreAudioService
+	fi
 }
 
 function removeSoundDriver() {
-    removeKextSoundDriver
-    removePlugInsSoundDriver
+	removeKextSoundDriver
+	removePlugInsSoundDriver
 }
 
 function removeOtherProductPlist() {
@@ -479,8 +479,8 @@ function removeplist() {
 	local pkgutil_list=("com.splashtop.splashtopStreamer.com.splashtop.streamer-daemon.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-daemon.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-for-user.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-srioframebuffer.pkg" "com.splashtop.splashtopStreamer.postflight.pkg" "com.splashtop.splashtopStreamer.SplashtopStreamer.pkg" "com.splashtop.splashtopStreamer.com.splashtop.streamer-for-root.pkg" "${appBundleId}")
 
 	for pkgutil in "${pkgutil_list[@]}" ; do
-        exceCMD "sudo pkgutil --forget ${pkgutil} 2&gt;/dev/null || true"
-    done
+		exceCMD "sudo pkgutil --forget ${pkgutil} 2&gt;/dev/null || true"
+	done
 }
 
 function removeS4bPlist() {
@@ -523,10 +523,10 @@ function removeAntivirus() {
 	local file_list=("/Library/SplashtopAntivirus")
 	
 	for _search_path in "${file_list[@]}" ; do
-        [ -e "${_search_path}/${uninstall_cmd_path}" ] || continue;
+		[ -e "${_search_path}/${uninstall_cmd_path}" ] || continue;
 
-        exceCMD "sudo \"${_search_path}/${uninstall_cmd_path}\"&amp;"
-    done
+		exceCMD "sudo \"${_search_path}/${uninstall_cmd_path}\"&amp;"
+	done
 }
 
 function removeOtherProductFiles() {
@@ -636,57 +636,57 @@ echo "argv : $@"
 
 initLog
 doinstall</string>
-                <key>uninstallable</key>
-                <true/>
-            </dict>
-        </dict>
-        <key>MinimumVersion</key>
-        <string>1.0.0</string>
-        <key>ParentRecipe</key>
-        <string>com.github.peetinc.download.SplashtopStreamer</string>
-        <key>Process</key>
-        <array>
-            <dict>
-                <key>Arguments</key>
-                <dict>
-                    <key>derive_minimum_os_version</key>
-                    <string>%DERIVE_MIN_OS%</string>
-                    <key>faux_root</key>
-                    <string>%RECIPE_CACHE_DIR%</string>
-                    <key>installs_item_paths</key>
-                    <array>
-                        <string>/Applications/Splashtop Streamer.app</string>
-                    </array>
-                </dict>
-                <key>Processor</key>
-                <string>MunkiInstallsItemsCreator</string>
-            </dict>
-            <dict>
-                <key>Processor</key>
-                <string>MunkiPkginfoMerger</string>
-            </dict>
-            <dict>
-                <key>Arguments</key>
-                <dict>
-                    <key>source_path</key>
-                    <string>%pathname%/Splashtop Streamer.pkg</string>
-                    <key>destination_path</key>
-                    <string>%RECIPE_CACHE_DIR%/Splashtop Streamer.pkg</string>
-                </dict>
-                <key>Processor</key>
-                <string>Copier</string>
-            </dict>
-            <dict>
-                <key>Arguments</key>
-                <dict>
-                    <key>pkg_path</key>
-                    <string>%RECIPE_CACHE_DIR%/Splashtop Streamer.pkg</string>
-                    <key>repo_subdirectory</key>
-                    <string>%MUNKI_REPO_SUBDIR%</string>
-                </dict>
-                <key>Processor</key>
-                <string>MunkiImporter</string>
-            </dict>
-        </array>
-    </dict>
+			<key>uninstallable</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.peetinc.download.SplashtopStreamer</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>derive_minimum_os_version</key>
+				<string>%DERIVE_MIN_OS%</string>
+				<key>faux_root</key>
+				<string>%RECIPE_CACHE_DIR%</string>
+				<key>installs_item_paths</key>
+				<array>
+					<string>/Applications/Splashtop Streamer.app</string>
+				</array>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiInstallsItemsCreator</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/Splashtop Streamer.pkg</string>
+				<key>source_path</key>
+				<string>%pathname%/Splashtop Streamer.pkg</string>
+			</dict>
+			<key>Processor</key>
+			<string>Copier</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/Splashtop Streamer.pkg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+		</dict>
+	</array>
+</dict>
 </plist>
