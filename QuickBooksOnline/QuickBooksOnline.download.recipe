@@ -10,6 +10,8 @@
 	<string>com.github.peetinc.download.QuickBooksOnline</string>
 	<key>Input</key>
 	<dict>
+		<key>DOWNLOAD_URL</key>
+		<string>https://http-download.intuit.com/http.intuit/CMO/tango/static/latest/QuickBooks%20Online.zip</string>
 		<key>NAME</key>
 		<string>QuickBooksOnline</string>
 	</dict>
@@ -23,7 +25,7 @@
 				<key>filename</key>
 				<string>%NAME%.zip</string>
 				<key>url</key>
-				<string>https://http-download.intuit.com/http.intuit/CMO/tango/static/latest/QuickBooks%20Online.zip</string>
+				<string>%DOWNLOAD_URL%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
