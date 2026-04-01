@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>BetterDisplay</string>
 		<key>SPARKLE_FEED_URL</key>
-		<string>https://betterdisplay.pro/betterdummy/sparkle/appcast.xml</string>
+		<string>https://betterdisplay.pro/betterdisplay/sparkle/appcast.xml</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -45,7 +45,7 @@
 				<key>input_path</key>
 				<string>%pathname%/BetterDisplay.app</string>
 				<key>requirement</key>
-				<string>anchor apple generic and identifier "me.waydabber.BetterDummy" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "299YSU96J7")</string>
+				<string>anchor apple generic and identifier "pro.betterdisplay.BetterDisplay" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "299YSU96J7")</string>
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
