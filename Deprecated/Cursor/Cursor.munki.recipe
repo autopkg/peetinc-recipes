@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest version of Cursor and imports it into Munki.</string>
+	<string>DEPRECATED: Use kevinmcox-recipes Anysphere/Cursor recipes instead. Downloads the latest version of Cursor and imports it into Munki.</string>
 	<key>Identifier</key>
 	<string>com.github.peetinc.munki.Cursor</string>
 	<key>Input</key>

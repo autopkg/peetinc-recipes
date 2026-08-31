@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest Universal version of Cursor.
+	<string>DEPRECATED: Use kevinmcox-recipes Anysphere/Cursor recipes instead. Downloads the latest Universal version of Cursor.
 
 Possible values for PLATFORM include:
 - darwin-universal (default)
