@@ -20,6 +20,15 @@
 	<key>Process</key>
 	<array>
 		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>warning_message</key>
+				<string>This recipe is deprecated. Switch to com.github.kevinmcox.pkg.Cursor instead.</string>
+			</dict>
+			<key>Processor</key>
+			<string>DeprecationWarning</string>
+		</dict>
+		<dict>
 			<key>Processor</key>
 			<string>AppPkgCreator</string>
 		</dict>

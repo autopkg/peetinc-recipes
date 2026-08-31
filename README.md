@@ -8,7 +8,6 @@ Artichoke Consulting crafted autopkg recipes. (With more than a little help from
 - GarminBaseCamp
 - BetterDisplay
 - Caffeine
-- Cursor
 - DisplayLinkLoginScreenExtension
 - DNSMonitor
 - ElevateUC
