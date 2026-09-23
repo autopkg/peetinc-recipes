@@ -30,8 +30,6 @@
 		<string>664</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>autoremove</key>
-			<true/>
 			<key>blocking_applications</key>
 			<array/>
 			<key>catalogs</key>
